@@ -46,6 +46,10 @@
 //提交意见反馈
 #define Request_FeedBack [Root_Url stringByAppendingString: @"api/feedback/add"]
 
+//请求意见反馈列表
+#define Request_FeedBack_List [Root_Url stringByAppendingString: @"api/feedback/list"]
+
+
 
 #define Info_Net_Error @"网络异常，点击刷新"
 

@@ -21,6 +21,7 @@
 #import "AppUtil.h"
 #import "VoteDetalViewController.h"
 #import "FileDataParams.h"
+#import "FeedBackTableViewController.h"
 
 #define ITEM_HEIGHT 190
 #define REQUEST_SIZE 2
@@ -60,6 +61,10 @@
     [super viewDidLoad];
     _datas = [[NSMutableArray alloc]init];
     [self initView];
+    
+    FeedBackTableViewController *controller1 = [[FeedBackTableViewController alloc]init];
+    [self.navigationController pushViewController:controller1 animated:YES];
+    
 }
 
 

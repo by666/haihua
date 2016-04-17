@@ -537,6 +537,17 @@
 			name = vote;
 			sourceTree = "<group>";
 		};
+		CFC15BC01CC3FD420077FA19 /* user */ = {
+			isa = PBXGroup;
+			children = (
+				CF014E0F1CA9B28D002D7079 /* UserTableModel.h */,
+				CF014E101CA9B28D002D7079 /* UserTableModel.m */,
+				CFA46B311C9550C600408084 /* UserModel.h */,
+				CFA46B321C9550C600408084 /* UserModel.m */,
+			);
+			name = user;
+			sourceTree = "<group>";
+		};
 		CFE291D91C8EC7D5008C9C26 /* controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -591,18 +602,15 @@
 		CFE291DC1C8EC802008C9C26 /* data */ = {
 			isa = PBXGroup;
 			children = (
+				CFC15BC01CC3FD420077FA19 /* user */,
 				CFA4922D1CA03D87006C8F23 /* ResponseModel.h */,
 				CFA4922E1CA03D87006C8F23 /* ResponseModel.m */,
 				CFA46B2E1C954FE200408084 /* VillageModel.h */,
 				CFA46B2F1C954FE200408084 /* VillageModel.m */,
-				CFA46B311C9550C600408084 /* UserModel.h */,
-				CFA46B321C9550C600408084 /* UserModel.m */,
 				CFA492301CA04DA0006C8F23 /* MessageModel.h */,
 				CFA492311CA04DA0006C8F23 /* MessageModel.m */,
 				CF008A381CA5AB1E00549EBD /* CommentModel.h */,
 				CF008A391CA5AB1E00549EBD /* CommentModel.m */,
-				CF014E0F1CA9B28D002D7079 /* UserTableModel.h */,
-				CF014E101CA9B28D002D7079 /* UserTableModel.m */,
 				CFB9BFBA1CAAE0E600A2BCE0 /* VoteModel.h */,
 				CFB9BFBB1CAAE0E600A2BCE0 /* VoteModel.m */,
 				CFB9BFBD1CAAED9100A2BCE0 /* FileDataParams.h */,

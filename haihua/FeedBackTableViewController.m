@@ -8,30 +8,52 @@
 
 #import "FeedBackTableViewController.h"
 
+#define REQUEST_SIZE 2
+
 @interface FeedBackTableViewController ()
 
 @end
 
 @implementation FeedBackTableViewController
+{
+    int CURRENT;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    [self requestFeedBack];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+-(void)requestFeedBack
+{
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSInteger villageId = [userDefaults integerForKey:VillageID];
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"cid"] = [NSString stringWithFormat:@"%d",(int)villageId];
+    params[@"index"] = [NSString stringWithFormat:@"%d",CURRENT];
+    params[@"length"] = [NSString stringWithFormat:@"%d",REQUEST_SIZE];
+    
+    [manager GET:Request_FeedBack_List parameters:params
+     
+         success:^(AFHTTPRequestOperation *operation, id responseObject)
+     {
+         ResponseModel *model = [ResponseModel mj_objectWithKeyValues:responseObject];
+         if(model.code == SUCCESS_CODE)
+         {
+         }
+         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+     }
+         failure:^(AFHTTPRequestOperation *operation, NSError *error)
+     {
+         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+     }];
+
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+
 
 @end
