@@ -275,7 +275,7 @@
     }
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    params[@"cid"] = [NSString stringWithFormat:@"%d",_villageId];
+    params[@"cid"] = [NSString stringWithFormat:@"%d",(int)_villageId];
     params[@"index"] = [NSString stringWithFormat:@"%d",CURRENT];
     params[@"length"] = [NSString stringWithFormat:@"%d",REQUEST_SIZE];
     [manager GET:Request_InfoList parameters:params

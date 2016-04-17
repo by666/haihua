@@ -353,7 +353,7 @@
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"uid"] = [account getUid];
-    params[@"cid"] = [NSString stringWithFormat:@"%d",[userDefaults integerForKey:VillageID]];
+    params[@"cid"] = [NSString stringWithFormat:@"%d",(int)[userDefaults integerForKey:VillageID]];
     params[@"mid"] = [NSString stringWithFormat:@"%ld", _model.mid];
     params[@"content"]= _commentTextView.text;
     params[@"token"] = [account getToken];

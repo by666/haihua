@@ -47,13 +47,13 @@
 		CF2CEDFF1CA456AB004FF058 /* UIScrollView+MJRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2CEDE91CA456AB004FF058 /* UIScrollView+MJRefresh.m */; };
 		CF2CEE001CA456AB004FF058 /* UIView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2CEDEB1CA456AB004FF058 /* UIView+MJExtension.m */; };
 		CF2CEE041CA456E8004FF058 /* IDSRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2CEE031CA456E8004FF058 /* IDSRefresh.m */; };
+		CF4A6D061CBDE39B00B36C93 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF4A6D051CBDE39B00B36C93 /* HomeViewController.m */; };
 		CF7166591C8F202700711656 /* ByNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = CF7166581C8F202700711656 /* ByNavigationBar.m */; };
 		CF71665D1C904D8A00711656 /* ColorUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = CF71665C1C904D8A00711656 /* ColorUtil.m */; };
 		CF7166631C9051C800711656 /* UILabel+ContentSize.m in Sources */ = {isa = PBXBuildFile; fileRef = CF7166611C9051C800711656 /* UILabel+ContentSize.m */; };
 		CF88B5C31CA306BE00660CD4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CF88B5C21CA306BE00660CD4 /* Assets.xcassets */; };
 		CF88B5C61CA30B9500660CD4 /* CommentDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF88B5C51CA30B9500660CD4 /* CommentDetailViewController.m */; };
 		CF88B5C91CA30BA900660CD4 /* VoteDetalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF88B5C81CA30BA900660CD4 /* VoteDetalViewController.m */; };
-		CFA464D71CA1B2B000563CE4 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFA464D61CA1B2B000563CE4 /* LoginViewController.m */; };
 		CFA464DA1CA1BA9900563CE4 /* UIPlaceholderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = CFA464D91CA1BA9900563CE4 /* UIPlaceholderTextView.m */; };
 		CFA464DD1CA1BBDF00563CE4 /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = CFA464DC1CA1BBDF00563CE4 /* UIView+Frame.m */; };
 		CFA464E11CA1C33000563CE4 /* DialogHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = CFA464E01CA1C33000563CE4 /* DialogHelper.m */; };
@@ -73,6 +73,8 @@
 		CFB9BFB91CAAC60100A2BCE0 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFB9BFB81CAAC60100A2BCE0 /* AboutViewController.m */; };
 		CFB9BFBC1CAAE0E600A2BCE0 /* VoteModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFB9BFBB1CAAE0E600A2BCE0 /* VoteModel.m */; };
 		CFB9BFBF1CAAED9100A2BCE0 /* FileDataParams.m in Sources */ = {isa = PBXBuildFile; fileRef = CFB9BFBE1CAAED9100A2BCE0 /* FileDataParams.m */; };
+		CFC15BB51CC3F4DC0077FA19 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFC15BB41CC3F4DC0077FA19 /* LoginViewController.m */; };
+		CFC15BB81CC3FC6A0077FA19 /* FeedBackTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFC15BB71CC3FC6A0077FA19 /* FeedBackTableViewController.m */; };
 		CFE291DF1C8EC865008C9C26 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFE291DE1C8EC865008C9C26 /* BaseViewController.m */; };
 		CFFAA47D1CB6B49E00880A03 /* libMiPushSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CFFAA47B1CB6B49E00880A03 /* libMiPushSDK.a */; };
 		CFFAA47F1CB6B4FF00880A03 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CFFAA47E1CB6B4FF00880A03 /* libresolv.tbd */; };
@@ -159,6 +161,8 @@
 		CF2CEDEC1CA456AB004FF058 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		CF2CEE021CA456E8004FF058 /* IDSRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDSRefresh.h; sourceTree = "<group>"; };
 		CF2CEE031CA456E8004FF058 /* IDSRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDSRefresh.m; sourceTree = "<group>"; };
+		CF4A6D041CBDE39B00B36C93 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
+		CF4A6D051CBDE39B00B36C93 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		CF7166571C8F202700711656 /* ByNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ByNavigationBar.h; sourceTree = "<group>"; };
 		CF7166581C8F202700711656 /* ByNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ByNavigationBar.m; sourceTree = "<group>"; };
 		CF71665B1C904D8A00711656 /* ColorUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorUtil.h; sourceTree = "<group>"; };
@@ -171,7 +175,6 @@
 		CF88B5C71CA30BA900660CD4 /* VoteDetalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoteDetalViewController.h; sourceTree = "<group>"; };
 		CF88B5C81CA30BA900660CD4 /* VoteDetalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VoteDetalViewController.m; sourceTree = "<group>"; };
 		CFA464D51CA1B2B000563CE4 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
-		CFA464D61CA1B2B000563CE4 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		CFA464D81CA1BA9900563CE4 /* UIPlaceholderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIPlaceholderTextView.h; sourceTree = "<group>"; };
 		CFA464D91CA1BA9900563CE4 /* UIPlaceholderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIPlaceholderTextView.m; sourceTree = "<group>"; };
 		CFA464DB1CA1BBDF00563CE4 /* UIView+Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Frame.h"; sourceTree = "<group>"; };
@@ -211,6 +214,9 @@
 		CFB9BFBB1CAAE0E600A2BCE0 /* VoteModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VoteModel.m; sourceTree = "<group>"; };
 		CFB9BFBD1CAAED9100A2BCE0 /* FileDataParams.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileDataParams.h; sourceTree = "<group>"; };
 		CFB9BFBE1CAAED9100A2BCE0 /* FileDataParams.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileDataParams.m; sourceTree = "<group>"; };
+		CFC15BB41CC3F4DC0077FA19 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		CFC15BB61CC3FC6A0077FA19 /* FeedBackTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedBackTableViewController.h; sourceTree = "<group>"; };
+		CFC15BB71CC3FC6A0077FA19 /* FeedBackTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedBackTableViewController.m; sourceTree = "<group>"; };
 		CFE291DD1C8EC865008C9C26 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		CFE291DE1C8EC865008C9C26 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		CFFAA47B1CB6B49E00880A03 /* libMiPushSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMiPushSDK.a; sourceTree = "<group>"; };
@@ -467,29 +473,81 @@
 			name = cell;
 			sourceTree = "<group>";
 		};
-		CFE291D91C8EC7D5008C9C26 /* controller */ = {
+		CFC15BB91CC3FC710077FA19 /* feedback */ = {
 			isa = PBXGroup;
 			children = (
-				CFE291DD1C8EC865008C9C26 /* BaseViewController.h */,
-				CFE291DE1C8EC865008C9C26 /* BaseViewController.m */,
-				CF004BA11C8ED6F200CD389E /* MainViewController.h */,
-				CF004BA21C8ED6F200CD389E /* MainViewController.m */,
+				CFB7FE1E1CAC4F6B009571C9 /* FeedBackViewController.h */,
+				CFB7FE1F1CAC4F6B009571C9 /* FeedBackViewController.m */,
+				CFC15BB61CC3FC6A0077FA19 /* FeedBackTableViewController.h */,
+				CFC15BB71CC3FC6A0077FA19 /* FeedBackTableViewController.m */,
+			);
+			name = feedback;
+			sourceTree = "<group>";
+		};
+		CFC15BBB1CC3FC970077FA19 /* login */ = {
+			isa = PBXGroup;
+			children = (
 				CFA46B281C95430E00408084 /* VillageListViewController.h */,
 				CFA46B291C95430E00408084 /* VillageListViewController.m */,
-				CFA464D51CA1B2B000563CE4 /* LoginViewController.h */,
-				CFA464D61CA1B2B000563CE4 /* LoginViewController.m */,
-				CF88B5C41CA30B9500660CD4 /* CommentDetailViewController.h */,
-				CF88B5C51CA30B9500660CD4 /* CommentDetailViewController.m */,
-				CF88B5C71CA30BA900660CD4 /* VoteDetalViewController.h */,
-				CF88B5C81CA30BA900660CD4 /* VoteDetalViewController.m */,
 				CF008A411CA711DB00549EBD /* ImproveInfoViewController.h */,
 				CF008A421CA711DB00549EBD /* ImproveInfoViewController.m */,
+				CFA464D51CA1B2B000563CE4 /* LoginViewController.h */,
+				CFC15BB41CC3F4DC0077FA19 /* LoginViewController.m */,
+			);
+			name = login;
+			sourceTree = "<group>";
+		};
+		CFC15BBC1CC3FCAA0077FA19 /* setting */ = {
+			isa = PBXGroup;
+			children = (
 				CF014E181CA9B6CE002D7079 /* UserInfoView.h */,
 				CF014E191CA9B6CE002D7079 /* UserInfoView.m */,
 				CFB9BFB71CAAC60100A2BCE0 /* AboutViewController.h */,
 				CFB9BFB81CAAC60100A2BCE0 /* AboutViewController.m */,
-				CFB7FE1E1CAC4F6B009571C9 /* FeedBackViewController.h */,
-				CFB7FE1F1CAC4F6B009571C9 /* FeedBackViewController.m */,
+			);
+			name = setting;
+			sourceTree = "<group>";
+		};
+		CFC15BBD1CC3FCC80077FA19 /* comment */ = {
+			isa = PBXGroup;
+			children = (
+				CF88B5C41CA30B9500660CD4 /* CommentDetailViewController.h */,
+				CF88B5C51CA30B9500660CD4 /* CommentDetailViewController.m */,
+			);
+			name = comment;
+			sourceTree = "<group>";
+		};
+		CFC15BBE1CC3FCD40077FA19 /* main */ = {
+			isa = PBXGroup;
+			children = (
+				CF4A6D041CBDE39B00B36C93 /* HomeViewController.h */,
+				CF4A6D051CBDE39B00B36C93 /* HomeViewController.m */,
+				CF004BA11C8ED6F200CD389E /* MainViewController.h */,
+				CF004BA21C8ED6F200CD389E /* MainViewController.m */,
+			);
+			name = main;
+			sourceTree = "<group>";
+		};
+		CFC15BBF1CC3FCDD0077FA19 /* vote */ = {
+			isa = PBXGroup;
+			children = (
+				CF88B5C71CA30BA900660CD4 /* VoteDetalViewController.h */,
+				CF88B5C81CA30BA900660CD4 /* VoteDetalViewController.m */,
+			);
+			name = vote;
+			sourceTree = "<group>";
+		};
+		CFE291D91C8EC7D5008C9C26 /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				CFC15BBF1CC3FCDD0077FA19 /* vote */,
+				CFC15BBE1CC3FCD40077FA19 /* main */,
+				CFC15BBD1CC3FCC80077FA19 /* comment */,
+				CFC15BBC1CC3FCAA0077FA19 /* setting */,
+				CFC15BBB1CC3FC970077FA19 /* login */,
+				CFC15BB91CC3FC710077FA19 /* feedback */,
+				CFE291DD1C8EC865008C9C26 /* BaseViewController.h */,
+				CFE291DE1C8EC865008C9C26 /* BaseViewController.m */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -497,8 +555,6 @@
 		CFE291DA1C8EC7E4008C9C26 /* view */ = {
 			isa = PBXGroup;
 			children = (
-				CF2CEE021CA456E8004FF058 /* IDSRefresh.h */,
-				CF2CEE031CA456E8004FF058 /* IDSRefresh.m */,
 				CFA464DE1CA1BBEC00563CE4 /* extra */,
 				CFA46B371C95551800408084 /* cell */,
 				CF7166571C8F202700711656 /* ByNavigationBar.h */,
@@ -507,6 +563,8 @@
 				CFA4923A1CA063E8006C8F23 /* TabButton.m */,
 				CFA464D81CA1BA9900563CE4 /* UIPlaceholderTextView.h */,
 				CFA464D91CA1BA9900563CE4 /* UIPlaceholderTextView.m */,
+				CF2CEE021CA456E8004FF058 /* IDSRefresh.h */,
+				CF2CEE031CA456E8004FF058 /* IDSRefresh.m */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -695,6 +753,7 @@
 			files = (
 				CFA464DA1CA1BA9900563CE4 /* UIPlaceholderTextView.m in Sources */,
 				CF2CEDF61CA456AB004FF058 /* MJRefreshBackGifFooter.m in Sources */,
+				CFC15BB81CC3FC6A0077FA19 /* FeedBackTableViewController.m in Sources */,
 				CFA46B301C954FE200408084 /* VillageModel.m in Sources */,
 				CF008A431CA711DB00549EBD /* ImproveInfoViewController.m in Sources */,
 				CFA4923E1CA06C64006C8F23 /* AppUtil.m in Sources */,
@@ -725,6 +784,7 @@
 				CF2CEDF91CA456AB004FF058 /* MJRefreshGifHeader.m in Sources */,
 				CFA46B331C9550C600408084 /* UserModel.m in Sources */,
 				CF88B5C61CA30B9500660CD4 /* CommentDetailViewController.m in Sources */,
+				CFC15BB51CC3F4DC0077FA19 /* LoginViewController.m in Sources */,
 				CFA464E41CA1C3EC00563CE4 /* IDSAlertSheet.m in Sources */,
 				CF2CEDFD1CA456AB004FF058 /* MJRefreshConst.m in Sources */,
 				CFA4923B1CA063E8006C8F23 /* TabButton.m in Sources */,
@@ -737,9 +797,9 @@
 				CF2CEDFF1CA456AB004FF058 /* UIScrollView+MJRefresh.m in Sources */,
 				CF88B5C91CA30BA900660CD4 /* VoteDetalViewController.m in Sources */,
 				CF008A3D1CA5AC9400549EBD /* CommentCell.m in Sources */,
-				CFA464D71CA1B2B000563CE4 /* LoginViewController.m in Sources */,
 				CF2CEDF21CA456AB004FF058 /* MJRefreshHeader.m in Sources */,
 				CF2CEDEE1CA456AB004FF058 /* MJRefreshAutoFooter.m in Sources */,
+				CF4A6D061CBDE39B00B36C93 /* HomeViewController.m in Sources */,
 				CFA4922F1CA03D87006C8F23 /* ResponseModel.m in Sources */,
 				CF014E1D1CA9B75A002D7079 /* UserInfoCell.m in Sources */,
 				CF2CEDF51CA456AB004FF058 /* MJRefreshAutoStateFooter.m in Sources */,

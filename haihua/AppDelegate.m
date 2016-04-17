@@ -145,7 +145,7 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
     // 设置别名
     [MiPushSDK setAlias:[[Account sharedAccount] getUid]];
     // 订阅内容
-    [MiPushSDK subscribe:[NSString stringWithFormat:@"%d",villageId]];
+    [MiPushSDK subscribe:[NSString stringWithFormat:@"%d",(int)villageId]];
     // 设置帐号
     [MiPushSDK setAccount:@"account"];
 }
