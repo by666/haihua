@@ -8,7 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
+#import "VillageListView.h"
 
-@interface HomeViewController : BaseViewController
+@interface HomeViewController : BaseViewController<VillageListViewDelegate>
+
++(void)show : (BaseViewController *)controller;
 
 @end

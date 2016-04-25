@@ -34,7 +34,7 @@
     _titleLabel = [[UILabel alloc]init];
     _titleLabel.textColor = [UIColor whiteColor];
     _titleLabel.textAlignment = NSTextAlignmentCenter;
-    _titleLabel.font = [UIFont systemFontOfSize:16.0f];
+    _titleLabel.font = [UIFont systemFontOfSize:18.0f];
     
     _titleClickBtn= [[UIButton alloc]init];
     _titleClickBtn.frame = self.frame;

@@ -30,6 +30,8 @@
 	<string>5311745831378</string>
 	<key>MiSDKRun</key>
 	<string>Debug</string>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>

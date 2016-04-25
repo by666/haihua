@@ -7,12 +7,12 @@
 //
 
 #import "AppDelegate.h"
-#import "MainViewController.h"
-#import "VillageListViewController.h"
+#import "HomeViewController.h"
 #import "ImproveInfoViewController.h"
 #import <SMS_SDK/SMSSDK.h>
 #import "MiPushSDK.h"
 #import "Account.h"
+#import "ImproveInfoViewController.h"
 @interface AppDelegate ()
 
 @end
@@ -97,23 +97,17 @@
 -(void)launchViewController
 {
     UINavigationController *controller;
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    NSInteger villageId = [userDefaults integerForKey:VillageID];
-    NSString *name = [userDefaults valueForKey:VillageName];
     Account *account = [Account sharedAccount];
-    if(![account isLogin])
-    {
-        VillageListViewController *villageListController =[[VillageListViewController alloc]init];
-        controller= [[UINavigationController alloc]initWithRootViewController:villageListController];
-    }
-    else
-    {
-        
-        MainViewController *mainViewController= [[MainViewController alloc]init];
-        mainViewController.villageId = villageId;
-        mainViewController.name = name;
-        controller= [[UINavigationController alloc]initWithRootViewController:mainViewController];
-    }
+//    if(![account isLogin])
+//    {
+//        VillageListViewController *villageListController =[[VillageListViewController alloc]init];
+//        controller= [[UINavigationController alloc]initWithRootViewController:villageListController];
+//    }
+//    else
+//    {
+        HomeViewController *homeViewController= [[HomeViewController alloc]init];
+        controller= [[UINavigationController alloc]initWithRootViewController:homeViewController];
+//    }
     _window.rootViewController = controller;
     [_window makeKeyAndVisible];
 }

@@ -12,6 +12,8 @@
 
 -(void)setData : (UserTableModel *)model;
 
+-(void)hideLine;
+
 +(NSString *)identify;
 
 @end

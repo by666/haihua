@@ -35,8 +35,6 @@
 
 -(void)initView
 {
-    
-    
     _voteTitleLabel = [[UILabel alloc]init];
     _voteTitleLabel.textColor = [ColorUtil colorWithHexString:@"#000000" alpha:0.6f];
     _voteTitleLabel.font = [UIFont systemFontOfSize:14.0f];
@@ -134,6 +132,7 @@
 
 
 }
+
 
 +(NSString *)identify
 {

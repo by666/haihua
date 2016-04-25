@@ -12,7 +12,7 @@
 #import "DialogHelper.h"
 #import "ImproveInfoViewController.h"
 #import <SMS_SDK/SMSSDK.h>
-#import "MainViewController.h"
+#import "CommentViewController.h"
 #import "Account.h"
 #import "MiPushSDK.h"
 
@@ -240,7 +240,7 @@
     [SMSSDK getVerificationCodeByMethod:SMSGetCodeMethodSMS phoneNumber:_phoneTextView.text zone:@"86" customIdentifier:nil result:^(NSError *error) {
         if (!error)
         {
-            [DialogHelper showTips:@"获取验证码成功"];
+            [DialogHelper showSuccessTips:@"获取验证码成功"];
         }
         else {
             [DialogHelper showTips:@"获取验证码失败"];
@@ -266,17 +266,22 @@
          if(model.code == SUCCESS_CODE)
          {
              
+//             Account *account = [[Account alloc]init];
+//             account.uid = model.uid;
+//             account.token = model.token;
+//             // 设置别名
+//             [MiPushSDK setAlias:account.uid];
+//             // 订阅内容
+//             [MiPushSDK subscribe:[NSString stringWithFormat:@"%d",(int)[userDefaults integerForKey:VillageID]]];
+//             // 设置帐号
+////             [MiPushSDK setAccount:@"account"];
+//             [[Account sharedAccount] savaAccount:account];
+//             [MainViewController show:self villageId:[userDefaults integerForKey:VillageID] name:[userDefaults objectForKey:VillageName]];
              Account *account = [[Account alloc]init];
              account.uid = model.uid;
              account.token = model.token;
-             // 设置别名
-             [MiPushSDK setAlias:account.uid];
-             // 订阅内容
-             [MiPushSDK subscribe:[NSString stringWithFormat:@"%d",(int)[userDefaults integerForKey:VillageID]]];
-             // 设置帐号
-//             [MiPushSDK setAccount:@"account"];
              [[Account sharedAccount] savaAccount:account];
-             [MainViewController show:self villageId:[userDefaults integerForKey:VillageID] name:[userDefaults objectForKey:VillageName]];
+             [ImproveInfoViewController show:self tel:_phoneTextView.text];
          }
          else if(model.code == SUCCESS_NEED_VERIFY)
          {

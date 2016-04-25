@@ -7,14 +7,9 @@
 //
 
 #import "BaseViewController.h"
+#import "VillageListView.h"
 
-@protocol ImproveInfoDelegate
-
-@optional -(void)OnSelectVillage : (int)villageId name : (NSString *)villageName;
-
-@end
-
-@interface ImproveInfoViewController : BaseViewController<ImproveInfoDelegate,UITextViewDelegate,UIAlertViewDelegate>
+@interface ImproveInfoViewController : BaseViewController<UITextViewDelegate,UIAlertViewDelegate,ByNavigationBarDelegate,VillageListViewDelegate>
 
 @property (copy, nonatomic) NSString *tel;
 

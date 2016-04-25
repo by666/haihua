@@ -11,10 +11,10 @@
 #import "UIPlaceholderTextView.h"
 #import "VillageModel.h"
 #import "AppUtil.h"
-#import "VillageListViewController.h"
 #import "DialogHelper.h"
 #import "Account.h"
-#import "MainViewController.h"
+#import "HomeViewController.h"
+#import "VillageListView.h"
 
 @interface ImproveInfoViewController ()
 
@@ -27,6 +27,10 @@
 @property (strong, nonatomic) UIButton *selectVillageBtn;
 
 @property (strong, nonatomic) NSMutableArray *datas;
+
+@property (strong, nonatomic) UIScrollView *headView;
+
+@property (strong, nonatomic) NSMutableArray *selectButtons;
 
 @end
 
@@ -47,6 +51,7 @@
     [super viewDidLoad];
     cid = -1;
     _datas = [[NSMutableArray alloc]init];
+    _selectButtons = [[NSMutableArray alloc]init];
     self.view.backgroundColor = BACKGROUND_COLOR;
     [self initView];
 }
@@ -74,127 +79,147 @@
     
     UILabel *tipLabel = [[UILabel alloc]init];
     tipLabel.text = @"完善资料，有助于您更好的行使投票和发言权";
-    tipLabel.textColor = [UIColor blackColor];
-    tipLabel.font = [UIFont systemFontOfSize:14.0f];
+    tipLabel.textColor = [UIColor colorWithRed:155/255 green:155/255 blue:155/255 alpha:1.0f];
+    tipLabel.font = [UIFont systemFontOfSize:11.0f];
     tipLabel.textAlignment = NSTextAlignmentCenter;
-    tipLabel.frame =CGRectMake(0, 30, SCREEN_WIDTH, tipLabel.contentSize.height);
+    tipLabel.frame =CGRectMake(0, 0, SCREEN_WIDTH, 28);
     [view addSubview:tipLabel];
 
-    
-    UIView *topLine = [[UIView alloc]init];
-    topLine.backgroundColor = LINE_COLOR;
-    topLine.frame = CGRectMake(15, tipLabel.frame.origin.y + tipLabel.contentSize.height + 30, SCREEN_WIDTH - 30, 0.5);
-    [view addSubview:topLine];
-    
-    UIView *centerLine1 = [[UIView alloc]init];
-    centerLine1.backgroundColor = LINE_COLOR;
-    centerLine1.frame = CGRectMake(15, tipLabel.frame.origin.y + tipLabel.contentSize.height + 70, SCREEN_WIDTH - 30, 0.5);
-    [view addSubview:centerLine1];
-    
-    UIView *centerLine2 = [[UIView alloc]init];
-    centerLine2.backgroundColor = LINE_COLOR;
-    centerLine2.frame = CGRectMake(15, tipLabel.frame.origin.y + tipLabel.contentSize.height + 110, SCREEN_WIDTH - 30, 0.5);
-    [view addSubview:centerLine2];
-    
-    UIView *centerLine3 = [[UIView alloc]init];
-    centerLine3.backgroundColor = LINE_COLOR;
-    centerLine3.frame = CGRectMake(15, tipLabel.frame.origin.y + tipLabel.contentSize.height + 150, SCREEN_WIDTH - 30, 0.5);
-    [view addSubview:centerLine3];
-    
-    UIView *bottomLine = [[UIView alloc]init];
-    bottomLine.backgroundColor = LINE_COLOR;
-    bottomLine.frame = CGRectMake(15, tipLabel.frame.origin.y + tipLabel.contentSize.height + 190, SCREEN_WIDTH - 30, 0.5);
-    [view addSubview:bottomLine];
-    
-    
-    UIView *divideLine = [[UIView alloc]init];
-    divideLine.backgroundColor = LINE_COLOR;
-    divideLine.frame = CGRectMake(90, tipLabel.frame.origin.y + tipLabel.contentSize.height + 30, 0.5, 160);
-    [view addSubview:divideLine];
-    
-    
+    //姓名
+    UIView *view1 = [[UIView alloc]init];
+    view1.backgroundColor = [UIColor whiteColor];
+    view1.frame = CGRectMake(0, 28, SCREEN_WIDTH, 42);
+    [view addSubview:view1];
     
     UILabel *nameLabel = [[UILabel alloc]init];
-    nameLabel.text = @"您的姓名";
-    nameLabel.font = [UIFont systemFontOfSize:15.0f];
+    nameLabel.text = @"居民姓名";
+    nameLabel.font = [UIFont systemFontOfSize:13.0f];
     nameLabel.textColor = [UIColor blackColor];
-    nameLabel.frame = CGRectMake(20, tipLabel.frame.origin.y + tipLabel.contentSize.height + 40, nameLabel.contentSize.width, nameLabel.contentSize.height);
-    [view addSubview:nameLabel];
+    nameLabel.textAlignment = NSTextAlignmentCenter;
+    nameLabel.frame = CGRectMake(15, 0, nameLabel.contentSize.width, 42);
+    [view1 addSubview:nameLabel];
     
-    UILabel *cardIDLabel = [[UILabel alloc]init];
-    cardIDLabel.text = @"身份证号";
-    cardIDLabel.font = [UIFont systemFontOfSize:15.0f];
-    cardIDLabel.textColor = [UIColor blackColor];
-    cardIDLabel.frame = CGRectMake(20, tipLabel.frame.origin.y + tipLabel.contentSize.height + 80, nameLabel.contentSize.width, nameLabel.contentSize.height);
-    [view addSubview:cardIDLabel];
-    
-    UILabel *addressLabel = [[UILabel alloc]init];
-    addressLabel.text = @"选择小区";
-    addressLabel.font = [UIFont systemFontOfSize:15.0f];
-    addressLabel.textColor = [UIColor blackColor];
-    addressLabel.frame = CGRectMake(20, tipLabel.frame.origin.y + tipLabel.contentSize.height + 120, nameLabel.contentSize.width, nameLabel.contentSize.height);
-    [view addSubview:addressLabel];
-    
-    UILabel *gateHouseLabel = [[UILabel alloc]init];
-    gateHouseLabel.text = @"门牌号";
-    gateHouseLabel.font = [UIFont systemFontOfSize:15.0f];
-    gateHouseLabel.textColor = [UIColor blackColor];
-    gateHouseLabel.frame = CGRectMake(20, tipLabel.frame.origin.y + tipLabel.contentSize.height + 160, nameLabel.contentSize.width, nameLabel.contentSize.height);
-    [view addSubview:gateHouseLabel];
-    
-    
-    _nameTextView = [[UIPlaceholderTextView alloc]initWithFrame:CGRectMake(divideLine.x + 10, topLine.y+2, SCREEN_WIDTH -divideLine.x - 10 - 15, 40)];
+    _nameTextView = [[UIPlaceholderTextView alloc]initWithFrame:CGRectMake(100, 5, SCREEN_WIDTH -100, 42)];
     _nameTextView.placeholder = @"请填写您的真实姓名";
-    _nameTextView.font = [UIFont systemFontOfSize:15.0f];
+    _nameTextView.font = [UIFont systemFontOfSize:13.0f];
     _nameTextView.backgroundColor = [UIColor clearColor];
-    _nameTextView.textColor = [UIColor blackColor];
+    _nameTextView.textColor = [ColorUtil colorWithHexString:@"#000000" alpha:0.6];
     _nameTextView.returnKeyType = UIReturnKeyNext;
     _nameTextView.delegate = self;
     [_nameTextView becomeFirstResponder];
-    [view addSubview:_nameTextView];
+    [view1 addSubview:_nameTextView];
+
     
+    //身份证号
+    UIView *view2 = [[UIView alloc]init];
+    view2.backgroundColor = [UIColor whiteColor];
+    view2.frame = CGRectMake(0, 28 + 42, SCREEN_WIDTH, 42);
+    [view addSubview:view2];
     
-    _cardIDTextView = [[UIPlaceholderTextView alloc]initWithFrame:CGRectMake(divideLine.x + 10, centerLine1.y+2, SCREEN_WIDTH -divideLine.x - 10 - 15, 40)];
+    UILabel *cardIDLabel = [[UILabel alloc]init];
+    cardIDLabel.text = @"身份证号";
+    cardIDLabel.font = [UIFont systemFontOfSize:13.0f];
+    cardIDLabel.textColor = [UIColor blackColor];
+    cardIDLabel.textAlignment = NSTextAlignmentCenter;
+    cardIDLabel.frame = CGRectMake(15, 0, cardIDLabel.contentSize.width, 42);
+    [view2 addSubview:cardIDLabel];
+    
+    _cardIDTextView = [[UIPlaceholderTextView alloc]initWithFrame:CGRectMake(100, 5, SCREEN_WIDTH -100, 42)];
     _cardIDTextView.placeholder = @"有助于我们核实您的真实身份";
-    _cardIDTextView.font = [UIFont systemFontOfSize:15.0f];
+    _cardIDTextView.font = [UIFont systemFontOfSize:13.0f];
     _cardIDTextView.backgroundColor = [UIColor clearColor];
-    _cardIDTextView.textColor = [UIColor blackColor];
+    _cardIDTextView.textColor = [ColorUtil colorWithHexString:@"#000000" alpha:0.6];
     _cardIDTextView.returnKeyType = UIReturnKeyNext;
     _cardIDTextView.delegate = self;
-    [view addSubview:_cardIDTextView];
+    [view2 addSubview:_cardIDTextView];
     
-    _gateHouseTextView = [[UIPlaceholderTextView alloc]initWithFrame:CGRectMake(divideLine.x + 10, centerLine3.y+2, SCREEN_WIDTH -divideLine.x - 10 - 15, 40)];
-    _gateHouseTextView.placeholder = @"请填写详细住址，例如A101";
-    _gateHouseTextView.font = [UIFont systemFontOfSize:15.0f];
-    _gateHouseTextView.backgroundColor = [UIColor clearColor];
-    _gateHouseTextView.textColor = [UIColor blackColor];
-    _gateHouseTextView.returnKeyType = UIReturnKeyGo;
-    _gateHouseTextView.delegate = self;
-    [view addSubview:_gateHouseTextView];
+    
+    UIView *divideLine1 = [[UIView alloc]init];
+    divideLine1.backgroundColor = BACKGROUND_COLOR;
+    divideLine1.frame = CGRectMake(0, 28 + 42, SCREEN_WIDTH, 1);
+    [view addSubview:divideLine1];
+    
+    
+    
+    //选择小区
+    UIView *view3 = [[UIView alloc]init];
+    view3.backgroundColor = [UIColor whiteColor];
+    view3.frame = CGRectMake(0, 28 + 42 *2+10, SCREEN_WIDTH, 42);
+    [view addSubview:view3];
+    
+    UILabel *addressLabel = [[UILabel alloc]init];
+    addressLabel.text = @"选择小区";
+    addressLabel.font = [UIFont systemFontOfSize:13.0f];
+    addressLabel.textColor = [UIColor blackColor];
+    addressLabel.frame = CGRectMake(15, 0, addressLabel.contentSize.width, 42);
+    addressLabel.textAlignment = NSTextAlignmentCenter;
+    [view3 addSubview:addressLabel];
     
     _selectVillageBtn = [[UIButton alloc]init];
     _selectVillageBtn.backgroundColor = [UIColor clearColor];
-    _selectVillageBtn.frame = CGRectMake(divideLine.x + 10, centerLine2.y, SCREEN_WIDTH -divideLine.x - 10 - 15, 40);
-    _selectVillageBtn.titleLabel.font = [UIFont systemFontOfSize:15.0f];
+    _selectVillageBtn.frame = CGRectMake(100, 0,SCREEN_WIDTH - 100, 40);
+    _selectVillageBtn.titleLabel.font = [UIFont systemFontOfSize:13.0f];
     [_selectVillageBtn setTitle:@"请选择小区 ▼" forState:UIControlStateNormal];
-    [_selectVillageBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [_selectVillageBtn setTitleColor:[ColorUtil colorWithHexString:@"#000000" alpha:0.6] forState:UIControlStateNormal];
     _selectVillageBtn.titleLabel.textAlignment = NSTextAlignmentLeft;
 
     [_selectVillageBtn addTarget:self action:@selector(selectVillage) forControlEvents:UIControlEventTouchUpInside];
-    [view addSubview:_selectVillageBtn];
+    [view3 addSubview:_selectVillageBtn];
+    
+    
+    //门牌号
+    UIView *view4 = [[UIView alloc]init];
+    view4.backgroundColor = [UIColor whiteColor];
+    view4.frame = CGRectMake(0, 28 + 42 *3+10, SCREEN_WIDTH, 42);
+    [view addSubview:view4];
+    
+    UILabel *gateHouseLabel = [[UILabel alloc]init];
+    gateHouseLabel.text = @"门牌号";
+    gateHouseLabel.font = [UIFont systemFontOfSize:13.0f];
+    gateHouseLabel.textColor = [UIColor blackColor];
+    gateHouseLabel.frame = CGRectMake(15, 0, gateHouseLabel.contentSize.width, 42);
+    gateHouseLabel.textAlignment = NSTextAlignmentCenter;
+    [view4 addSubview:gateHouseLabel];
+    
 
+    _gateHouseTextView = [[UIPlaceholderTextView alloc]initWithFrame:CGRectMake(100, 5, SCREEN_WIDTH-100, 42)];
+    _gateHouseTextView.placeholder = @"请填写详细住址，例如A101";
+    _gateHouseTextView.font = [UIFont systemFontOfSize:13.0f];
+    _gateHouseTextView.backgroundColor = [UIColor clearColor];
+    _gateHouseTextView.textColor =[ColorUtil colorWithHexString:@"#000000" alpha:0.6];
+    _gateHouseTextView.returnKeyType = UIReturnKeyGo;
+    _gateHouseTextView.delegate = self;
+    [view4 addSubview:_gateHouseTextView];
+    
+    
+    UIView *divideLine2 = [[UIView alloc]init];
+    divideLine2.backgroundColor = BACKGROUND_COLOR;
+    divideLine2.frame = CGRectMake(0, 28 + 42 *3 +10, SCREEN_WIDTH, 1);
+    [view addSubview:divideLine2];
+    
+    
+    _headView = [[UIScrollView alloc]init];
+    _headView.showsVerticalScrollIndicator = NO;
+    _headView.showsHorizontalScrollIndicator = NO;
+    _headView.frame = CGRectMake(0, 28 + 42 *4 +20, SCREEN_WIDTH, 80);
+    _headView.backgroundColor = [UIColor whiteColor];
+    _headView.contentSize = CGSizeMake(15*6 + 60 * 5, 80);
+    _headView.hidden = YES;
+    [view addSubview:_headView];
+    
 
     UIButton *commitBtn = [[UIButton alloc]init];
-    commitBtn.frame = CGRectMake(30, bottomLine.y + 20, SCREEN_WIDTH-60, 50);
+    commitBtn.frame = CGRectMake(15, 28 + 42 *4 +10 +120, SCREEN_WIDTH-30, 48);
     [commitBtn setBackgroundImage:[AppUtil imageWithColor:MAIN_COLOR] forState:UIControlStateNormal];
     [commitBtn setBackgroundImage:[AppUtil imageWithColor:[ColorUtil colorWithHexString:@"#2d90ff" alpha:0.6f]] forState:UIControlStateHighlighted];
     [commitBtn setTitle:@"提交审核" forState:UIControlStateNormal];
     [commitBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    commitBtn.titleLabel.font = [UIFont systemFontOfSize:18];
+    commitBtn.titleLabel.font = [UIFont systemFontOfSize:15.0f];
     commitBtn.layer.masksToBounds=YES;
-    commitBtn.layer.cornerRadius = 6;
+    commitBtn.layer.cornerRadius = 4;
     [commitBtn addTarget:self action:@selector(requestCommit) forControlEvents:UIControlEventTouchUpInside];
     [view addSubview:commitBtn];
+    
 }
 
 
@@ -217,22 +242,107 @@
     
     return YES;
 }
+
+-(void)textViewDidEndEditing:(UITextView *)textView
+{
+    if(textView == _cardIDTextView)
+    {
+        NSString *cardId= _cardIDTextView.text;
+        if(cardId.length == 15)
+        {
+            [_headView setHidden:NO];
+            int gender = [[cardId substringWithRange:NSMakeRange(14, 1)] integerValue];
+            [self showHeadView:gender];
+        }
+        else if(cardId.length == 18)
+        {
+            [_headView setHidden:NO];
+            int gender = [[cardId substringWithRange:NSMakeRange(16, 1)] integerValue];
+            [self showHeadView:gender];
+        }
+        else
+        {
+            [_headView setHidden:YES];
+        }
+    }
+}
+
+-(void)showHeadView : (int)gender
+{
+    for(UIView *view in _headView.subviews)
+    {
+        [view removeFromSuperview];
+    }
+    [_selectButtons removeAllObjects];
+    
+    NSArray *array;
+    gender = gender %2;
+    if(gender == 0)
+    {
+        array = @[@"ic_girl_a",@"ic_girl_b",@"ic_girl_c",@"ic_girl_d",@"ic_girl_e"];
+    }
+    else
+    {
+        array = @[@"ic_boy_a",@"ic_boy_b",@"ic_boy_c",@"ic_boy_d",@"ic_boy_e"];
+    }
+    for(int i=0 ; i<[array count]; i++)
+    {
+        UIButton *button = [[UIButton alloc]init];
+        [button setImage:[UIImage imageNamed:[array objectAtIndex:i]] forState:UIControlStateNormal];
+        button.tag = i;
+        [button addTarget:self action:@selector(OnHeadClick:) forControlEvents:UIControlEventTouchUpInside];
+        button.frame = CGRectMake(15 * (i+1)+ 60 * i, 10, 60, 60);
+        [_headView addSubview:button];
+        
+        UIButton *selectBtn = [[UIButton alloc]init];
+        [selectBtn setImage:[UIImage imageNamed:@"ic_chose"] forState:UIControlStateNormal];
+        [selectBtn setImage:[UIImage imageNamed:@"ic_chose_in"] forState:UIControlStateSelected];
+        selectBtn.frame = CGRectMake(35, 35, 20, 20);
+        [button addSubview:selectBtn];
+        [_selectButtons addObject:selectBtn];
+
+    }
+}
+
+-(UIButton *)buildHeadButton : (UIImage *)image
+{
+    UIButton *button = [[UIButton alloc]init];
+    [button setImage:image forState:UIControlStateNormal];
+    return button;
+}
+
+-(void)OnHeadClick : (id)sender
+{
+    UIButton *button = sender;
+    NSInteger position = button.tag;
+    if(!IS_NS_COLLECTION_EMPTY(_selectButtons))
+    {
+        for(UIButton *temp in _selectButtons)
+        {
+            [temp setSelected:NO];
+        }
+        [[_selectButtons objectAtIndex:position] setSelected:YES];
+    }
+}
+
 #pragma mark 点击选择小区
 -(void)selectVillage
 {
+    [_nameTextView resignFirstResponder];
+    [_cardIDTextView resignFirstResponder];
+    [_gateHouseTextView resignFirstResponder];
     
-    VillageListViewController *controller = [[VillageListViewController alloc]init];
-    controller.isFromImprove = YES;
-    controller.delegate = self;
-    [self.navigationController pushViewController:controller animated:YES];
+    VillageListView *view = [[VillageListView alloc]init];
+    view.delegate = self;
+    [self.view addSubview:view];
 }
 
 #pragma mark 选择小区回调
--(void)OnSelectVillage:(int)villageId name:(NSString *)villageName
+-(void)OnSelectVillage:(VillageModel *)model
 {
-    cid = villageId;
-    name= villageName;
-    [_selectVillageBtn setTitle:villageName forState:UIControlStateNormal];
+    cid = model.villageId;
+    name= model.name;
+    [_selectVillageBtn setTitle:model.name forState:UIControlStateNormal];
 }
 
 
@@ -250,7 +360,7 @@
 #pragma mark 对话框监听
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    [MainViewController show:self villageId:cid name:name];
+    [HomeViewController show:self];
 }
 
 
@@ -321,6 +431,11 @@
          [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
      }];
         
+}
+
+-(void)OnLeftClickCallback
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 

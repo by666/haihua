@@ -16,6 +16,8 @@
 
 @property (assign, nonatomic) BOOL isClick;
 
+@property (strong ,nonatomic) UIImage *image;
 
-+(UserTableModel *)buildModel : (NSString *)title content : (NSString *)content isClick : (BOOL)isClick;
+
++(UserTableModel *)buildModel : (UIImage *)image title: (NSString *)title content : (NSString *)content isClick : (BOOL)isClick;
 @end

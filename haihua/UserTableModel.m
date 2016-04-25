@@ -10,9 +10,10 @@
 
 @implementation UserTableModel
 
-+(UserTableModel *)buildModel : (NSString *)title content : (NSString *)content isClick : (BOOL)isClick
++(UserTableModel *)buildModel : (UIImage *)image title: (NSString *)title content : (NSString *)content isClick : (BOOL)isClick
 {
     UserTableModel *tableModel = [[UserTableModel alloc]init];
+    tableModel.image = image;
     tableModel.title = title;
     tableModel.content = content;
     tableModel.isClick = isClick;
