@@ -77,6 +77,7 @@
 		CFDD2E011CCE39C000E81E3F /* TimeUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDD2E001CCE39C000E81E3F /* TimeUtil.m */; };
 		CFDD2E041CCF0CE400E81E3F /* FeedbackListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDD2E031CCF0CE400E81E3F /* FeedbackListViewController.m */; };
 		CFDD2E071CCF14E000E81E3F /* FeedbackModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDD2E061CCF14E000E81E3F /* FeedbackModel.m */; };
+		CFDD2E0A1CCF3BF700E81E3F /* FeedbackDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDD2E091CCF3BF700E81E3F /* FeedbackDetailViewController.m */; };
 		CFE291DF1C8EC865008C9C26 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFE291DE1C8EC865008C9C26 /* BaseViewController.m */; };
 		CFFAA47D1CB6B49E00880A03 /* libMiPushSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CFFAA47B1CB6B49E00880A03 /* libMiPushSDK.a */; };
 		CFFAA47F1CB6B4FF00880A03 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CFFAA47E1CB6B4FF00880A03 /* libresolv.tbd */; };
@@ -223,6 +224,8 @@
 		CFDD2E031CCF0CE400E81E3F /* FeedbackListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackListViewController.m; sourceTree = "<group>"; };
 		CFDD2E051CCF14E000E81E3F /* FeedbackModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackModel.h; sourceTree = "<group>"; };
 		CFDD2E061CCF14E000E81E3F /* FeedbackModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackModel.m; sourceTree = "<group>"; };
+		CFDD2E081CCF3BF700E81E3F /* FeedbackDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackDetailViewController.h; sourceTree = "<group>"; };
+		CFDD2E091CCF3BF700E81E3F /* FeedbackDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackDetailViewController.m; sourceTree = "<group>"; };
 		CFE291DD1C8EC865008C9C26 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		CFE291DE1C8EC865008C9C26 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		CFFAA47B1CB6B49E00880A03 /* libMiPushSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMiPushSDK.a; sourceTree = "<group>"; };
@@ -486,6 +489,8 @@
 				CFDD2E031CCF0CE400E81E3F /* FeedbackListViewController.m */,
 				CFB7FE1E1CAC4F6B009571C9 /* FeedBackViewController.h */,
 				CFB7FE1F1CAC4F6B009571C9 /* FeedBackViewController.m */,
+				CFDD2E081CCF3BF700E81E3F /* FeedbackDetailViewController.h */,
+				CFDD2E091CCF3BF700E81E3F /* FeedbackDetailViewController.m */,
 			);
 			name = feedback;
 			sourceTree = "<group>";
@@ -805,6 +810,7 @@
 				CF88B5C61CA30B9500660CD4 /* CommentDetailViewController.m in Sources */,
 				CFC15BB51CC3F4DC0077FA19 /* LoginViewController.m in Sources */,
 				CFA464E41CA1C3EC00563CE4 /* IDSAlertSheet.m in Sources */,
+				CFDD2E0A1CCF3BF700E81E3F /* FeedbackDetailViewController.m in Sources */,
 				CF2CEDFD1CA456AB004FF058 /* MJRefreshConst.m in Sources */,
 				CFA4923B1CA063E8006C8F23 /* TabButton.m in Sources */,
 				CFA492321CA04DA0006C8F23 /* NewsModel.m in Sources */,

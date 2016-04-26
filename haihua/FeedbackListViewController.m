@@ -10,6 +10,7 @@
 #import "IDSRefresh.h"
 #import <MBProgressHUD.h>
 #import "CommentViewCell.h"
+#import "FeedBackViewController.h"
 
 #define ITEM_HEIGHT 110
 #define REQUEST_SIZE 10
@@ -21,6 +22,8 @@
 @property (strong, nonatomic) UITableView *tableView;
 
 @property (strong, nonatomic) UIButton *errorView;
+
+@property (strong, nonatomic) UIButton *feedbackBtn;
 
 @end
 
@@ -69,6 +72,12 @@
     header.lastUpdatedTimeLabel.hidden = YES;
     _tableView.header = header;
     [self.view addSubview:_tableView];
+    
+    _feedbackBtn = [[UIButton alloc]init];
+    [_feedbackBtn setImage:[UIImage imageNamed:@"ic_post"] forState:UIControlStateNormal];
+    [_feedbackBtn addTarget:self action:@selector(OnFeedbackClick:) forControlEvents:UIControlEventTouchUpInside];
+    _feedbackBtn.frame = CGRectMake(SCREEN_WIDTH - 80, SCREEN_HEIGHT - 80, 60, 60);
+    [self.view addSubview:_feedbackBtn];
 }
 
 -(void)initErrorView
@@ -131,6 +140,13 @@
 -(void)OnLeftClickCallback
 {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+
+#pragma mark 点击上传
+-(void)OnFeedbackClick : (id)sender
+{
+    [FeedBackViewController show:self];
 }
 
 #pragma mark 请求列表数据

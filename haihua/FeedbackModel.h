@@ -28,7 +28,7 @@
 //内容
 @property (copy , nonatomic) NSString *content;
 
-//状态
+//状态 untreated 未受理, treated已处理, in_treatment 处理中, not_accept 不予处理
 @property (copy , nonatomic) NSString *status;
 
 //用户名

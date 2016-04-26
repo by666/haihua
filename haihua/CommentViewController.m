@@ -22,7 +22,7 @@
 
 #define Top_Height 180
 #define ITEM_HEIGHT 110
-#define REQUEST_SIZE 2
+#define REQUEST_SIZE 10
 
 @interface CommentViewController ()
 
