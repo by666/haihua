@@ -8,7 +8,7 @@
 
 #import "CommentViewController.h"
 #import <MBProgressHUD.h>
-#import "MessageModel.h"
+#import "NewsModel.h"
 #import "CommentViewCell.h"
 #import "TabButton.h"
 #import "LoginViewController.h"
@@ -21,7 +21,7 @@
 #import "FileDataParams.h"
 
 #define Top_Height 180
-#define ITEM_HEIGHT 190
+#define ITEM_HEIGHT 110
 #define REQUEST_SIZE 2
 
 @interface CommentViewController ()
@@ -127,6 +127,7 @@
     _tableView.contentInset = UIEdgeInsetsMake(10, 0, 10, 0);
     _tableView.delegate = self;
     _tableView.dataSource = self;
+    _tableView.backgroundColor = [UIColor clearColor];
     _tableView.scrollEnabled = NO;
     [_tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     [_scrollerView addSubview:_tableView];
@@ -170,11 +171,12 @@
 {
 
     CommentViewCell *cell = [[CommentViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:[CommentViewCell identify]];
+    cell.backgroundColor = [UIColor clearColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     if(!IS_NS_COLLECTION_EMPTY(_datas))
     {
-        MessageModel *model = [_datas objectAtIndex:indexPath.row];
-        [cell setData:model];
+        NewsModel *model = [_datas objectAtIndex:indexPath.row];
+        [cell setNewsData:model];
     }
     return cell;
 }
@@ -183,7 +185,7 @@
 {
     if(!IS_NS_COLLECTION_EMPTY(_datas))
     {
-        MessageModel *model = [_datas objectAtIndex:indexPath.row];
+        NewsModel *model = [_datas objectAtIndex:indexPath.row];
         if ([model.type isEqualToString:@"vote"])
         {
             [VoteDetalViewController show:self model:model];
@@ -248,7 +250,7 @@
              id data = model.data;
              if(isLoadMore)
              {
-                 NSMutableArray *temp = [MessageModel mj_objectArrayWithKeyValuesArray:data];
+                 NSMutableArray *temp = [NewsModel mj_objectArrayWithKeyValuesArray:data];
                  if(IS_NS_COLLECTION_EMPTY(temp))
                  {
                      [_scrollerView.footer noticeNoMoreData];
@@ -258,7 +260,7 @@
              }
              else
              {
-                 _datas = [MessageModel mj_objectArrayWithKeyValuesArray:data];
+                 _datas = [NewsModel mj_objectArrayWithKeyValuesArray:data];
              }
              _tableView.frame = CGRectMake(0,Top_Height, SCREEN_WIDTH,  [_datas count] * ITEM_HEIGHT);
              [_scrollerView setContentSize:CGSizeMake(SCREEN_WIDTH, [_datas count] * ITEM_HEIGHT + Top_Height)];

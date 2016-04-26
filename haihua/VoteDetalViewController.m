@@ -28,7 +28,7 @@
 
 @property (strong, nonatomic) UIView *dynamicTitleView;
 
-@property (strong ,nonatomic) MessageModel *model;
+@property (strong ,nonatomic) NewsModel *model;
 
 @property (strong ,nonatomic) NSMutableArray *datas;
 
@@ -50,7 +50,7 @@
 }
 
 
-+(void)show : (BaseViewController *)controller model: (MessageModel *)model;
++(void)show : (BaseViewController *)controller model: (NewsModel *)model;
 {
     VoteDetalViewController *targetController = [[VoteDetalViewController alloc]init];
     targetController.model = model;

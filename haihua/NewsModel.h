@@ -8,10 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
-@interface MessageModel : NSObject
+@interface NewsModel : NSObject
 
 //id
 @property (assign, nonatomic) long mid;
+
+//图片url
+@property (copy, nonatomic) NSString *url;
+
 //信息类型
 @property (copy ,nonatomic)NSString *type;
 

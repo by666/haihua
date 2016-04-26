@@ -11,6 +11,7 @@
 #import "UserInfoViewController.h"
 #import "Account.h"
 #import "LoginViewController.h"
+#import "FeedbackListViewController.h"
 #define BUTTON_WIDTH 70
 
 @interface HomeViewController()
@@ -97,7 +98,7 @@
     }
     else if(button == _button2)
     {
-//        [CommentViewController show:self title:@"投票做主"];
+        [CommentViewController show:self title:@"投票做主"];
     }
     else if(button == _button3)
     {
@@ -105,6 +106,7 @@
     }
     else if(button == _button4)
     {
+        [FeedbackListViewController show:self];
     }
     else if(button == _button5)
     {

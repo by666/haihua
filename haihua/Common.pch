@@ -17,6 +17,8 @@
 #import "UIView+Frame.h"
 #import "Singleton.h"
 #import "AppUtil.h"
+#import <UIImageView+WebCache.h>
+
 
 
 //-------------------获取设备大小-------------------------

@@ -1,0 +1,32 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "F8BDCBABF0CF060584BFADA2CAB9A233880D65D9",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+    "a28fc68a-df57-437a-bedb-5a1ca6d66b36++5539" : {
+
+    }
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "a28fc68a-df57-437a-bedb-5a1ca6d66b36++5539" : 0,
+    "F8BDCBABF0CF060584BFADA2CAB9A233880D65D9" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "3D5D6056-2FB0-4600-801E-8951E90706F2",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "a28fc68a-df57-437a-bedb-5a1ca6d66b36++5539" : "..\/ios\/ios",
+    "F8BDCBABF0CF060584BFADA2CAB9A233880D65D9" : "haihua\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "haihua",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "haihua.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/by666\/haihua.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "F8BDCBABF0CF060584BFADA2CAB9A233880D65D9"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "http:\/\/svn.ids111.com\/o2o",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "a28fc68a-df57-437a-bedb-5a1ca6d66b36++5539"
+    }
+  ]
+}

@@ -7,11 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MessageModel.h"
+#import "NewsModel.h"
+#import "FeedbackModel.h"
 
 @interface CommentViewCell : UITableViewCell
 
--(void)setData : (MessageModel *)model;
+-(void)setNewsData : (NewsModel *)model;
+
+-(void)setFeedBackData : (FeedbackModel *)model;
 
 +(NSString *)identify;
 

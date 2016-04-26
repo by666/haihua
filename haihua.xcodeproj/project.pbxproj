@@ -62,7 +62,7 @@
 		CFA46B301C954FE200408084 /* VillageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFA46B2F1C954FE200408084 /* VillageModel.m */; };
 		CFA46B331C9550C600408084 /* UserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFA46B321C9550C600408084 /* UserModel.m */; };
 		CFA4922F1CA03D87006C8F23 /* ResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFA4922E1CA03D87006C8F23 /* ResponseModel.m */; };
-		CFA492321CA04DA0006C8F23 /* MessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFA492311CA04DA0006C8F23 /* MessageModel.m */; };
+		CFA492321CA04DA0006C8F23 /* NewsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFA492311CA04DA0006C8F23 /* NewsModel.m */; };
 		CFA492351CA04EA9006C8F23 /* CommentViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CFA492341CA04EA9006C8F23 /* CommentViewCell.m */; };
 		CFA4923B1CA063E8006C8F23 /* TabButton.m in Sources */ = {isa = PBXBuildFile; fileRef = CFA4923A1CA063E8006C8F23 /* TabButton.m */; };
 		CFA4923E1CA06C64006C8F23 /* AppUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = CFA4923D1CA06C64006C8F23 /* AppUtil.m */; };
@@ -72,9 +72,11 @@
 		CFB9BFBC1CAAE0E600A2BCE0 /* VoteModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFB9BFBB1CAAE0E600A2BCE0 /* VoteModel.m */; };
 		CFB9BFBF1CAAED9100A2BCE0 /* FileDataParams.m in Sources */ = {isa = PBXBuildFile; fileRef = CFB9BFBE1CAAED9100A2BCE0 /* FileDataParams.m */; };
 		CFC15BB51CC3F4DC0077FA19 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFC15BB41CC3F4DC0077FA19 /* LoginViewController.m */; };
-		CFC15BB81CC3FC6A0077FA19 /* FeedBackTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFC15BB71CC3FC6A0077FA19 /* FeedBackTableViewController.m */; };
 		CFDD2DFB1CCDFD0B00E81E3F /* VillageListView.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDD2DFA1CCDFD0B00E81E3F /* VillageListView.m */; };
 		CFDD2DFE1CCE00D800E81E3F /* VillageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDD2DFD1CCE00D800E81E3F /* VillageCell.m */; };
+		CFDD2E011CCE39C000E81E3F /* TimeUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDD2E001CCE39C000E81E3F /* TimeUtil.m */; };
+		CFDD2E041CCF0CE400E81E3F /* FeedbackListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDD2E031CCF0CE400E81E3F /* FeedbackListViewController.m */; };
+		CFDD2E071CCF14E000E81E3F /* FeedbackModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDD2E061CCF14E000E81E3F /* FeedbackModel.m */; };
 		CFE291DF1C8EC865008C9C26 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFE291DE1C8EC865008C9C26 /* BaseViewController.m */; };
 		CFFAA47D1CB6B49E00880A03 /* libMiPushSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CFFAA47B1CB6B49E00880A03 /* libMiPushSDK.a */; };
 		CFFAA47F1CB6B4FF00880A03 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CFFAA47E1CB6B4FF00880A03 /* libresolv.tbd */; };
@@ -192,8 +194,8 @@
 		CFA46B321C9550C600408084 /* UserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserModel.m; sourceTree = "<group>"; };
 		CFA4922D1CA03D87006C8F23 /* ResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResponseModel.h; sourceTree = "<group>"; };
 		CFA4922E1CA03D87006C8F23 /* ResponseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResponseModel.m; sourceTree = "<group>"; };
-		CFA492301CA04DA0006C8F23 /* MessageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageModel.h; sourceTree = "<group>"; };
-		CFA492311CA04DA0006C8F23 /* MessageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageModel.m; sourceTree = "<group>"; };
+		CFA492301CA04DA0006C8F23 /* NewsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsModel.h; sourceTree = "<group>"; };
+		CFA492311CA04DA0006C8F23 /* NewsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsModel.m; sourceTree = "<group>"; };
 		CFA492331CA04EA9006C8F23 /* CommentViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentViewCell.h; sourceTree = "<group>"; };
 		CFA492341CA04EA9006C8F23 /* CommentViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentViewCell.m; sourceTree = "<group>"; };
 		CFA492391CA063E8006C8F23 /* TabButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabButton.h; sourceTree = "<group>"; };
@@ -211,12 +213,16 @@
 		CFB9BFBD1CAAED9100A2BCE0 /* FileDataParams.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileDataParams.h; sourceTree = "<group>"; };
 		CFB9BFBE1CAAED9100A2BCE0 /* FileDataParams.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileDataParams.m; sourceTree = "<group>"; };
 		CFC15BB41CC3F4DC0077FA19 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
-		CFC15BB61CC3FC6A0077FA19 /* FeedBackTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedBackTableViewController.h; sourceTree = "<group>"; };
-		CFC15BB71CC3FC6A0077FA19 /* FeedBackTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedBackTableViewController.m; sourceTree = "<group>"; };
 		CFDD2DF91CCDFD0B00E81E3F /* VillageListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VillageListView.h; sourceTree = "<group>"; };
 		CFDD2DFA1CCDFD0B00E81E3F /* VillageListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VillageListView.m; sourceTree = "<group>"; };
 		CFDD2DFC1CCE00D800E81E3F /* VillageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VillageCell.h; sourceTree = "<group>"; };
 		CFDD2DFD1CCE00D800E81E3F /* VillageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VillageCell.m; sourceTree = "<group>"; };
+		CFDD2DFF1CCE39C000E81E3F /* TimeUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TimeUtil.h; path = ../../../ios/ios/trunks/master/Radar/Radar/Classes/libs/CoreLibrary/Classes/CoreUtility/TimeUtil.h; sourceTree = "<group>"; };
+		CFDD2E001CCE39C000E81E3F /* TimeUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TimeUtil.m; path = ../../../ios/ios/trunks/master/Radar/Radar/Classes/libs/CoreLibrary/Classes/CoreUtility/TimeUtil.m; sourceTree = "<group>"; };
+		CFDD2E021CCF0CE400E81E3F /* FeedbackListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackListViewController.h; sourceTree = "<group>"; };
+		CFDD2E031CCF0CE400E81E3F /* FeedbackListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackListViewController.m; sourceTree = "<group>"; };
+		CFDD2E051CCF14E000E81E3F /* FeedbackModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackModel.h; sourceTree = "<group>"; };
+		CFDD2E061CCF14E000E81E3F /* FeedbackModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackModel.m; sourceTree = "<group>"; };
 		CFE291DD1C8EC865008C9C26 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		CFE291DE1C8EC865008C9C26 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		CFFAA47B1CB6B49E00880A03 /* libMiPushSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMiPushSDK.a; sourceTree = "<group>"; };
@@ -476,10 +482,10 @@
 		CFC15BB91CC3FC710077FA19 /* feedback */ = {
 			isa = PBXGroup;
 			children = (
+				CFDD2E021CCF0CE400E81E3F /* FeedbackListViewController.h */,
+				CFDD2E031CCF0CE400E81E3F /* FeedbackListViewController.m */,
 				CFB7FE1E1CAC4F6B009571C9 /* FeedBackViewController.h */,
 				CFB7FE1F1CAC4F6B009571C9 /* FeedBackViewController.m */,
-				CFC15BB61CC3FC6A0077FA19 /* FeedBackTableViewController.h */,
-				CFC15BB71CC3FC6A0077FA19 /* FeedBackTableViewController.m */,
 			);
 			name = feedback;
 			sourceTree = "<group>";
@@ -583,6 +589,8 @@
 		CFE291DB1C8EC7F0008C9C26 /* utils */ = {
 			isa = PBXGroup;
 			children = (
+				CFDD2DFF1CCE39C000E81E3F /* TimeUtil.h */,
+				CFDD2E001CCE39C000E81E3F /* TimeUtil.m */,
 				CF014DFE1CA8FCD9002D7079 /* Singleton.h */,
 				CFA464E21CA1C3EC00563CE4 /* IDSAlertSheet.h */,
 				CFA464E31CA1C3EC00563CE4 /* IDSAlertSheet.m */,
@@ -607,14 +615,16 @@
 				CFA4922E1CA03D87006C8F23 /* ResponseModel.m */,
 				CFA46B2E1C954FE200408084 /* VillageModel.h */,
 				CFA46B2F1C954FE200408084 /* VillageModel.m */,
-				CFA492301CA04DA0006C8F23 /* MessageModel.h */,
-				CFA492311CA04DA0006C8F23 /* MessageModel.m */,
+				CFA492301CA04DA0006C8F23 /* NewsModel.h */,
+				CFA492311CA04DA0006C8F23 /* NewsModel.m */,
 				CF008A381CA5AB1E00549EBD /* CommentModel.h */,
 				CF008A391CA5AB1E00549EBD /* CommentModel.m */,
 				CFB9BFBA1CAAE0E600A2BCE0 /* VoteModel.h */,
 				CFB9BFBB1CAAE0E600A2BCE0 /* VoteModel.m */,
 				CFB9BFBD1CAAED9100A2BCE0 /* FileDataParams.h */,
 				CFB9BFBE1CAAED9100A2BCE0 /* FileDataParams.m */,
+				CFDD2E051CCF14E000E81E3F /* FeedbackModel.h */,
+				CFDD2E061CCF14E000E81E3F /* FeedbackModel.m */,
 			);
 			name = data;
 			sourceTree = "<group>";
@@ -761,8 +771,8 @@
 			files = (
 				CFA464DA1CA1BA9900563CE4 /* UIPlaceholderTextView.m in Sources */,
 				CF2CEDF61CA456AB004FF058 /* MJRefreshBackGifFooter.m in Sources */,
-				CFC15BB81CC3FC6A0077FA19 /* FeedBackTableViewController.m in Sources */,
 				CFA46B301C954FE200408084 /* VillageModel.m in Sources */,
+				CFDD2E011CCE39C000E81E3F /* TimeUtil.m in Sources */,
 				CF008A431CA711DB00549EBD /* ImproveInfoViewController.m in Sources */,
 				CFA4923E1CA06C64006C8F23 /* AppUtil.m in Sources */,
 				CF2CEDFB1CA456AB004FF058 /* MJRefreshStateHeader.m in Sources */,
@@ -774,6 +784,7 @@
 				CF2CEDF01CA456AB004FF058 /* MJRefreshComponent.m in Sources */,
 				CFE291DF1C8EC865008C9C26 /* BaseViewController.m in Sources */,
 				CFA464E11CA1C33000563CE4 /* DialogHelper.m in Sources */,
+				CFDD2E071CCF14E000E81E3F /* FeedbackModel.m in Sources */,
 				CF2CEDF81CA456AB004FF058 /* MJRefreshBackStateFooter.m in Sources */,
 				CF2CEDFE1CA456AB004FF058 /* UIScrollView+MJExtension.m in Sources */,
 				CF2CEDEF1CA456AB004FF058 /* MJRefreshBackFooter.m in Sources */,
@@ -796,7 +807,7 @@
 				CFA464E41CA1C3EC00563CE4 /* IDSAlertSheet.m in Sources */,
 				CF2CEDFD1CA456AB004FF058 /* MJRefreshConst.m in Sources */,
 				CFA4923B1CA063E8006C8F23 /* TabButton.m in Sources */,
-				CFA492321CA04DA0006C8F23 /* MessageModel.m in Sources */,
+				CFA492321CA04DA0006C8F23 /* NewsModel.m in Sources */,
 				CF71665D1C904D8A00711656 /* ColorUtil.m in Sources */,
 				CF014E111CA9B28D002D7079 /* UserTableModel.m in Sources */,
 				CFA464E71CA1C4FD00563CE4 /* IDSExtendedLabel.m in Sources */,
@@ -805,6 +816,7 @@
 				CF88B5C91CA30BA900660CD4 /* VoteDetalViewController.m in Sources */,
 				CF008A3D1CA5AC9400549EBD /* CommentCell.m in Sources */,
 				CF2CEDF21CA456AB004FF058 /* MJRefreshHeader.m in Sources */,
+				CFDD2E041CCF0CE400E81E3F /* FeedbackListViewController.m in Sources */,
 				CF2CEDEE1CA456AB004FF058 /* MJRefreshAutoFooter.m in Sources */,
 				CF4A6D061CBDE39B00B36C93 /* HomeViewController.m in Sources */,
 				CFA4922F1CA03D87006C8F23 /* ResponseModel.m in Sources */,

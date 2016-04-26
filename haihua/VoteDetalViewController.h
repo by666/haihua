@@ -7,10 +7,10 @@
 //
 
 #import "BaseViewController.h"
-#import "MessageModel.h"
+#import "NewsModel.h"
 
 @interface VoteDetalViewController : BaseViewController<UINavigationBarDelegate,UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource>
 
-+(void)show : (BaseViewController *)controller model: (MessageModel *)model;
++(void)show : (BaseViewController *)controller model: (NewsModel *)model;
 
 @end

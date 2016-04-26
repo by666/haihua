@@ -34,7 +34,7 @@
 
 @property (strong, nonatomic) UITableView *tableView;
 
-@property (strong ,nonatomic) MessageModel *model;
+@property (strong ,nonatomic) NewsModel *model;
 
 @property (strong, nonatomic) UIView *bottomView;
 
@@ -54,7 +54,7 @@
     int CURRENT;
 }
 
-+(void)show : (BaseViewController *)controller model: (MessageModel *)model;
++(void)show : (BaseViewController *)controller model: (NewsModel *)model;
 {
     CommentDetailViewController *targetController = [[CommentDetailViewController alloc]init];
     targetController.model = model;
