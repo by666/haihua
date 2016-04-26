@@ -10,12 +10,13 @@
 #import "Account.h"
 #import "AppUtil.h"
 #import "DialogHelper.h"
+#import "UIPlaceholderTextView.h"
 
 @interface FeedBackViewController ()
 
-@property (strong ,nonatomic) UITextView *titleTextView;
+@property (strong ,nonatomic) UIPlaceholderTextView *titleTextView;
 
-@property (strong, nonatomic) UITextView *contentTextView;
+@property (strong, nonatomic) UIPlaceholderTextView *contentTextView;
 
 @property (strong, nonatomic) NSMutableArray *images;
 
@@ -29,8 +30,9 @@
 +(void)show : (BaseViewController *)controller
 {
     FeedBackViewController *target = [[FeedBackViewController alloc]init];
-    [controller.navigationController pushViewController:target animated:YES];
+    [controller presentViewController:target animated:YES completion:nil];
 }
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = BACKGROUND_COLOR;
@@ -53,76 +55,61 @@
     [self showNavigationBar];
     [self.navBar.leftBtn setHidden:NO];
     self.navBar.delegate = self;
-    [self.navBar.leftBtn setImage:[UIImage imageNamed:@"ic_back"] forState:UIControlStateNormal];
-    [self.navBar setTitle:@"曝光反馈"];
+    [self.navBar.leftBtn setImage:[UIImage imageNamed:@"ic_close"] forState:UIControlStateNormal];
+    [self.navBar setTitle:@"发布意见"];
 }
 
 -(void)initMainView
 {
-    UILabel *titleLabel =[[UILabel alloc]init];
-    titleLabel.text = @"标题";
-    titleLabel.font = [UIFont systemFontOfSize:14.0f];
-    titleLabel.textColor = [UIColor blackColor];
-    titleLabel.frame = CGRectMake(15, NavigationBar_HEIGHT +StatuBar_HEIGHT + 30 + (30 - titleLabel.contentSize.height)/2, titleLabel.contentSize.width, titleLabel.contentSize.height);
-    [self.view addSubview:titleLabel];
+    UIView *topView = [[UIView alloc]init];
+    topView.backgroundColor = [UIColor whiteColor];
+    topView.frame = CGRectMake(0,  NavigationBar_HEIGHT +StatuBar_HEIGHT, SCREEN_WIDTH, 160 + 100 + 20);
+    [self.view addSubview:topView];
     
-    
-    _titleTextView = [[UITextView alloc]init];
+    _titleTextView = [[UIPlaceholderTextView alloc]init];
+    _titleTextView.placeholder = @"标题";
     _titleTextView.font = [UIFont systemFontOfSize:13.0f];
-    _titleTextView.layer.borderColor = [[UIColor grayColor] CGColor];
-    _titleTextView.layer.cornerRadius = 4;
-    _titleTextView.layer.borderWidth = 0.5;
-    _titleTextView.layer.masksToBounds = YES;
-    _titleTextView.frame = CGRectMake(15 + titleLabel.contentSize.width + 10, NavigationBar_HEIGHT +StatuBar_HEIGHT + 30, SCREEN_WIDTH - 30 -(titleLabel.contentSize.width + 10), 30);
-    [self.view addSubview:_titleTextView];
+    _titleTextView.backgroundColor = [UIColor whiteColor];
+    _titleTextView.textColor = [ColorUtil colorWithHexString:@"#000000" alpha:0.6f];
+    _titleTextView.frame = CGRectMake(15, 0, SCREEN_WIDTH-30, 40);
+    [topView addSubview:_titleTextView];
     
-    
-    UILabel *contentLabel =[[UILabel alloc]init];
-    contentLabel.text = @"内容";
-    contentLabel.font = [UIFont systemFontOfSize:14.0f];
-    contentLabel.textColor = [UIColor blackColor];
-    contentLabel.frame = CGRectMake(15, NavigationBar_HEIGHT +StatuBar_HEIGHT + 30 + (30 - contentLabel.contentSize.height)/2 + 50, contentLabel.contentSize.width, contentLabel.contentSize.height);
-    [self.view addSubview:contentLabel];
-    
-    
-    _contentTextView = [[UITextView alloc]init];
+    _contentTextView = [[UIPlaceholderTextView alloc]init];
+    _contentTextView.placeholder = @"描述一下你想说的";
     _contentTextView.font = [UIFont systemFontOfSize:13.0f];
-    _contentTextView.layer.borderColor = [[UIColor grayColor] CGColor];
-    _contentTextView.layer.cornerRadius = 4;
-    _contentTextView.layer.borderWidth = 0.5;
-    _contentTextView.layer.masksToBounds = YES;
-    _contentTextView.frame = CGRectMake(15 + titleLabel.contentSize.width + 10, NavigationBar_HEIGHT +StatuBar_HEIGHT + 30 + 50, SCREEN_WIDTH - 30 -(titleLabel.contentSize.width + 10), 120);
-    [self.view addSubview:_contentTextView];
+    _contentTextView.textColor = LINE_COLOR;
+    _contentTextView.textColor = [ColorUtil colorWithHexString:@"#000000" alpha:0.6f];
+    _contentTextView.frame = CGRectMake(15 , 40, SCREEN_WIDTH-30, 120);
+    [topView addSubview:_contentTextView];
     
-    
-    UILabel *imageLabel =[[UILabel alloc]init];
-    imageLabel.text = @"附件";
-    imageLabel.font = [UIFont systemFontOfSize:14.0f];
-    imageLabel.textColor = [UIColor blackColor];
-    imageLabel.frame = CGRectMake(15, NavigationBar_HEIGHT +StatuBar_HEIGHT + 30 + (30 - contentLabel.contentSize.height)/2 + 190, imageLabel.contentSize.width, imageLabel.contentSize.height);
-    [self.view addSubview:imageLabel];
+    UIView *lineView = [[UIView alloc]init];
+    lineView.backgroundColor = LINE_COLOR;
+    lineView.frame = CGRectMake(15, 40, SCREEN_WIDTH - 30, 0.5);
+    [topView addSubview:lineView];
     
     
     for(int i = 0 ;i < 3 ;i ++)
     {
-        UIButton *button = [[UIButton alloc]init];
+        UIImageView *button = [[UIImageView alloc]init];
         button.tag = i;
+        button.userInteractionEnabled = YES;
         button.layer.cornerRadius = 4;
         button.layer.masksToBounds = YES;
         button.backgroundColor = [UIColor lightGrayColor];
-        [button setImage:[UIImage imageNamed:@"defaultimg"] forState:UIControlStateNormal];
-        button.frame = CGRectMake(15 + titleLabel.contentSize.width + 10 + 70 * i, _contentTextView.y + 140, 60, 60);
-        [button addTarget:self action:@selector(OnButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:button];
+        button.image = [UIImage imageNamed:@"ic_add"];
+        button.frame = CGRectMake(15 * (i+1)  + 80 * i, 180, 80, 80);
+        UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(OnButtonClick:)];
+        [button addGestureRecognizer:recognizer];
+        [topView addSubview:button];
         [_buttons addObject:button];
     }
     
     
     UIButton *commitBtn = [[UIButton alloc]init];
-    commitBtn.frame = CGRectMake((SCREEN_WIDTH - 120)/2,  _contentTextView.y + 220, 120, 40);
+    commitBtn.frame = CGRectMake(15,  360, SCREEN_WIDTH - 30, 50);
     [commitBtn setBackgroundImage:[AppUtil imageWithColor:MAIN_COLOR] forState:UIControlStateNormal];
     [commitBtn setBackgroundImage:[AppUtil imageWithColor:[ColorUtil colorWithHexString:@"#2d90ff" alpha:0.6f]] forState:UIControlStateHighlighted];
-    [commitBtn setTitle:@"提交" forState:UIControlStateNormal];
+    [commitBtn setTitle:@"确定发布" forState:UIControlStateNormal];
     [commitBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     commitBtn.titleLabel.font = [UIFont systemFontOfSize:18];
     commitBtn.layer.masksToBounds=YES;
@@ -148,7 +135,7 @@
         picker.delegate = self;
         picker.allowsEditing = YES;
         picker.sourceType = sourceType;
-        [self.navigationController presentViewController:picker animated:YES completion:^{
+        [self presentViewController:picker animated:YES completion:^{
             [hud hide:YES];
         }];
     }
@@ -166,12 +153,12 @@
     picker.delegate = self;
     //设置选择后的图片可被编辑
     picker.allowsEditing = YES;
-    [self.navigationController presentViewController:picker animated:YES completion:nil];
+    [self presentViewController:picker animated:YES completion:nil];
 }
+
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-    
     
     NSString *type = [info objectForKey:UIImagePickerControllerMediaType];
     if ([type isEqualToString:@"public.image"])
@@ -181,7 +168,7 @@
         [_images addObject:originalImage];
         for(int i = 0; i< [_images count]; i++)
         {
-            [[_buttons objectAtIndex:i] setImage:[_images objectAtIndex:i] forState:UIControlStateNormal];
+            ((UIImageView *)[_buttons objectAtIndex:i]).image = [_images objectAtIndex:i] ;
         }
         
         [picker dismissViewControllerAnimated:YES completion:nil];
@@ -192,7 +179,7 @@
 #pragma mark 点击返回事件
 -(void)OnLeftClickCallback
 {
-    [self.navigationController popViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 
