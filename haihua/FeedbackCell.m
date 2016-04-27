@@ -8,7 +8,7 @@
 
 #import "FeedbackCell.h"
 #import "TimeUtil.h"
-
+#import "HeadUtil.h"
 #define Item_Height 200
 
 @interface FeedbackCell()
@@ -53,7 +53,6 @@
     [self.contentView addSubview:_rootView];
     
     _headImageView = [[UIImageView alloc]init];
-    _headImageView.image = [UIImage imageNamed:@"ic_boy_a"];
     _headImageView.frame = CGRectMake(10, 10, 30, 30);
     [_rootView addSubview:_headImageView];
     
@@ -78,6 +77,8 @@
 
 -(void)setFeedBackData : (FeedbackModel *)model
 {
+    _headImageView.image = [HeadUtil getHeadImage:model.sex position:model.avatar];
+
     _nameLabel.text = model.name;
     _nameLabel.frame = CGRectMake(50, 10 + (30 - _nameLabel.contentSize.height)/2, _nameLabel.contentSize.width, _nameLabel.contentSize.height);
     

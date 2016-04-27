@@ -15,6 +15,7 @@
 #import "CommentViewController.h"
 #import "Account.h"
 #import "MiPushSDK.h"
+#import "HomeViewController.h"
 
 
 @interface LoginViewController ()
@@ -281,7 +282,7 @@
              account.uid = model.uid;
              account.token = model.token;
              [[Account sharedAccount] savaAccount:account];
-             [ImproveInfoViewController show:self tel:_phoneTextView.text];
+             [HomeViewController show:self];
          }
          else if(model.code == SUCCESS_NEED_VERIFY)
          {

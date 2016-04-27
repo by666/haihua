@@ -96,7 +96,19 @@
     _showImageView.image = [UIImage imageNamed:@"test"];
     
     _titleLabel.text = model.title;
-    if(IS_NS_COLLECTION_EMPTY(model.picNotes))
+    BOOL hasImage = NO;
+    if(!IS_NS_COLLECTION_EMPTY(model.picNotes))
+    {
+        for(PictureModel *picModel in model.picNotes)
+        {
+            if(picModel.pic == 1)
+            {
+                hasImage = YES;
+                break;
+            }
+        }
+    }
+    if(!hasImage)
     {
         _showImageView.hidden = YES;
         _titleLabel.frame = CGRectMake(10, 10, SCREEN_WIDTH - 20 - 20 , Item_Height - 50);

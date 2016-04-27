@@ -10,6 +10,7 @@
 
 @interface FeedbackListViewController : BaseViewController<UITableViewDelegate,UITableViewDataSource>
 
-+(void)show : (BaseViewController *)controller;
++(void)show : (BaseViewController *)controller
+       mine : (BOOL)isMine;
 
 @end

@@ -185,6 +185,10 @@
 
 -(void)OnButtonClick : (id)sender
 {
+    if (![_titleTextView isExclusiveTouch] || ![_contentTextView isExclusiveTouch]) {
+        [_titleTextView resignFirstResponder];
+        [_contentTextView resignFirstResponder];
+    }
     
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"请选择" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles: nil];
     
@@ -260,6 +264,10 @@
         [formData appendPartWithFormData:[[[Account sharedAccount]getToken] dataUsingEncoding:NSUTF8StringEncoding] name:@"token"];
         [formData appendPartWithFormData:[_titleTextView.text dataUsingEncoding:NSUTF8StringEncoding] name:@"title"];
         [formData appendPartWithFormData:[_contentTextView.text dataUsingEncoding:NSUTF8StringEncoding ] name:@"content"];
+        NSUserDefaults *userdefault = [NSUserDefaults standardUserDefaults];
+        int cid = [userdefault integerForKey:VillageID];
+        [formData appendPartWithFormData:[[NSString stringWithFormat:@"%d",cid] dataUsingEncoding:NSUTF8StringEncoding ] name:@"cid"];
+
         [formData appendPartWithFormData:[md5s dataUsingEncoding:NSUTF8StringEncoding ] name:@"md5s"];
         
     } error:nil];
@@ -279,6 +287,9 @@
                           {
                               [DialogHelper showSuccessTips:@"上传成功，感谢您的支持"];
 
+                          }
+                          else{
+                              [DialogHelper showWarnTips:@"上传失败,请重试"];
                           }
                       }
                       [hua hide:YES];

@@ -46,4 +46,6 @@
 
 @property (copy, nonatomic) NSString *status;
 
+@property (assign, nonatomic) long commentedVoId;
+
 @end

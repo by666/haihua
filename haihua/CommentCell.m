@@ -8,6 +8,7 @@
 
 #import "CommentCell.h"
 #import "TimeUtil.h"
+#import "HeadUtil.h"
 
 @interface CommentCell()
 
@@ -59,14 +60,8 @@
 
 -(void)setData:(CommentModel *)model
 {
-    if([model.sex isEqualToString:@"man"])
-    {
-        _genderImageView.image = [UIImage imageNamed:@"ic_head_male"];
-    }
-    else
-    {
-        _genderImageView.image = [UIImage imageNamed:@"ic_head_female"];
-    }
+   
+    _genderImageView.image = [HeadUtil getHeadImage:model.sex position:model.avatar];
     
     _nameLabel.text = model.name;
     _nameLabel.frame = CGRectMake(_genderImageView.x + 30 + 5, 10 + (30 - _nameLabel.contentSize.height)/2, _nameLabel.contentSize.width, _nameLabel.contentSize.height);

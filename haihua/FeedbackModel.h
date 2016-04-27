@@ -43,6 +43,8 @@
 //图片集合
 @property (strong, nonatomic) NSMutableArray *pictures;
 
+@property (assign, nonatomic) int avatar;
+
 
 //{
 //    "index": 2,

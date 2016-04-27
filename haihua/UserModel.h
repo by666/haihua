@@ -37,6 +37,9 @@
 //验证状态
 @property (copy, nonatomic) NSString *verified;
 
+//头像位置
+@property (assign, nonatomic)int avatar;
+
 
 
 @end

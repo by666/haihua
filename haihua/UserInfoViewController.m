@@ -15,6 +15,9 @@
 #import "FeedBackViewController.h"
 #import "DialogHelper.h"
 #import "AboutViewController.h"
+#import "HeadUtil.h"
+#import "FeedbackListViewController.h"
+#import "LogoutViewController.h"
 #define ITEM_HEIGHT 50
 
 @interface UserInfoViewController()
@@ -25,7 +28,7 @@
 
 @property (strong, nonatomic) UIButton *headView;
 
-@property (strong, nonatomic) UIImageView *headImage;
+@property (strong, nonatomic) UIImageView *headImageView;
 
 @property (strong, nonatomic) UILabel *nameLabel;
 
@@ -58,7 +61,6 @@
 #pragma mark 初始化视图
 -(void)initView
 {
-    [self createData : nil];
     [self initNavigationBar];
     
     _scrollView = [[UIScrollView alloc]init];
@@ -78,6 +80,8 @@
     [_tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     _tableView.frame = CGRectMake(0, 80, SCREEN_WIDTH, ITEM_HEIGHT * 7 +30);
     [_scrollView addSubview:_tableView];
+    
+    [self requestUserInfo];
 }
 
 -(void)initNavigationBar
@@ -96,9 +100,9 @@
         verifyStatu = @"审核通过";
     }
     [_datas addObject:[UserTableModel buildModel:[UIImage imageNamed:@"ic_ass"] title :@"审核状态" content:verifyStatu isClick:NO]];
-    [_datas addObject:[UserTableModel buildModel:[UIImage imageNamed:@"ic_bby"] title :@"我的建议" content:@"20" isClick:YES]];
-    [_datas addObject:[UserTableModel buildModel:[UIImage imageNamed:@"ic_ppl"] title :@"我的评论" content:@"11" isClick:YES]];
-    [_datas addObject:[UserTableModel buildModel:[UIImage imageNamed:@"ic_ttl"] title :@"我的投票" content:@"200" isClick:YES]];
+    [_datas addObject:[UserTableModel buildModel:[UIImage imageNamed:@"ic_bby"] title :@"我的建议" content:@"" isClick:YES]];
+    [_datas addObject:[UserTableModel buildModel:[UIImage imageNamed:@"ic_ppl"] title :@"我的评论" content:@"" isClick:YES]];
+    [_datas addObject:[UserTableModel buildModel:[UIImage imageNamed:@"ic_ttl"] title :@"我的投票" content:@"" isClick:YES]];
     [_datas addObject:[UserTableModel buildModel:[UIImage imageNamed:@"ic_xxl"] title :@"检查更新" content:nil isClick:YES]];
     [_datas addObject:[UserTableModel buildModel:[UIImage imageNamed:@"ic_ggy"] title :@"关于" content:nil isClick:YES]];
     [_datas addObject:[UserTableModel buildModel:[UIImage imageNamed:@"ic_set"] title :@"设置" content:nil isClick:YES]];
@@ -112,28 +116,24 @@
     _headView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 80);
     _headView.backgroundColor = [UIColor whiteColor];
     
-    UIImageView *headImage = [[UIImageView alloc]init];
-    headImage.image = [UIImage imageNamed:@"ic_boy_a"];
-    headImage.frame = CGRectMake(15, 10, 60, 60);
-    [_headView addSubview:headImage];
+    _headImageView = [[UIImageView alloc]init];
+    _headImageView.frame = CGRectMake(15, 10, 60, 60);
+    [_headView addSubview:_headImageView];
     
     _nameLabel = [[UILabel alloc]init];
     _nameLabel.font = [UIFont systemFontOfSize:18.0f];
-    _nameLabel.text = @"by";
     _nameLabel.textColor = [UIColor blackColor];
-    _nameLabel.frame = CGRectMake(85, 20, _nameLabel.contentSize.width, _nameLabel.contentSize.height);
     [_headView addSubview:_nameLabel];
     
     _villageLabel = [[UILabel alloc]init];
     _villageLabel.font = [UIFont systemFontOfSize:14.0f];
-    _villageLabel.text = @"尚都花园，2e-1002";
     _villageLabel.textColor = [ColorUtil colorWithHexString:@"#000000" alpha:0.6f];
-    _villageLabel.frame = CGRectMake(85, 45, _villageLabel.contentSize.width, _villageLabel.contentSize.height);
     [_headView addSubview:_villageLabel];
     
     UIImageView *arrowImageView = [[UIImageView alloc]init];
     UIImage *image = [UIImage imageNamed:@"ic_arow"];
     arrowImageView.image = image;
+    arrowImageView.hidden = YES;
     arrowImageView.frame = CGRectMake(SCREEN_WIDTH -  image.size.width - 15, (80 - image.size.height )/2, image.size.width, image.size.height);
     [_headView addSubview:arrowImageView];
     
@@ -236,7 +236,7 @@
         case 1:
             if(indexPath.row == 0)
             {
-                NSLog(@"我的建议");
+                [FeedbackListViewController show:self mine:YES];
             }
             else if(indexPath.row == 1)
             {
@@ -260,7 +260,7 @@
         case 3:
             if(indexPath.row == 0)
             {
-                NSLog(@"设置");
+                [LogoutViewController show:self];
             }
             break;
             
@@ -287,7 +287,7 @@
              id data = model.data;
              UserModel *userModel = [UserModel mj_objectWithKeyValues:data];
              [[Account sharedAccount]saveTel:userModel.tel];
-//             [self updateView:userModel];
+             [self updateView:userModel];
             
          }
          [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
@@ -296,6 +296,22 @@
      {
          [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
      }];
+}
+
+-(void)updateView : (UserModel *)model
+{
+ 
+    _nameLabel.text = model.name;
+    _nameLabel.frame = CGRectMake(85, 20, _nameLabel.contentSize.width, _nameLabel.contentSize.height);
+
+    _villageLabel.text = [NSString stringWithFormat:@"%@,%@",model.communityName,model.gatehouse];
+    _villageLabel.frame = CGRectMake(85, 45, _villageLabel.contentSize.width, _villageLabel.contentSize.height);
+
+    _headImageView.image = [HeadUtil getHeadImage:model.sex position:model.avatar];
+
+    [self createData : model];
+    [_tableView reloadData];
+
 }
 
 #pragma mark 返回按钮

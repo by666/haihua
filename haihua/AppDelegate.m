@@ -97,7 +97,7 @@
 -(void)launchViewController
 {
     UINavigationController *controller;
-    Account *account = [Account sharedAccount];
+//    Account *account = [Account sharedAccount];
 //    if(![account isLogin])
 //    {
 //        VillageListViewController *villageListController =[[VillageListViewController alloc]init];

@@ -44,6 +44,8 @@
 
 @property (strong, nonatomic) UIButton *errorView;
 
+@property (copy, nonatomic) NSString *type;
+
 @end
 
 @implementation CommentViewController
@@ -51,10 +53,14 @@
     int CURRENT;
 }
 
-+(void)show : (UIViewController *)controller title: (NSString *)title
+
++(void)show : (UIViewController *)controller
+       title: (NSString *)title
+        type: (NSString *)type
 {
     CommentViewController *openViewControler = [[CommentViewController alloc]init];
     openViewControler.mainTitle = title;
+    openViewControler.type = type;
     [controller.navigationController pushViewController:openViewControler animated:YES];
 }
 
@@ -241,6 +247,7 @@
     params[@"cid"] = [NSString stringWithFormat:@"%d", [userDefault integerForKey:VillageID]];
     params[@"index"] = [NSString stringWithFormat:@"%d",CURRENT];
     params[@"length"] = [NSString stringWithFormat:@"%d",REQUEST_SIZE];
+    params[@"type"] = _type;
     [manager GET:Request_InfoList parameters:params
          success:^(AFHTTPRequestOperation *operation, id responseObject)
      {

@@ -10,6 +10,8 @@
 
 @interface CommentViewController : BaseViewController<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate>
 
-+(void)show : (BaseViewController *)controller title: (NSString *)title;
++(void)show : (UIViewController *)controller
+       title: (NSString *)title
+        type: (NSString *)type;
 
 @end

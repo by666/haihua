@@ -31,6 +31,8 @@ SINGLETON_DECLARATION(Account);
 
 - (BOOL)isLogin;
 
+-(void)logout;
+
 - (NSString *)getUid;
 
 - (NSString *)getToken;

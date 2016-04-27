@@ -49,6 +49,8 @@
 		CF2CEE041CA456E8004FF058 /* IDSRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2CEE031CA456E8004FF058 /* IDSRefresh.m */; };
 		CF48C6281CCFCDB900BF4EF9 /* FeedbackCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CF48C6271CCFCDB900BF4EF9 /* FeedbackCell.m */; };
 		CF48C62B1CCFF43800BF4EF9 /* PictureModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CF48C62A1CCFF43800BF4EF9 /* PictureModel.m */; };
+		CF48C6371CD120B200BF4EF9 /* HeadUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = CF48C6361CD120B200BF4EF9 /* HeadUtil.m */; };
+		CF48C63A1CD1424F00BF4EF9 /* LogoutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF48C6391CD1424F00BF4EF9 /* LogoutViewController.m */; };
 		CF4A6D061CBDE39B00B36C93 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF4A6D051CBDE39B00B36C93 /* HomeViewController.m */; };
 		CF7166591C8F202700711656 /* ByNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = CF7166581C8F202700711656 /* ByNavigationBar.m */; };
 		CF71665D1C904D8A00711656 /* ColorUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = CF71665C1C904D8A00711656 /* ColorUtil.m */; };
@@ -170,6 +172,10 @@
 		CF48C6271CCFCDB900BF4EF9 /* FeedbackCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackCell.m; sourceTree = "<group>"; };
 		CF48C6291CCFF43800BF4EF9 /* PictureModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PictureModel.h; sourceTree = "<group>"; };
 		CF48C62A1CCFF43800BF4EF9 /* PictureModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PictureModel.m; sourceTree = "<group>"; };
+		CF48C6351CD120B200BF4EF9 /* HeadUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeadUtil.h; sourceTree = "<group>"; };
+		CF48C6361CD120B200BF4EF9 /* HeadUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeadUtil.m; sourceTree = "<group>"; };
+		CF48C6381CD1424F00BF4EF9 /* LogoutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogoutViewController.h; sourceTree = "<group>"; };
+		CF48C6391CD1424F00BF4EF9 /* LogoutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogoutViewController.m; sourceTree = "<group>"; };
 		CF4A6D041CBDE39B00B36C93 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		CF4A6D051CBDE39B00B36C93 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		CF7166571C8F202700711656 /* ByNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ByNavigationBar.h; sourceTree = "<group>"; };
@@ -519,6 +525,8 @@
 			children = (
 				CFB9BFB71CAAC60100A2BCE0 /* AboutViewController.h */,
 				CFB9BFB81CAAC60100A2BCE0 /* AboutViewController.m */,
+				CF48C6381CD1424F00BF4EF9 /* LogoutViewController.h */,
+				CF48C6391CD1424F00BF4EF9 /* LogoutViewController.m */,
 			);
 			name = setting;
 			sourceTree = "<group>";
@@ -616,6 +624,8 @@
 				CFA4923D1CA06C64006C8F23 /* AppUtil.m */,
 				CF014DFB1CA8FC16002D7079 /* Account.h */,
 				CF014DFC1CA8FC16002D7079 /* Account.m */,
+				CF48C6351CD120B200BF4EF9 /* HeadUtil.h */,
+				CF48C6361CD120B200BF4EF9 /* HeadUtil.m */,
 			);
 			name = utils;
 			sourceTree = "<group>";
@@ -792,6 +802,7 @@
 				CFA4923E1CA06C64006C8F23 /* AppUtil.m in Sources */,
 				CF2CEDFB1CA456AB004FF058 /* MJRefreshStateHeader.m in Sources */,
 				CFB7FE1D1CAC368F009571C9 /* VoteItemCell.m in Sources */,
+				CF48C6371CD120B200BF4EF9 /* HeadUtil.m in Sources */,
 				CF014DFD1CA8FC16002D7079 /* Account.m in Sources */,
 				CFB9BFBC1CAAE0E600A2BCE0 /* VoteModel.m in Sources */,
 				CF008A3A1CA5AB1E00549EBD /* CommentModel.m in Sources */,
@@ -825,6 +836,7 @@
 				CFA4923B1CA063E8006C8F23 /* TabButton.m in Sources */,
 				CFA492321CA04DA0006C8F23 /* NewsModel.m in Sources */,
 				CF71665D1C904D8A00711656 /* ColorUtil.m in Sources */,
+				CF48C63A1CD1424F00BF4EF9 /* LogoutViewController.m in Sources */,
 				CF014E111CA9B28D002D7079 /* UserTableModel.m in Sources */,
 				CF48C6281CCFCDB900BF4EF9 /* FeedbackCell.m in Sources */,
 				CFA464E71CA1C4FD00563CE4 /* IDSExtendedLabel.m in Sources */,

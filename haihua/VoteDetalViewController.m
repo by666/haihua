@@ -227,11 +227,16 @@
         {
             model.isSeleted = NO;
         }
+        
         selectPosition = indexPath.row;
         VoteModel *selectModel = [_datas objectAtIndex:indexPath.row];
         selectModel.isSeleted = YES;
         [tableView reloadData];
         
+        if(selectModel.hasVote)
+        {
+            return;
+        }
         NSString *message = [NSString stringWithFormat:@"是否确定投票给\"%@\"",selectModel.option];
         UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"投票" message:message delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
         [alertView show];
@@ -259,6 +264,7 @@
 #pragma mark 获取投票结果
 -(void)requestVoteResult
 {
+    [_datas removeAllObjects];
     __weak MBProgressHUD *hua =[MBProgressHUD showHUDAddedTo:self.view animated:YES];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
@@ -277,17 +283,20 @@
              }
              _datas = [VoteModel mj_objectArrayWithKeyValuesArray:data];
              int size = 0;
-             for(VoteModel *model in _datas)
+             for(VoteModel *temp in _datas)
              {
-                 size += model.total;
+                 size += temp.total;
              }
-             for(VoteModel *model in _datas)
+             for(VoteModel *temp in _datas)
              {
-                 model.allTotal = size;
-                 model.hasVote = hasVote;
+                 temp.allTotal = size;
+                 temp.hasVote = hasVote;
+                 temp.commentedVoId = model.commentedVoId;
              }
          }
          _tableView.frame = CGRectMake(10, contentHeight + 30, SCREEN_WIDTH - 20, [_datas count] * ITEM_HEIGHT + 15);
+         [_scrollView setContentSize:CGSizeMake(SCREEN_WIDTH, contentHeight + 60 + [_datas count] * ITEM_HEIGHT)];
+
          [_tableView reloadData];
          [hua hide:YES];
      }

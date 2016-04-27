@@ -58,4 +58,12 @@ SINGLETON_IMPLEMENTION(Account);
     return tel;
 }
 
+-(void)logout
+{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setValue:nil forKey:UID];
+    [userDefaults setValue:nil forKey:TOKEN];
+}
+
+
 @end

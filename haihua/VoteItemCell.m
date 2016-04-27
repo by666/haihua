@@ -75,7 +75,6 @@
 
 -(void)setData : (VoteModel *)model
 {
-    model.myOption = @"选项2";
     _optionLabel.text = model.option;
 
     float percent = 0;
@@ -86,10 +85,10 @@
     _percentLabel.text = [[NSString stringWithFormat:@"%.1f",percent * 100] stringByAppendingString:@"%"];
     _percentLabel.frame = CGRectMake(SCREEN_WIDTH - 50 - _percentLabel.contentSize.width, 10, _percentLabel.contentSize.width, ITEM_HEIGHT-10);
 
-    if(!model.hasVote)
+    if(model.hasVote)
     {
         _percentLabel.hidden = NO;
-        if([model.myOption isEqualToString:model.option])
+        if(model.commentedVoId == model.voId)
         {
             _progressView.backgroundColor  = [UIColor orangeColor];
         }

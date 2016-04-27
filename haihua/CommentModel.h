@@ -27,4 +27,6 @@
 
 @property (copy , nonatomic) NSString *name;
 
+@property (assign, nonatomic)int avatar;
+
 @end

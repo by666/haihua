@@ -38,6 +38,7 @@
 {
     int cid;
     NSString *name;
+    NSInteger headPosition;
 }
 
 +(void)show : (BaseViewController *)controller tel : (NSString *)tel
@@ -49,6 +50,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    headPosition = -1;
     cid = -1;
     _datas = [[NSMutableArray alloc]init];
     _selectButtons = [[NSMutableArray alloc]init];
@@ -322,6 +324,7 @@
             [temp setSelected:NO];
         }
         [[_selectButtons objectAtIndex:position] setSelected:YES];
+        headPosition = position;
     }
 }
 
@@ -396,6 +399,12 @@
         [DialogHelper showWarnTips:@"请选择小区"];
         return;
     }
+    if(headPosition == -1)
+    {
+        [DialogHelper showWarnTips:@"请选择一个喜欢的头像"];
+        return;
+
+    }
  
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -406,6 +415,7 @@
     params[@"idcard"] = _cardIDTextView.text;
     params[@"gatehouse"] = _gateHouseTextView.text;
     params[@"token"] = [[Account sharedAccount]getToken];
+    params[@"avatar"] = [NSString stringWithFormat:@"%d",headPosition];
     [manager GET:Request_Commit parameters:params
          success:^(AFHTTPRequestOperation *operation, id responseObject)
      {

@@ -12,6 +12,7 @@
 #import "Account.h"
 #import "LoginViewController.h"
 #import "FeedbackListViewController.h"
+#import "UserModel.h"
 #define BUTTON_WIDTH 70
 
 @interface HomeViewController()
@@ -45,6 +46,7 @@
 {
     [super viewDidLoad];
     [self initView];
+    [self requestUserInfo];
 }
 
 -(void)initView
@@ -60,7 +62,6 @@
     
     NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
     _villageLabel = [[UILabel alloc]init];
-    _villageLabel.text = [userDefault objectForKey:VillageName];
     _villageLabel.textColor = [ColorUtil colorWithHexString:@"#000000" alpha:0.6f];
     _villageLabel.font = [UIFont systemFontOfSize:18.0f];
     _villageLabel.textAlignment = NSTextAlignmentCenter;
@@ -111,19 +112,19 @@
     UIButton *button = sender;
     if(button == _button1)
     {
-        [CommentViewController show:self title:@"居民议事"];
+        [CommentViewController show:self title:@"居民议事" type:@"discuss"];
     }
     else if(button == _button2)
     {
-        [CommentViewController show:self title:@"投票做主"];
+        [CommentViewController show:self title:@"投票做主" type:@"vote"];
     }
     else if(button == _button3)
     {
-        [CommentViewController show:self title:@"办事指南"];
+        [CommentViewController show:self title:@"办事指南" type:@"guide"];
     }
     else if(button == _button4)
     {
-        [FeedbackListViewController show:self];
+        [FeedbackListViewController show:self mine:NO];
     }
     else if(button == _button5)
     {
@@ -134,7 +135,9 @@
     }
     else if(button == _personButton)
     {
-        if([[Account sharedAccount]isLogin])
+        Account *account = [Account sharedAccount];
+
+        if([account isLogin])
         {
             [UserInfoViewController show:self];
         }
@@ -151,8 +154,39 @@
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     [userDefaults setInteger:model.villageId forKey:VillageID];
     [userDefaults setValue:model.name forKey:VillageName];
-    _villageLabel.text = [userDefaults objectForKey:VillageName];
+    _villageLabel.text = model.name;
 
+}
+
+#pragma mark 请求用户信息
+-(void)requestUserInfo
+{
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"uid"] = [[Account sharedAccount] getUid];
+    params[@"token"] = [[Account sharedAccount] getToken];
+    [manager GET:Request_GetUserInfo parameters:params
+         success:^(AFHTTPRequestOperation *operation, id responseObject)
+     {
+         ResponseModel *model = [ResponseModel mj_objectWithKeyValues:responseObject];
+         if(model.code == SUCCESS_CODE)
+         {
+             id data = model.data;
+             UserModel *userModel = [UserModel mj_objectWithKeyValues:data];
+             [[Account sharedAccount]saveTel:userModel.tel];
+             _villageLabel.text = userModel.communityName;
+             NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+             [userDefaults setInteger:userModel.cid forKey:VillageID];
+             [userDefaults setValue:userModel.communityName forKey:VillageName];
+
+         }
+         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+     }
+         failure:^(AFHTTPRequestOperation *operation, NSError *error)
+     {
+         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+     }];
 }
 
 @end

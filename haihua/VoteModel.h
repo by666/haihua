@@ -22,6 +22,6 @@
 
 @property (assign, nonatomic) BOOL hasVote;
 
-@property (copy, nonatomic) NSString *myOption;
+@property (assign, nonatomic) long commentedVoId;
 
 @end

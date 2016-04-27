@@ -12,6 +12,7 @@
 #import "FeedbackCell.h"
 #import "FeedBackViewController.h"
 #import "FeedbackDetailViewController.h"
+#import "Account.h"
 
 #define ITEM_HEIGHT 200
 #define REQUEST_SIZE 10
@@ -26,6 +27,8 @@
 
 @property (strong, nonatomic) UIButton *feedbackBtn;
 
+@property (assign, nonatomic) BOOL isMine;
+
 @end
 
 @implementation FeedbackListViewController
@@ -33,9 +36,11 @@
     int CURRENT;
 }
 
-+(void)show : (UIViewController *)controller
++(void)show : (BaseViewController *)controller
+       mine : (BOOL)isMine
 {
     FeedbackListViewController *openViewControler = [[FeedbackListViewController alloc]init];
+    openViewControler.isMine = isMine;
     [controller.navigationController pushViewController:openViewControler animated:YES];
 }
 
@@ -182,6 +187,10 @@
     params[@"cid"] = [NSString stringWithFormat:@"%d", [userDefault integerForKey:VillageID]];
     params[@"index"] = [NSString stringWithFormat:@"%d",CURRENT];
     params[@"length"] = [NSString stringWithFormat:@"%d",REQUEST_SIZE];
+    if(_isMine)
+    {
+        params[@"uid"] = [[Account sharedAccount] getUid];
+    }
     [manager GET:Request_FeedBack_List parameters:params
          success:^(AFHTTPRequestOperation *operation, id responseObject)
      {

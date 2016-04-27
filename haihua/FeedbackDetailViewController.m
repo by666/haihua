@@ -8,6 +8,7 @@
 
 #import "FeedbackDetailViewController.h"
 #import "TimeUtil.h"
+#import "HeadUtil.h"
 
 @interface FeedbackDetailViewController ()
 
@@ -41,7 +42,7 @@
     [self.view addSubview:scrollView];
     
     UIImageView *headImageView = [[UIImageView alloc]init];
-    headImageView.image = [UIImage imageNamed:@"ic_boy_a"];
+    headImageView.image = [HeadUtil getHeadImage: _model.sex position:_model.avatar];
     headImageView.frame = CGRectMake(10, 10, 30, 30);
     [scrollView addSubview:headImageView];
     
@@ -65,7 +66,7 @@
     contentLabel.font = [UIFont systemFontOfSize:14.0f];
     contentLabel.lineBreakMode = NSLineBreakByWordWrapping;
     contentLabel.numberOfLines = 0;
-    contentLabel.text = @"innenwhe看那块加拿大男孩看到你空间啊好多年抠脚大汉空间呢哈看见的就卡的可能啊但是你健康氨基啊短裤就很难见到卡上可能获得空间那就肯定很难空间啊好多年会计啊好的男科好那看见的话那打开手机好呢看见啊电话呢就卡红色内裤加拿大生恐惧你哈的空间呢哈丹江口市呢啊可视电话呢就看简单款 iu的健康和你家啊可能的跨上健康大会上看见脑筋难看还能得到";
+    contentLabel.text = _model.content;
     CGSize size = [contentLabel.text sizeWithFont:contentLabel.font constrainedToSize:CGSizeMake(SCREEN_WIDTH-20, MAXFLOAT) lineBreakMode:NSLineBreakByWordWrapping];
     contentLabel.frame = CGRectMake(10, headImageView.y + headImageView.height + 20, SCREEN_WIDTH -20, size.height);
     [scrollView addSubview:contentLabel];
