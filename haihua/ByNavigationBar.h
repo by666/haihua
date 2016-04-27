@@ -12,6 +12,8 @@
 
 @optional -(void)OnLeftClickCallback;
 
+//@optional -(void)OnRightClickCallback;
+
 @optional -(void)OnTitleClick;
 
 @end
@@ -21,6 +23,8 @@
 @property (strong,nonatomic) UILabel *titleLabel;
 
 @property (strong,nonatomic) UIButton *leftBtn;
+
+//@property (strong,nonatomic) UIButton *rightBtn;
 
 @property (strong, nonatomic) UIButton *titleClickBtn;
 

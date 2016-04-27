@@ -47,6 +47,8 @@
 		CF2CEDFF1CA456AB004FF058 /* UIScrollView+MJRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2CEDE91CA456AB004FF058 /* UIScrollView+MJRefresh.m */; };
 		CF2CEE001CA456AB004FF058 /* UIView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2CEDEB1CA456AB004FF058 /* UIView+MJExtension.m */; };
 		CF2CEE041CA456E8004FF058 /* IDSRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2CEE031CA456E8004FF058 /* IDSRefresh.m */; };
+		CF48C6281CCFCDB900BF4EF9 /* FeedbackCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CF48C6271CCFCDB900BF4EF9 /* FeedbackCell.m */; };
+		CF48C62B1CCFF43800BF4EF9 /* PictureModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CF48C62A1CCFF43800BF4EF9 /* PictureModel.m */; };
 		CF4A6D061CBDE39B00B36C93 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF4A6D051CBDE39B00B36C93 /* HomeViewController.m */; };
 		CF7166591C8F202700711656 /* ByNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = CF7166581C8F202700711656 /* ByNavigationBar.m */; };
 		CF71665D1C904D8A00711656 /* ColorUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = CF71665C1C904D8A00711656 /* ColorUtil.m */; };
@@ -164,6 +166,10 @@
 		CF2CEDEC1CA456AB004FF058 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		CF2CEE021CA456E8004FF058 /* IDSRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDSRefresh.h; sourceTree = "<group>"; };
 		CF2CEE031CA456E8004FF058 /* IDSRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDSRefresh.m; sourceTree = "<group>"; };
+		CF48C6261CCFCDB900BF4EF9 /* FeedbackCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackCell.h; sourceTree = "<group>"; };
+		CF48C6271CCFCDB900BF4EF9 /* FeedbackCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackCell.m; sourceTree = "<group>"; };
+		CF48C6291CCFF43800BF4EF9 /* PictureModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PictureModel.h; sourceTree = "<group>"; };
+		CF48C62A1CCFF43800BF4EF9 /* PictureModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PictureModel.m; sourceTree = "<group>"; };
 		CF4A6D041CBDE39B00B36C93 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		CF4A6D051CBDE39B00B36C93 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		CF7166571C8F202700711656 /* ByNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ByNavigationBar.h; sourceTree = "<group>"; };
@@ -478,6 +484,8 @@
 				CFB7FE1C1CAC368F009571C9 /* VoteItemCell.m */,
 				CFDD2DFC1CCE00D800E81E3F /* VillageCell.h */,
 				CFDD2DFD1CCE00D800E81E3F /* VillageCell.m */,
+				CF48C6261CCFCDB900BF4EF9 /* FeedbackCell.h */,
+				CF48C6271CCFCDB900BF4EF9 /* FeedbackCell.m */,
 			);
 			name = cell;
 			sourceTree = "<group>";
@@ -630,6 +638,8 @@
 				CFB9BFBE1CAAED9100A2BCE0 /* FileDataParams.m */,
 				CFDD2E051CCF14E000E81E3F /* FeedbackModel.h */,
 				CFDD2E061CCF14E000E81E3F /* FeedbackModel.m */,
+				CF48C6291CCFF43800BF4EF9 /* PictureModel.h */,
+				CF48C62A1CCFF43800BF4EF9 /* PictureModel.m */,
 			);
 			name = data;
 			sourceTree = "<group>";
@@ -816,6 +826,7 @@
 				CFA492321CA04DA0006C8F23 /* NewsModel.m in Sources */,
 				CF71665D1C904D8A00711656 /* ColorUtil.m in Sources */,
 				CF014E111CA9B28D002D7079 /* UserTableModel.m in Sources */,
+				CF48C6281CCFCDB900BF4EF9 /* FeedbackCell.m in Sources */,
 				CFA464E71CA1C4FD00563CE4 /* IDSExtendedLabel.m in Sources */,
 				CF2CEDF11CA456AB004FF058 /* MJRefreshFooter.m in Sources */,
 				CF2CEDFF1CA456AB004FF058 /* UIScrollView+MJRefresh.m in Sources */,
@@ -823,6 +834,7 @@
 				CF008A3D1CA5AC9400549EBD /* CommentCell.m in Sources */,
 				CF2CEDF21CA456AB004FF058 /* MJRefreshHeader.m in Sources */,
 				CFDD2E041CCF0CE400E81E3F /* FeedbackListViewController.m in Sources */,
+				CF48C62B1CCFF43800BF4EF9 /* PictureModel.m in Sources */,
 				CF2CEDEE1CA456AB004FF058 /* MJRefreshAutoFooter.m in Sources */,
 				CF4A6D061CBDE39B00B36C93 /* HomeViewController.m in Sources */,
 				CFA4922F1CA03D87006C8F23 /* ResponseModel.m in Sources */,

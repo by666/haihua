@@ -7,40 +7,43 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "PictureModel.h"
 @interface NewsModel : NSObject
 
-//id
+//mid
 @property (assign, nonatomic) long mid;
 
-//图片url
-@property (copy, nonatomic) NSString *url;
+//uid
+@property (assign, nonatomic) int uid;
 
-//信息类型
-@property (copy ,nonatomic)NSString *type;
+//cid
+@property (assign, nonatomic) int cid;
 
 //标题
 @property (copy, nonatomic) NSString *title;
 
-//内容
-@property (copy, nonatomic) NSString *content;
-
 //发布时间
 @property (assign, nonatomic) long publishTs;
 
-//截至时间
-@property (assign, nonatomic) long endTs;
+//信息类型
+@property (copy ,nonatomic)NSString *type;
 
 //创建时间
 @property (assign, nonatomic) long createTs;
 
-//评论总数
+//statuEdit
+@property (assign, nonatomic) BOOL statusEdit;
+
+//截至时间
+@property (assign, nonatomic) long endTs;
+
+//总评论数
 @property (assign, nonatomic) int totalComment;
 
-//备注, 主要用于投票信息里面的小标题
-@property (copy ,nonatomic) NSString *note;
+//typeVote
+@property (assign, nonatomic) BOOL typeVote;
 
-//indexID
-@property (assign, nonatomic) int index;
+//图文内容
+@property (strong, nonatomic) NSMutableArray *picNotes;
 
 @end

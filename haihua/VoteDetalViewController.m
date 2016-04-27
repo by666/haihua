@@ -105,12 +105,11 @@
     [_scrollView addSubview:_msgTimeLabel];
     
     _msgContentLabel = [[UILabel alloc]init];
-    _msgContentLabel.text = _model.content;
     _msgContentLabel.font = [UIFont systemFontOfSize:13.0f];
     _msgContentLabel.textColor = [UIColor blackColor];
     _msgContentLabel.lineBreakMode = NSLineBreakByCharWrapping;
     _msgContentLabel.numberOfLines = 0;
-    labelsize = [_model.content sizeWithFont:_msgContentLabel.font constrainedToSize: CGSizeMake(SCREEN_WIDTH - 20,CGFLOAT_MAX)
+    labelsize = [@"" sizeWithFont:_msgContentLabel.font constrainedToSize: CGSizeMake(SCREEN_WIDTH - 20,CGFLOAT_MAX)
                                lineBreakMode:NSLineBreakByCharWrapping];
     
     _msgContentLabel.frame = CGRectMake(10, _msgTimeLabel.contentSize.height + _msgTimeLabel.y+15, SCREEN_WIDTH - 20, labelsize.height);
@@ -148,7 +147,6 @@
 -(void)initVoteView
 {
     _voteTitleLabel = [[UILabel alloc]init];
-    _voteTitleLabel.text = _model.note;
     _voteTitleLabel.textColor = [ColorUtil colorWithHexString:@"#000000" alpha:0.8];
     _voteTitleLabel.textAlignment = NSTextAlignmentCenter;
     _voteTitleLabel.font = [UIFont systemFontOfSize:18.0f];

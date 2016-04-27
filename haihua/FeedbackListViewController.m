@@ -9,10 +9,11 @@
 #import "FeedbackListViewController.h"
 #import "IDSRefresh.h"
 #import <MBProgressHUD.h>
-#import "CommentViewCell.h"
+#import "FeedbackCell.h"
 #import "FeedBackViewController.h"
+#import "FeedbackDetailViewController.h"
 
-#define ITEM_HEIGHT 110
+#define ITEM_HEIGHT 200
 #define REQUEST_SIZE 10
 
 @interface FeedbackListViewController ()
@@ -110,13 +111,19 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    FeedbackModel *model = [_datas objectAtIndex:indexPath.row];
+
+    if(IS_NS_COLLECTION_EMPTY(model.pictures))
+    {
+        return 120;
+    }
     return ITEM_HEIGHT;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    CommentViewCell *cell = [[CommentViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:[CommentViewCell identify]];
+    FeedbackCell *cell = [[FeedbackCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:[FeedbackCell identify]];
     cell.backgroundColor = [UIColor clearColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     if(!IS_NS_COLLECTION_EMPTY(_datas))
@@ -131,7 +138,7 @@
 {
     if(!IS_NS_COLLECTION_EMPTY(_datas))
     {
-       
+        [FeedbackDetailViewController show:self model:[_datas objectAtIndex:indexPath.row]];
     }
 }
 

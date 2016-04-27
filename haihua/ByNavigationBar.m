@@ -31,6 +31,12 @@
     [_leftBtn addTarget:self action:@selector(OnLeftCallBack) forControlEvents:UIControlEventTouchUpInside];
     [_leftBtn setImage:[UIImage imageNamed:@"ic_back"] forState:UIControlStateNormal];
     
+//    _rightBtn = [[UIButton alloc]init];
+//    _rightBtn.frame = CGRectMake(0, StatuBar_HEIGHT, NavigationBar_HEIGHT, NavigationBar_HEIGHT);
+//    [_rightBtn setContentEdgeInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
+//    [_rightBtn addTarget:self action:@selector(OnRightCallBack) forControlEvents:UIControlEventTouchUpInside];
+//    [_rightBtn setImage:[UIImage imageNamed:@"ic_back"] forState:UIControlStateNormal];
+    
     _titleLabel = [[UILabel alloc]init];
     _titleLabel.textColor = [UIColor whiteColor];
     _titleLabel.textAlignment = NSTextAlignmentCenter;
@@ -44,6 +50,7 @@
     
     
     [self addSubview:_leftBtn];
+//    [self addSubview:_rightBtn];
     [self addSubview:_titleLabel];
     [self addSubview:_titleClickBtn];
 }
@@ -83,6 +90,14 @@
         [self.delegate OnLeftClickCallback];
     }
 }
+
+//-(void)OnRightCallBack
+//{
+//    if(self.delegate)
+//    {
+//        [self.delegate OnRightClickCallback];
+//    }
+//}
 
 
 

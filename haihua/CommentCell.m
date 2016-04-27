@@ -7,6 +7,7 @@
 //
 
 #import "CommentCell.h"
+#import "TimeUtil.h"
 
 @interface CommentCell()
 
@@ -73,10 +74,9 @@
     _contentLabel.text = model.content;
     _contentLabel.frame = CGRectMake(_genderImageView.x + 30 + 5, _genderImageView.y + 30, SCREEN_WIDTH - (_genderImageView.x + 30 + 5) - 10 , 48);
     
-    NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"yyyy-MM-dd"];
+ 
     NSDate *date = [NSDate dateWithTimeIntervalSince1970:model.ts];
-    _timeLabel.text =[formatter stringFromDate:date];
+    _timeLabel.text =[TimeUtil cl_prettyDateWithReference:date];
     _timeLabel.frame = CGRectMake(SCREEN_WIDTH - 15 - _timeLabel.contentSize.width , 10 + (30 - _nameLabel.contentSize.height)/2, _timeLabel.contentSize.width,_timeLabel.contentSize.height);
 }
 

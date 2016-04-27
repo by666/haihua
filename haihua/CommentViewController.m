@@ -256,17 +256,31 @@
                      [_scrollerView.footer noticeNoMoreData];
                      return ;
                  }
+                 else
+                 {
+                     for( int i = 0 ; i < temp.count ; i ++)
+                     {
+                         NewsModel *model = [temp objectAtIndex:i];
+                         model.picNotes = [PictureModel mj_objectArrayWithKeyValuesArray:model.picNotes];
+                     }
+                 }
                  [_datas addObjectsFromArray:temp];
              }
              else
              {
                  _datas = [NewsModel mj_objectArrayWithKeyValuesArray:data];
+                 for( int i = 0 ; i < _datas.count ; i ++)
+                 {
+                     NewsModel *model = [_datas objectAtIndex:i];
+                     model.picNotes = [PictureModel mj_objectArrayWithKeyValuesArray:model.picNotes];
+                 }
              }
              _tableView.frame = CGRectMake(0,Top_Height, SCREEN_WIDTH,  [_datas count] * ITEM_HEIGHT);
              [_scrollerView setContentSize:CGSizeMake(SCREEN_WIDTH, [_datas count] * ITEM_HEIGHT + Top_Height)];
              [_tableView reloadData];
              [_scrollerView.header endRefreshing];
              [_scrollerView.footer endRefreshing];
+             
          }
          [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
      }

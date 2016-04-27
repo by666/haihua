@@ -16,17 +16,12 @@
 #import "Account.h"
 
 #define ITEM_HEIGHT 100
-#define REQUEST_SIZE 3
+#define TOP_HEIGHT 60
+#define REQUEST_SIZE 10
 #define MORE_HEIGHT 50
 @interface CommentDetailViewController ()
 
 @property (strong, nonatomic) UIScrollView *scrollView;
-
-@property (strong, nonatomic) UILabel *msgTitleLabel;
-
-@property (strong, nonatomic) UILabel *msgTimeLabel;
-
-@property (strong, nonatomic) UILabel *msgContentLabel;
 
 @property (strong, nonatomic) UIPlaceholderTextView *commentTextView;
 
@@ -40,18 +35,14 @@
 
 @property (strong, nonatomic) UIView *maskView;
 
-@property (strong, nonatomic) UIView *dynamicTitleView;
-
 @property (strong, nonatomic) NSMutableArray *datas;
-
-//@property (strong, nonatomic) UIButton *moreBtn;
 
 @end
 
 @implementation CommentDetailViewController
 {
-    CGSize labelsize;
     int CURRENT;
+    int contentHeight;
 }
 
 +(void)show : (BaseViewController *)controller model: (NewsModel *)model;
@@ -74,20 +65,11 @@
 {
     self.view.backgroundColor = BACKGROUND_COLOR;
     [self initNavigationBar];
-    _scrollView = [[UIScrollView alloc]init];
-    _scrollView.frame = CGRectMake(0, NavigationBar_HEIGHT + StatuBar_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT - (NavigationBar_HEIGHT +StatuBar_HEIGHT)-50);
-    _scrollView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(uploadMore)];
-
-    _scrollView.delegate = self;
-    _scrollView.showsVerticalScrollIndicator = NO;
-    _scrollView.showsHorizontalScrollIndicator = NO;
-    [self.view addSubview:_scrollView];
+    [self initTopView];
     [self initBody];
-    [self initComment];
-    [self initMaskView];
     [self initBottom];
-    _scrollView.contentSize = CGSizeMake(SCREEN_WIDTH, 15 + _msgTimeLabel.contentSize.height + 15 + labelsize.height + 15 + 30);
-    [self requestCommentList : NO];
+    [self initComment];
+    
 }
 
 -(void)initNavigationBar
@@ -96,64 +78,96 @@
     [self.navBar.leftBtn setHidden:NO];
     self.navBar.delegate = self;
     [self.navBar.leftBtn setImage:[UIImage imageNamed:@"ic_back"] forState:UIControlStateNormal];
-    [self.navBar setTitle:_model.title];
+}
+
+-(void)initTopView
+{
+    UIView *topView = [[UIView alloc]init];
+    topView.backgroundColor = MAIN_COLOR;
+    topView.frame = CGRectMake(0, NavigationBar_HEIGHT +StatuBar_HEIGHT, SCREEN_WIDTH, TOP_HEIGHT);
+    [self.view addSubview:topView];
+    
+    UILabel *titleLabel = [[UILabel alloc]init];
+    titleLabel.textColor = [UIColor whiteColor];
+    titleLabel.font = [UIFont systemFontOfSize:15.0f];
+    titleLabel.numberOfLines = 0;
+    titleLabel.contentMode = NSLineBreakByWordWrapping;
+    titleLabel.text = _model.title;
+    CGSize size = [titleLabel.text sizeWithFont:titleLabel.font constrainedToSize:CGSizeMake(SCREEN_WIDTH-30, MAXFLOAT) lineBreakMode:NSLineBreakByWordWrapping];
+    titleLabel.frame = CGRectMake(15, 0, SCREEN_WIDTH-30, size.height);
+    [topView addSubview:titleLabel];
+    
+    UILabel *timeLabel = [[UILabel alloc]init];
+    timeLabel.textColor = [UIColor whiteColor];
+    timeLabel.font = [UIFont systemFontOfSize:13.0f];
+    NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd"];
+    NSDate *date = [NSDate dateWithTimeIntervalSince1970:_model.publishTs];
+    timeLabel.text = [formatter stringFromDate:date];
+    timeLabel.frame = CGRectMake(15, 5 + size.height, timeLabel.contentSize.width, timeLabel.contentSize.height);
+    [topView addSubview:timeLabel];
 }
 
 -(void)initBody
 {
-    NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"yyyy-MM-dd"];
-    NSDate *date = [NSDate dateWithTimeIntervalSince1970:_model.publishTs];
-    
-    _msgTimeLabel = [[UILabel alloc]init];
-    _msgTimeLabel.text = [formatter stringFromDate:date];
-    _msgTimeLabel.font = [UIFont systemFontOfSize:12.0f];
-    _msgTimeLabel.textColor = [ColorUtil colorWithHexString:@"#000000" alpha:0.8f];
-    _msgTimeLabel.frame = CGRectMake(10, 15, SCREEN_WIDTH -20, _msgTimeLabel.contentSize.height);
-    [_scrollView addSubview:_msgTimeLabel];
+    _scrollView = [[UIScrollView alloc]init];
+    _scrollView.frame = CGRectMake(0, NavigationBar_HEIGHT + StatuBar_HEIGHT +TOP_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT - (NavigationBar_HEIGHT +StatuBar_HEIGHT)-50 -TOP_HEIGHT);
+    _scrollView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(uploadMore)];
 
-    _msgContentLabel = [[UILabel alloc]init];
-    _msgContentLabel.text = _model.content;
-    _msgContentLabel.font = [UIFont systemFontOfSize:13.0f];
-    _msgContentLabel.textColor = [UIColor blackColor];
-    _msgContentLabel.lineBreakMode = NSLineBreakByCharWrapping;
-    _msgContentLabel.numberOfLines = 0;
-    labelsize = [_model.content sizeWithFont:_msgContentLabel.font constrainedToSize: CGSizeMake(SCREEN_WIDTH - 20,CGFLOAT_MAX)
-        lineBreakMode:NSLineBreakByCharWrapping];
-
-    _msgContentLabel.frame = CGRectMake(10, _msgTimeLabel.contentSize.height + _msgTimeLabel.y+15, SCREEN_WIDTH - 20, labelsize.height);
-    [_scrollView addSubview:_msgContentLabel];
-
+    _scrollView.delegate = self;
+    _scrollView.showsVerticalScrollIndicator = NO;
+    _scrollView.showsHorizontalScrollIndicator = NO;
+    [self.view addSubview:_scrollView];
     
-    UIView *commentTitle = [self createTitleView];
-    commentTitle.frame = CGRectMake(0, 15 + _msgTimeLabel.contentSize.height + 15 + labelsize.height + 15, SCREEN_WIDTH, 30);
-    [_scrollView addSubview:commentTitle];
+    UIView *bodyView = [[UIView alloc]init];
+    bodyView.backgroundColor = [UIColor whiteColor];
+    [_scrollView addSubview:bodyView];
     
-    _dynamicTitleView = [self createTitleView];
-    _dynamicTitleView.frame = CGRectMake(0, NavigationBar_HEIGHT + StatuBar_HEIGHT, SCREEN_WIDTH, 30);
-    _dynamicTitleView.hidden= YES;
-    [self.view addSubview:_dynamicTitleView];
+    NSMutableArray *pictures = _model.picNotes;
+    if(!IS_NS_COLLECTION_EMPTY(pictures))
+    {
+        for(PictureModel *model in pictures)
+        {
+            //文字
+            if(model.type == 1)
+            {
+                UILabel *label = [[UILabel alloc]init];
+                label.font = [UIFont systemFontOfSize:13.0f];
+                label.textColor = [UIColor blackColor];
+                label.text = model.data;
+                label.numberOfLines = 0;
+                label.lineBreakMode = NSLineBreakByWordWrapping;
+                CGSize labelSize = [label.text sizeWithFont:label.font constrainedToSize:CGSizeMake(SCREEN_WIDTH - 30, MAXFLOAT) lineBreakMode:NSLineBreakByWordWrapping];
+                label.frame = CGRectMake(15, 15 + contentHeight, SCREEN_WIDTH - 30, labelSize.height);
+                [_scrollView addSubview:label];
+                
+                contentHeight += (labelSize.height + 15);
+            }
+            //图片
+            else if(model.type == 2)
+            {
+                UIImageView *imageView = [[UIImageView alloc]init];
+                imageView.contentMode = UIViewContentModeScaleAspectFill;
+                imageView.clipsToBounds = YES;
+                [imageView sd_setImageWithURL:[NSURL URLWithString:model.data] placeholderImage:[UIImage imageNamed:@"net_error"]];
+                imageView.frame = CGRectMake(15, 15 + contentHeight, SCREEN_WIDTH -30, SCREEN_WIDTH -30);
+                [_scrollView addSubview:imageView];
+                contentHeight += (SCREEN_WIDTH - 30 + 15);
+            }
+        }
+    }
+    
+    bodyView.frame = CGRectMake(0, 0, SCREEN_WIDTH, contentHeight  + 15);
+    [_scrollView setContentSize:CGSizeMake(SCREEN_WIDTH, contentHeight + 15)];
+    
+    [self requestCommentList:NO];
 }
 
--(UIView *)createTitleView
-{
-    UIView *commentTitle = [[UIView alloc]init];
-    commentTitle.backgroundColor = [ColorUtil colorWithHexString:@"#FFFAF0"];
-    
-    UILabel *commentTitleLabel = [[UILabel alloc]init];
-    commentTitleLabel.text = @"评论";
-    commentTitleLabel.font = [UIFont systemFontOfSize:12.0f];
-    commentTitleLabel.textColor = [ColorUtil colorWithHexString:@"#000000" alpha:0.6f];
-    commentTitleLabel.frame = CGRectMake(10, 0, commentTitleLabel.contentSize.width, commentTitleLabel.contentSize.height);
-    commentTitleLabel.centerY = 15;
-    [commentTitle addSubview:commentTitleLabel];
-    return commentTitle;
-}
 
 -(void)initComment
 {
     _tableView = [[UITableView alloc]init];
-    _tableView.frame = CGRectMake(0, 15 + _msgTimeLabel.contentSize.height + 15 + labelsize.height + 15 + 30 , SCREEN_WIDTH, 0);
+    _tableView.frame = CGRectMake(0, contentHeight + 30 , SCREEN_WIDTH, 0);
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.scrollEnabled = NO;
@@ -161,19 +175,11 @@
     _tableView.showsHorizontalScrollIndicator = NO;
     [_scrollView addSubview:_tableView];
     
-//    _moreBtn = [[UIButton alloc]init];
-//    [_moreBtn setTitle:@"查看更多评论" forState:UIControlStateNormal];
-//    [_moreBtn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
-//
-//    _moreBtn.titleLabel.font = [UIFont systemFontOfSize:15.0f];
-//    _moreBtn.backgroundColor = [UIColor clearColor];
-//    _moreBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
-//    [_moreBtn addTarget:self action:@selector(TapMoreArea) forControlEvents:UIControlEventTouchUpInside];
-//    [_scrollView addSubview:_moreBtn];
     
 }
 
--(void)initMaskView
+
+-(void)initBottom
 {
     _maskView = [[UIView alloc]init];
     _maskView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT-50);
@@ -182,10 +188,7 @@
     [_maskView addGestureRecognizer:recognizer];
     [self.view addSubview:_maskView];
     _maskView.hidden = YES;
-}
-
--(void)initBottom
-{
+    
     _bottomView = [[UIView alloc]init];
     _bottomView.frame = CGRectMake(0, SCREEN_HEIGHT - 50, SCREEN_WIDTH, 50);
     _bottomView.backgroundColor = [UIColor whiteColor];
@@ -241,14 +244,7 @@
 {
     double distY = scrollView.contentOffset.y;
     NSLog(@"%f",distY);
-    if(distY > 15 + _msgTimeLabel.contentSize.height + 15 + labelsize.height + 15)
-    {
-        [_dynamicTitleView setHidden:NO];
-    }
-    else
-    {
-        [_dynamicTitleView setHidden:YES];
-    }
+  
 }
 #pragma mark 列表视图
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -306,11 +302,6 @@
     }
 }
 
-//点击更多区域
--(void)TapMoreArea
-{
-//    [CommentListViewController show:self mid:[NSString stringWithFormat:@"%ld",_model.mid]];
-}
 
 //键盘拉起回调
 - (void) keyboardWasShown:(NSNotification *) notif
@@ -418,9 +409,15 @@
              id data = model.data;
              NSMutableArray *requestDatas = [CommentModel mj_objectArrayWithKeyValuesArray:data];
 
+             if(IS_NS_COLLECTION_EMPTY(requestDatas))
+             {
+                 [_scrollView.footer noticeNoMoreData];
+                 [MBProgressHUD hideHUDForView:self.view animated:YES];
+                 return;
+             }
              [_datas addObjectsFromArray:requestDatas];
-             int height = 15 + _msgTimeLabel.contentSize.height + 15 + labelsize.height + 15 + 30 +([_datas count] *ITEM_HEIGHT);
-             _tableView.frame = CGRectMake(0, 15 + _msgTimeLabel.contentSize.height + 15 + labelsize.height + 15 + 30 , SCREEN_WIDTH, ([_datas count] *ITEM_HEIGHT));
+             int height = contentHeight + 30 +([_datas count] *ITEM_HEIGHT);
+             _tableView.frame = CGRectMake(0, contentHeight + 30 , SCREEN_WIDTH, ([_datas count] *ITEM_HEIGHT));
             _scrollView.contentSize = CGSizeMake(SCREEN_WIDTH, height);
              [_tableView reloadData];
          }

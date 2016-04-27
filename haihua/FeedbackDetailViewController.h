@@ -7,7 +7,10 @@
 //
 
 #import "BaseViewController.h"
+#import "FeedbackModel.h"
+@interface FeedbackDetailViewController : BaseViewController<ByNavigationBarDelegate>
 
-@interface FeedbackDetailViewController : BaseViewController
++(void)show : (BaseViewController *)controller
+       model: (FeedbackModel *)model;
 
 @end
