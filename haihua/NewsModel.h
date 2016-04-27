@@ -46,4 +46,6 @@
 //图文内容
 @property (strong, nonatomic) NSMutableArray *picNotes;
 
+@property (assign, nonatomic) BOOL hasVote;
+
 @end

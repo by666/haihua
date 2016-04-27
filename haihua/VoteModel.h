@@ -22,4 +22,6 @@
 
 @property (assign, nonatomic) BOOL hasVote;
 
+@property (copy, nonatomic) NSString *myOption;
+
 @end

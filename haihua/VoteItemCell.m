@@ -7,22 +7,24 @@
 //
 
 #import "VoteItemCell.h"
+#define ITEM_HEIGHT 50
 
 @interface VoteItemCell()
 
-@property (strong , nonatomic) UILabel *voteTitleLabel;
+@property (strong, nonatomic) UIView *bgView;
 
-@property (strong, nonatomic) UIView *bgProgress;
+@property (strong, nonatomic) UIView *progressView;
 
-@property (strong, nonatomic) UIView *mainProgress;
+@property (strong , nonatomic) UILabel *optionLabel;
 
-@property (strong, nonatomic) UIButton *selectButton;
-
-@property (strong, nonatomic) UILabel *countLabel;
+@property (strong, nonatomic) UILabel *percentLabel;
 
 @end
 
 @implementation VoteItemCell
+{
+    int ProgressWidth;
+}
 
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -35,100 +37,91 @@
 
 -(void)initView
 {
-    _voteTitleLabel = [[UILabel alloc]init];
-    _voteTitleLabel.textColor = [ColorUtil colorWithHexString:@"#000000" alpha:0.6f];
-    _voteTitleLabel.font = [UIFont systemFontOfSize:14.0f];
-    [self.contentView addSubview:_voteTitleLabel];
-    
-    
-    _bgProgress = [[UIView alloc]init];
-    _bgProgress.layer.cornerRadius = 6;
-    _bgProgress.layer.masksToBounds = YES;
-    _bgProgress.backgroundColor = LINE_COLOR;
-    [self.contentView addSubview:_bgProgress];
-    
-    
-    _mainProgress = [[UIView alloc]init];
-    _mainProgress.layer.cornerRadius = 6;
-    _mainProgress.layer.masksToBounds = YES;
-    _mainProgress.backgroundColor = MAIN_COLOR;
-    [self.contentView addSubview:_mainProgress];
-    
-    _countLabel = [[UILabel alloc]init];
-    _countLabel.textColor = [ColorUtil colorWithHexString:@"#000000" alpha:0.6f];
+    self.backgroundColor = [UIColor clearColor];
 
-    _countLabel.font = [UIFont systemFontOfSize:14.0f];
-    [self.contentView addSubview:_countLabel];
+    ProgressWidth = SCREEN_WIDTH - 40;
     
-    _selectButton = [[UIButton alloc]init];
-    _selectButton.userInteractionEnabled = NO;
-    [_selectButton setImage:[UIImage imageNamed:@"ic_select_normal"] forState:UIControlStateNormal];
-    [_selectButton setImage:[UIImage imageNamed:@"ic_select_press"] forState:UIControlStateSelected];
-    _selectButton.backgroundColor = [UIColor clearColor];
-    [self.contentView addSubview:_selectButton];
+    _bgView = [[UIView alloc]init];
+    _bgView.frame = CGRectMake(10, 10, ProgressWidth, ITEM_HEIGHT-10);
+    _bgView.layer.masksToBounds = YES;
+    _bgView.backgroundColor  = [UIColor whiteColor];
+    _bgView.layer.cornerRadius = (ITEM_HEIGHT - 10 )/2;
+    _bgView.layer.borderColor = [MAIN_COLOR CGColor];
+    _bgView.layer.borderWidth = 1;
+    _bgView.userInteractionEnabled = NO;
+    [self.contentView addSubview:_bgView];
     
+    _progressView = [[UIView alloc]init];
+    _progressView.layer.masksToBounds = YES;
+    _progressView.userInteractionEnabled = NO;
+    _progressView.backgroundColor = [UIColor redColor];
+    [self.contentView addSubview:_progressView];
+    
+    _optionLabel = [[UILabel alloc]init];
+    _optionLabel.textColor = [UIColor blackColor];
+    _optionLabel.font = [UIFont systemFontOfSize:16.0f];
+    _optionLabel.backgroundColor = [UIColor clearColor];
+    _optionLabel.frame = CGRectMake(10, 10, ProgressWidth, ITEM_HEIGHT-10);
+    _optionLabel.textAlignment = NSTextAlignmentCenter;
+    [self.contentView addSubview:_optionLabel];
+    
+    _percentLabel = [[UILabel alloc]init];
+    _percentLabel.textColor = [ColorUtil colorWithHexString:@"#000000" alpha:0.6f];
+    _percentLabel.font = [UIFont systemFontOfSize:14.0f];
+    _percentLabel.hidden = YES;
+    [self.contentView addSubview:_percentLabel];
 }
+
 
 -(void)setData : (VoteModel *)model
 {
-    if(model.hasVote)
-    {
-        _bgProgress.hidden = NO;
-        _mainProgress.hidden = NO;
-        _selectButton.hidden = YES;
-        
-        _voteTitleLabel.text = model.option;
-        _voteTitleLabel.frame = CGRectMake(15, 5, _voteTitleLabel.contentSize.width, _voteTitleLabel.contentSize.height);
-        
-        
-        double total = SCREEN_WIDTH -30;
-        _bgProgress.frame = CGRectMake(15, 10  + _voteTitleLabel.contentSize.height , total, 12);
+    model.myOption = @"选项2";
+    _optionLabel.text = model.option;
 
-        double actualWidth = 0;
-        if(model.allTotal == 0)
+    float percent = 0;
+    if(model.allTotal > 0)
+    {
+        percent = (float)model.total / (float)model.allTotal;
+    }
+    _percentLabel.text = [[NSString stringWithFormat:@"%.1f",percent * 100] stringByAppendingString:@"%"];
+    _percentLabel.frame = CGRectMake(SCREEN_WIDTH - 50 - _percentLabel.contentSize.width, 10, _percentLabel.contentSize.width, ITEM_HEIGHT-10);
+
+    if(!model.hasVote)
+    {
+        _percentLabel.hidden = NO;
+        if([model.myOption isEqualToString:model.option])
         {
-            actualWidth = 0;
+            _progressView.backgroundColor  = [UIColor orangeColor];
         }
         else
         {
-            actualWidth =((double)model.total /(double) model.allTotal ) * total;
+            _progressView.backgroundColor  = [ColorUtil colorWithHexString:@"#000000" alpha:0.2f];
         }
-        _mainProgress.frame = CGRectMake(15, 10  + _voteTitleLabel.contentSize.height,actualWidth , 12);
-        
-        int percent = 0;
-        if(model.allTotal == 0)
+        _progressView.frame = CGRectMake(10, 10,  ProgressWidth * percent, ITEM_HEIGHT-10);
+        if(ProgressWidth * percent > ProgressWidth - (ITEM_HEIGHT - 10 )/2)
         {
-            percent = 0;
+            _progressView.layer.cornerRadius = (ITEM_HEIGHT - 10 )/2;
         }
         else
         {
-            percent = ((double)model.total / (double)model.allTotal ) * 100;
+            CAShapeLayer *maskLayer = [CAShapeLayer layer];
+            maskLayer.path = [UIBezierPath bezierPathWithRoundedRect:_progressView.bounds byRoundingCorners: UIRectCornerTopLeft | UIRectCornerBottomLeft cornerRadii: (CGSize){(ITEM_HEIGHT - 10 )/2, (ITEM_HEIGHT - 10 )/2}].CGPath;
+            _progressView.layer.mask = maskLayer;
         }
-        _countLabel.text = [NSString stringWithFormat:@"%d票  %d%@",model.total,percent,@"%"];
-        _countLabel.frame = CGRectMake(SCREEN_WIDTH - 15 - _countLabel.contentSize.width, 5, _countLabel.contentSize.width, _countLabel.contentSize.height);
 
     }
     else
     {
-        _bgProgress.hidden = YES;
-        _mainProgress.hidden = YES;
-        _selectButton.hidden = NO;
-        
-        _voteTitleLabel.text = model.option;
-        _voteTitleLabel.frame = CGRectMake(15, (self.contentView.height - _voteTitleLabel.contentSize.height ) / 2, _voteTitleLabel.contentSize.width, _voteTitleLabel.contentSize.height);
-        
-        _selectButton.frame = CGRectMake(SCREEN_WIDTH - 15 - 24 , (self.contentView.height - 24 ) / 2, 24, 24);
+        _percentLabel.hidden = YES;
         if(model.isSeleted)
         {
-            [_selectButton setSelected:YES];
+            _bgView.backgroundColor  = [UIColor orangeColor];
         }
         else
         {
-            [_selectButton setSelected:NO];
+            _bgView.backgroundColor  = [UIColor whiteColor];
         }
     }
-    
-
 
 
 }
