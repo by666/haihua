@@ -18,7 +18,7 @@
 #import "HeadUtil.h"
 #import "FeedbackListViewController.h"
 #import "LogoutViewController.h"
-#import "CommentViewController.h"
+#import "MsgListViewController.h"
 #define ITEM_HEIGHT 50
 
 @interface UserInfoViewController()
@@ -241,11 +241,11 @@
             }
             else if(indexPath.row == 1)
             {
-                [CommentViewController show:self title:@"我的评论" type:@"discuss" mine:YES];
+                [MsgListViewController show:self title:@"我的评论" type:@"discuss" mine:YES];
             }
             else if(indexPath.row == 2)
             {
-                [CommentViewController show:self title:@"我的投票" type:@"vote" mine:YES];
+                [MsgListViewController show:self title:@"我的投票" type:@"vote" mine:YES];
             }
             break;
         case 2:

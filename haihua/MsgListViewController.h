@@ -8,7 +8,7 @@
 
 #import "BaseViewController.h"
 
-@interface CommentViewController : BaseViewController<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate>
+@interface MsgListViewController : BaseViewController<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate>
 
 +(void)show : (UIViewController *)controller
        title: (NSString *)title

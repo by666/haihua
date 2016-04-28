@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		38DB315E415A3C4FDA1C9F3E /* libPods-haihua.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 018436E8C598563445769FC4 /* libPods-haihua.a */; };
-		CF004BA31C8ED6F200CD389E /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF004BA21C8ED6F200CD389E /* CommentViewController.m */; };
+		CF004BA31C8ED6F200CD389E /* MsgListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF004BA21C8ED6F200CD389E /* MsgListViewController.m */; };
 		CF008A3A1CA5AB1E00549EBD /* CommentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CF008A391CA5AB1E00549EBD /* CommentModel.m */; };
 		CF008A3D1CA5AC9400549EBD /* CommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CF008A3C1CA5AC9400549EBD /* CommentCell.m */; };
 		CF008A431CA711DB00549EBD /* ImproveInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF008A421CA711DB00549EBD /* ImproveInfoViewController.m */; };
@@ -96,8 +96,8 @@
 /* Begin PBXFileReference section */
 		018436E8C598563445769FC4 /* libPods-haihua.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-haihua.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF9B174712C9F8ADFD80E8B0 /* Pods-haihua.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-haihua.release.xcconfig"; path = "Pods/Target Support Files/Pods-haihua/Pods-haihua.release.xcconfig"; sourceTree = "<group>"; };
-		CF004BA11C8ED6F200CD389E /* CommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentViewController.h; sourceTree = "<group>"; };
-		CF004BA21C8ED6F200CD389E /* CommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentViewController.m; sourceTree = "<group>"; };
+		CF004BA11C8ED6F200CD389E /* MsgListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MsgListViewController.h; sourceTree = "<group>"; };
+		CF004BA21C8ED6F200CD389E /* MsgListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MsgListViewController.m; sourceTree = "<group>"; };
 		CF008A381CA5AB1E00549EBD /* CommentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentModel.h; sourceTree = "<group>"; };
 		CF008A391CA5AB1E00549EBD /* CommentModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentModel.m; sourceTree = "<group>"; };
 		CF008A3B1CA5AC9400549EBD /* CommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentCell.h; sourceTree = "<group>"; };
@@ -548,8 +548,8 @@
 			children = (
 				CF4A6D041CBDE39B00B36C93 /* HomeViewController.h */,
 				CF4A6D051CBDE39B00B36C93 /* HomeViewController.m */,
-				CF004BA11C8ED6F200CD389E /* CommentViewController.h */,
-				CF004BA21C8ED6F200CD389E /* CommentViewController.m */,
+				CF004BA11C8ED6F200CD389E /* MsgListViewController.h */,
+				CF004BA21C8ED6F200CD389E /* MsgListViewController.m */,
 				CF014E181CA9B6CE002D7079 /* UserInfoViewController.h */,
 				CF014E191CA9B6CE002D7079 /* UserInfoViewController.m */,
 			);
@@ -579,12 +579,12 @@
 		CFE291D91C8EC7D5008C9C26 /* controller */ = {
 			isa = PBXGroup;
 			children = (
-				CFC15BBF1CC3FCDD0077FA19 /* vote */,
 				CFC15BBE1CC3FCD40077FA19 /* main */,
 				CFC15BBD1CC3FCC80077FA19 /* comment */,
 				CFC15BBC1CC3FCAA0077FA19 /* setting */,
 				CFC15BBB1CC3FC970077FA19 /* login */,
 				CFC15BB91CC3FC710077FA19 /* feedback */,
+				CFC15BBF1CC3FCDD0077FA19 /* vote */,
 				CFE291DD1C8EC865008C9C26 /* BaseViewController.h */,
 				CFE291DE1C8EC865008C9C26 /* BaseViewController.m */,
 			);
@@ -826,7 +826,7 @@
 				CFDD2DFE1CCE00D800E81E3F /* VillageCell.m in Sources */,
 				CF2CEE001CA456AB004FF058 /* UIView+MJExtension.m in Sources */,
 				CFB7FE201CAC4F6B009571C9 /* FeedBackViewController.m in Sources */,
-				CF004BA31C8ED6F200CD389E /* CommentViewController.m in Sources */,
+				CF004BA31C8ED6F200CD389E /* MsgListViewController.m in Sources */,
 				CFA464DD1CA1BBDF00563CE4 /* UIView+Frame.m in Sources */,
 				CF2CEDF41CA456AB004FF058 /* MJRefreshAutoNormalFooter.m in Sources */,
 				CFB9BFBF1CAAED9100A2BCE0 /* FileDataParams.m in Sources */,

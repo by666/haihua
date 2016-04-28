@@ -6,7 +6,7 @@
 //  Copyright © 2016年 by.huang. All rights reserved.
 //
 
-#import "CommentViewController.h"
+#import "MsgListViewController.h"
 #import <MBProgressHUD.h>
 #import "MsgModel.h"
 #import "CommentViewCell.h"
@@ -24,7 +24,7 @@
 #define ITEM_HEIGHT 110
 #define REQUEST_SIZE 10
 
-@interface CommentViewController ()
+@interface MsgListViewController ()
 
 @property (copy, nonatomic) NSString *mainTitle;
 
@@ -52,7 +52,7 @@
 
 @end
 
-@implementation CommentViewController
+@implementation MsgListViewController
 {
     int CURRENT;
     int Top_Height;
@@ -65,7 +65,7 @@
         type: (NSString *)type
         mine:(BOOL)isMine
 {
-    CommentViewController *openViewControler = [[CommentViewController alloc]init];
+    MsgListViewController *openViewControler = [[MsgListViewController alloc]init];
     openViewControler.mainTitle = title;
     openViewControler.type = type;
     openViewControler.isMine = isMine;

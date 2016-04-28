@@ -12,7 +12,7 @@
 #import "DialogHelper.h"
 #import "ImproveInfoViewController.h"
 #import <SMS_SDK/SMSSDK.h>
-#import "CommentViewController.h"
+#import "MsgListViewController.h"
 #import "Account.h"
 #import "MiPushSDK.h"
 #import "HomeViewController.h"

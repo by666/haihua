@@ -7,7 +7,7 @@
 //
 
 #import "HomeViewController.h"
-#import "CommentViewController.h"
+#import "MsgListViewController.h"
 #import "UserInfoViewController.h"
 #import "Account.h"
 #import "LoginViewController.h"
@@ -111,15 +111,15 @@
     UIButton *button = sender;
     if(button == _button1)
     {
-        [CommentViewController show:self title:@"居民议事" type:@"discuss" mine: NO];
+        [MsgListViewController show:self title:@"居民议事" type:@"discuss" mine: NO];
     }
     else if(button == _button2)
     {
-        [CommentViewController show:self title:@"投票做主" type:@"vote" mine: NO];
+        [MsgListViewController show:self title:@"投票做主" type:@"vote" mine: NO];
     }
     else if(button == _button3)
     {
-        [CommentViewController show:self title:@"办事指南" type:@"guide" mine: NO];
+        [MsgListViewController show:self title:@"办事指南" type:@"guide" mine: NO];
     }
     else if(button == _button4)
     {
