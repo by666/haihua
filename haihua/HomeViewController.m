@@ -112,15 +112,15 @@
     UIButton *button = sender;
     if(button == _button1)
     {
-        [CommentViewController show:self title:@"居民议事" type:@"discuss"];
+        [CommentViewController show:self title:@"居民议事" type:@"discuss" mine: NO];
     }
     else if(button == _button2)
     {
-        [CommentViewController show:self title:@"投票做主" type:@"vote"];
+        [CommentViewController show:self title:@"投票做主" type:@"vote" mine: NO];
     }
     else if(button == _button3)
     {
-        [CommentViewController show:self title:@"办事指南" type:@"guide"];
+        [CommentViewController show:self title:@"办事指南" type:@"guide" mine: NO];
     }
     else if(button == _button4)
     {

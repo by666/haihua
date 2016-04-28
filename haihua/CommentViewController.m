@@ -20,7 +20,6 @@
 #import "VoteDetalViewController.h"
 #import "FileDataParams.h"
 
-#define Top_Height 180
 #define ITEM_HEIGHT 110
 #define REQUEST_SIZE 10
 
@@ -46,21 +45,27 @@
 
 @property (copy, nonatomic) NSString *type;
 
+@property (assign , nonatomic) BOOL isMine;
+
 @end
 
 @implementation CommentViewController
 {
     int CURRENT;
+    int Top_Height;
+
 }
 
 
 +(void)show : (UIViewController *)controller
        title: (NSString *)title
         type: (NSString *)type
+        mine:(BOOL)isMine
 {
     CommentViewController *openViewControler = [[CommentViewController alloc]init];
     openViewControler.mainTitle = title;
     openViewControler.type = type;
+    openViewControler.isMine = isMine;
     [controller.navigationController pushViewController:openViewControler animated:YES];
 }
 
@@ -68,6 +73,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    Top_Height = 180;
     _datas = [[NSMutableArray alloc]init];
     [self initView];
 }
@@ -75,6 +81,10 @@
 
 #pragma mark 初始化视图
 - (void)initView{
+    if(_isMine)
+    {
+        Top_Height = 0;
+    }
     [self.view setBackgroundColor:BACKGROUND_COLOR];
     [self showNavigationBar];
     [self.navBar setTitle:_mainTitle];
@@ -248,7 +258,14 @@
     params[@"index"] = [NSString stringWithFormat:@"%d",CURRENT];
     params[@"length"] = [NSString stringWithFormat:@"%d",REQUEST_SIZE];
     params[@"type"] = _type;
-    [manager GET:Request_InfoList parameters:params
+    NSString *url = Request_InfoList;
+    if(_isMine)
+    {
+        url = Request_MyInfoList;
+        params[@"uid"] = [[Account sharedAccount] getUid];
+        params[@"token"] = [[Account sharedAccount] getToken];
+    }
+    [manager GET:url parameters:params
          success:^(AFHTTPRequestOperation *operation, id responseObject)
      {
          ResponseModel *model = [ResponseModel mj_objectWithKeyValues:responseObject];

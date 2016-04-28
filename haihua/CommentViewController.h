@@ -12,6 +12,7 @@
 
 +(void)show : (UIViewController *)controller
        title: (NSString *)title
-        type: (NSString *)type;
+        type: (NSString *)type
+       mine : (BOOL) isMine;
 
 @end

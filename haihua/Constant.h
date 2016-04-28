@@ -31,6 +31,9 @@
 //请求政务信息列表
 #define Request_InfoList [Root_Url stringByAppendingString: @"api/msg/gov/list"]
 
+//请求我参与的政务信息列表
+#define Request_MyInfoList [Root_Url stringByAppendingString: @"api/msg/gov/list/my"]
+
 //请求评论列表
 #define Request_CommentList [Root_Url stringByAppendingString:@"api/msg/gov/comment/list"]
 
@@ -48,6 +51,9 @@
 
 //请求意见反馈列表
 #define Request_FeedBack_List [Root_Url stringByAppendingString: @"api/feedback/list"]
+
+//请求我的意见反馈列表
+#define Request_MyFeedBack_List [Root_Url stringByAppendingString: @"api/feedback/list/my"]
 
 
 

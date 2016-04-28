@@ -26,6 +26,8 @@
 
 @property (strong, nonatomic)UIButton *sendButton;
 
+@property (assign, nonatomic)BOOL hideClose;
+
 @end
 
 @implementation LoginViewController
@@ -41,6 +43,15 @@
     [controller presentViewController:nav animated:YES completion:nil];
 }
 
+
+
++(void)show : (BaseViewController *)controller close : (BOOL)hideClose
+{
+    LoginViewController *targetController = [[LoginViewController alloc]init];
+    targetController.hideClose = hideClose;
+    UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:targetController];
+    [controller presentViewController:nav animated:YES completion:nil];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -75,6 +86,10 @@
     self.navBar.delegate = self;
     [self.navBar.leftBtn setImage:[UIImage imageNamed:@"ic_close"] forState:UIControlStateNormal];
     [self.navBar setTitle:@"登陆"];
+    if(_hideClose)
+    {
+        [self.navBar.leftBtn setHidden:YES];
+    }
 }
 
 -(void)initLoginView
@@ -162,7 +177,7 @@
     _sendButton.layer.cornerRadius = 4;
     [_sendButton setBackgroundImage:[AppUtil imageWithColor:MAIN_COLOR] forState:UIControlStateNormal];
     [_sendButton setBackgroundImage:[AppUtil imageWithColor:[ColorUtil colorWithHexString:@"#2d90ff" alpha:0.6f]] forState:UIControlStateHighlighted];
-    _sendButton.frame = CGRectMake(divideLine.x + 140, topLine.y+5, 80, 30);
+    _sendButton.frame = CGRectMake(SCREEN_WIDTH - 100, topLine.y+5, 80, 30);
     [_sendButton addTarget:self action:@selector(sendMsg) forControlEvents:UIControlEventTouchUpInside];
     [loginView addSubview:_sendButton];
 }

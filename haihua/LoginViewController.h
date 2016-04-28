@@ -13,4 +13,7 @@
 
 +(void)show : (BaseViewController *)controller;
 
+//是否隐藏关闭按钮
++(void)show : (BaseViewController *)controller close : (BOOL)hideClose;
+
 @end

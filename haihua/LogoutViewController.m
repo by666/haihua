@@ -67,7 +67,7 @@
     if(buttonIndex == 1)
     {
         [[Account sharedAccount] logout];
-        [LoginViewController show:self];
+        [LoginViewController show:self close:YES];
     }
 }
 

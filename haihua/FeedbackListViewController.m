@@ -177,6 +177,7 @@
 
 -(void)requestList : (BOOL)isLoadMore
 {
+    
     if(!isLoadMore)
     {
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -187,11 +188,15 @@
     params[@"cid"] = [NSString stringWithFormat:@"%d", [userDefault integerForKey:VillageID]];
     params[@"index"] = [NSString stringWithFormat:@"%d",CURRENT];
     params[@"length"] = [NSString stringWithFormat:@"%d",REQUEST_SIZE];
+    NSString *url = Request_FeedBack_List;
     if(_isMine)
     {
+        url = Request_MyFeedBack_List;
         params[@"uid"] = [[Account sharedAccount] getUid];
+        params[@"token"] = [[Account sharedAccount] getToken];
     }
-    [manager GET:Request_FeedBack_List parameters:params
+    
+    [manager GET:url parameters:params
          success:^(AFHTTPRequestOperation *operation, id responseObject)
      {
          ResponseModel *model = [ResponseModel mj_objectWithKeyValues:responseObject];
