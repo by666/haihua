@@ -90,7 +90,7 @@
 }
 
 
--(void)setNewsData:(NewsModel *)model
+-(void)setNewsData:(MsgModel *)model
 {
 
     _showImageView.image = [UIImage imageNamed:@"test"];

@@ -100,10 +100,10 @@
     {
         verifyStatu = @"审核通过";
     }
-    [_datas addObject:[UserTableModel buildModel:[UIImage imageNamed:@"ic_ass"] title :@"审核状态" content:verifyStatu isClick:NO]];
-    [_datas addObject:[UserTableModel buildModel:[UIImage imageNamed:@"ic_bby"] title :@"我的建议" content:@"" isClick:YES]];
-    [_datas addObject:[UserTableModel buildModel:[UIImage imageNamed:@"ic_ppl"] title :@"我的评论" content:@"" isClick:YES]];
-    [_datas addObject:[UserTableModel buildModel:[UIImage imageNamed:@"ic_ttl"] title :@"我的投票" content:@"" isClick:YES]];
+        [_datas addObject:[UserTableModel buildModel:[UIImage imageNamed:@"ic_ass"] title :@"审核状态" content:verifyStatu isClick:NO]];
+    [_datas addObject:[UserTableModel buildModel:[UIImage imageNamed:@"ic_bby"] title :@"我的建议" content:[NSString stringWithFormat:@"%d",model.total_feedback] isClick:YES]];
+    [_datas addObject:[UserTableModel buildModel:[UIImage imageNamed:@"ic_ppl"] title :@"我的评论" content:[NSString stringWithFormat:@"%d",model.total_msg] isClick:YES]];
+    [_datas addObject:[UserTableModel buildModel:[UIImage imageNamed:@"ic_ttl"] title :@"我的投票" content:[NSString stringWithFormat:@"%d",model.total_vote] isClick:YES]];
     [_datas addObject:[UserTableModel buildModel:[UIImage imageNamed:@"ic_xxl"] title :@"检查更新" content:nil isClick:YES]];
     [_datas addObject:[UserTableModel buildModel:[UIImage imageNamed:@"ic_ggy"] title :@"关于" content:nil isClick:YES]];
     [_datas addObject:[UserTableModel buildModel:[UIImage imageNamed:@"ic_set"] title :@"设置" content:nil isClick:YES]];
@@ -287,6 +287,9 @@
          {
              id data = model.data;
              UserModel *userModel = [UserModel mj_objectWithKeyValues:data];
+             userModel.total_feedback = model.total_feedback;
+             userModel.total_vote = model.total_vote;
+             userModel.total_msg = model.total_msg;
              [[Account sharedAccount]saveTel:userModel.tel];
              [self updateView:userModel];
             

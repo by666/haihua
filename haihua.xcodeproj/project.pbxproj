@@ -51,6 +51,7 @@
 		CF48C62B1CCFF43800BF4EF9 /* PictureModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CF48C62A1CCFF43800BF4EF9 /* PictureModel.m */; };
 		CF48C6371CD120B200BF4EF9 /* HeadUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = CF48C6361CD120B200BF4EF9 /* HeadUtil.m */; };
 		CF48C63A1CD1424F00BF4EF9 /* LogoutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF48C6391CD1424F00BF4EF9 /* LogoutViewController.m */; };
+		CF48C63D1CD1DF3300BF4EF9 /* BannerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CF48C63C1CD1DF3300BF4EF9 /* BannerModel.m */; };
 		CF4A6D061CBDE39B00B36C93 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF4A6D051CBDE39B00B36C93 /* HomeViewController.m */; };
 		CF7166591C8F202700711656 /* ByNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = CF7166581C8F202700711656 /* ByNavigationBar.m */; };
 		CF71665D1C904D8A00711656 /* ColorUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = CF71665C1C904D8A00711656 /* ColorUtil.m */; };
@@ -66,7 +67,7 @@
 		CFA46B301C954FE200408084 /* VillageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFA46B2F1C954FE200408084 /* VillageModel.m */; };
 		CFA46B331C9550C600408084 /* UserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFA46B321C9550C600408084 /* UserModel.m */; };
 		CFA4922F1CA03D87006C8F23 /* ResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFA4922E1CA03D87006C8F23 /* ResponseModel.m */; };
-		CFA492321CA04DA0006C8F23 /* NewsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFA492311CA04DA0006C8F23 /* NewsModel.m */; };
+		CFA492321CA04DA0006C8F23 /* MsgModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFA492311CA04DA0006C8F23 /* MsgModel.m */; };
 		CFA492351CA04EA9006C8F23 /* CommentViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CFA492341CA04EA9006C8F23 /* CommentViewCell.m */; };
 		CFA4923B1CA063E8006C8F23 /* TabButton.m in Sources */ = {isa = PBXBuildFile; fileRef = CFA4923A1CA063E8006C8F23 /* TabButton.m */; };
 		CFA4923E1CA06C64006C8F23 /* AppUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = CFA4923D1CA06C64006C8F23 /* AppUtil.m */; };
@@ -176,6 +177,8 @@
 		CF48C6361CD120B200BF4EF9 /* HeadUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeadUtil.m; sourceTree = "<group>"; };
 		CF48C6381CD1424F00BF4EF9 /* LogoutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogoutViewController.h; sourceTree = "<group>"; };
 		CF48C6391CD1424F00BF4EF9 /* LogoutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogoutViewController.m; sourceTree = "<group>"; };
+		CF48C63B1CD1DF3300BF4EF9 /* BannerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BannerModel.h; sourceTree = "<group>"; };
+		CF48C63C1CD1DF3300BF4EF9 /* BannerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BannerModel.m; sourceTree = "<group>"; };
 		CF4A6D041CBDE39B00B36C93 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		CF4A6D051CBDE39B00B36C93 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		CF7166571C8F202700711656 /* ByNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ByNavigationBar.h; sourceTree = "<group>"; };
@@ -207,8 +210,8 @@
 		CFA46B321C9550C600408084 /* UserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserModel.m; sourceTree = "<group>"; };
 		CFA4922D1CA03D87006C8F23 /* ResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResponseModel.h; sourceTree = "<group>"; };
 		CFA4922E1CA03D87006C8F23 /* ResponseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResponseModel.m; sourceTree = "<group>"; };
-		CFA492301CA04DA0006C8F23 /* NewsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsModel.h; sourceTree = "<group>"; };
-		CFA492311CA04DA0006C8F23 /* NewsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsModel.m; sourceTree = "<group>"; };
+		CFA492301CA04DA0006C8F23 /* MsgModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MsgModel.h; sourceTree = "<group>"; };
+		CFA492311CA04DA0006C8F23 /* MsgModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MsgModel.m; sourceTree = "<group>"; };
 		CFA492331CA04EA9006C8F23 /* CommentViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentViewCell.h; sourceTree = "<group>"; };
 		CFA492341CA04EA9006C8F23 /* CommentViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentViewCell.m; sourceTree = "<group>"; };
 		CFA492391CA063E8006C8F23 /* TabButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabButton.h; sourceTree = "<group>"; };
@@ -638,8 +641,8 @@
 				CFA4922E1CA03D87006C8F23 /* ResponseModel.m */,
 				CFA46B2E1C954FE200408084 /* VillageModel.h */,
 				CFA46B2F1C954FE200408084 /* VillageModel.m */,
-				CFA492301CA04DA0006C8F23 /* NewsModel.h */,
-				CFA492311CA04DA0006C8F23 /* NewsModel.m */,
+				CFA492301CA04DA0006C8F23 /* MsgModel.h */,
+				CFA492311CA04DA0006C8F23 /* MsgModel.m */,
 				CF008A381CA5AB1E00549EBD /* CommentModel.h */,
 				CF008A391CA5AB1E00549EBD /* CommentModel.m */,
 				CFB9BFBA1CAAE0E600A2BCE0 /* VoteModel.h */,
@@ -650,6 +653,8 @@
 				CFDD2E061CCF14E000E81E3F /* FeedbackModel.m */,
 				CF48C6291CCFF43800BF4EF9 /* PictureModel.h */,
 				CF48C62A1CCFF43800BF4EF9 /* PictureModel.m */,
+				CF48C63B1CD1DF3300BF4EF9 /* BannerModel.h */,
+				CF48C63C1CD1DF3300BF4EF9 /* BannerModel.m */,
 			);
 			name = data;
 			sourceTree = "<group>";
@@ -798,6 +803,7 @@
 				CF2CEDF61CA456AB004FF058 /* MJRefreshBackGifFooter.m in Sources */,
 				CFA46B301C954FE200408084 /* VillageModel.m in Sources */,
 				CFDD2E011CCE39C000E81E3F /* TimeUtil.m in Sources */,
+				CF48C63D1CD1DF3300BF4EF9 /* BannerModel.m in Sources */,
 				CF008A431CA711DB00549EBD /* ImproveInfoViewController.m in Sources */,
 				CFA4923E1CA06C64006C8F23 /* AppUtil.m in Sources */,
 				CF2CEDFB1CA456AB004FF058 /* MJRefreshStateHeader.m in Sources */,
@@ -834,7 +840,7 @@
 				CFDD2E0A1CCF3BF700E81E3F /* FeedbackDetailViewController.m in Sources */,
 				CF2CEDFD1CA456AB004FF058 /* MJRefreshConst.m in Sources */,
 				CFA4923B1CA063E8006C8F23 /* TabButton.m in Sources */,
-				CFA492321CA04DA0006C8F23 /* NewsModel.m in Sources */,
+				CFA492321CA04DA0006C8F23 /* MsgModel.m in Sources */,
 				CF71665D1C904D8A00711656 /* ColorUtil.m in Sources */,
 				CF48C63A1CD1424F00BF4EF9 /* LogoutViewController.m in Sources */,
 				CF014E111CA9B28D002D7079 /* UserTableModel.m in Sources */,

@@ -60,7 +60,6 @@
     [self.view addSubview:bgImageView];
     
     
-    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
     _villageLabel = [[UILabel alloc]init];
     _villageLabel.textColor = [ColorUtil colorWithHexString:@"#000000" alpha:0.6f];
     _villageLabel.font = [UIFont systemFontOfSize:18.0f];

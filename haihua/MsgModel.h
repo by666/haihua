@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "PictureModel.h"
-@interface NewsModel : NSObject
+@interface MsgModel : NSObject
 
 //mid
 @property (assign, nonatomic) long mid;

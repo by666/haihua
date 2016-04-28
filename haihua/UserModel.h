@@ -40,6 +40,15 @@
 //头像位置
 @property (assign, nonatomic)int avatar;
 
+//反馈数
+@property (assign, nonatomic)int total_feedback;
+
+//评论数
+@property (assign, nonatomic)int total_msg;
+
+//投票数
+@property (assign, nonatomic)int total_vote;
+
 
 
 @end

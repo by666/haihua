@@ -6,9 +6,9 @@
 //  Copyright © 2016年 by.huang. All rights reserved.
 //
 
-#import "NewsModel.h"
+#import "MsgModel.h"
 
-@implementation NewsModel
+@implementation MsgModel
 
 
 @end

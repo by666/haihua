@@ -8,7 +8,7 @@
 
 #import "CommentViewController.h"
 #import <MBProgressHUD.h>
-#import "NewsModel.h"
+#import "MsgModel.h"
 #import "CommentViewCell.h"
 #import "TabButton.h"
 #import "LoginViewController.h"
@@ -19,6 +19,7 @@
 #import "AppUtil.h"
 #import "VoteDetalViewController.h"
 #import "FileDataParams.h"
+#import "BannerModel.h"
 
 #define ITEM_HEIGHT 110
 #define REQUEST_SIZE 10
@@ -36,6 +37,8 @@
 @property (strong, nonatomic) UITableView *tableView;
 
 @property (strong, nonatomic) NSMutableArray *datas;
+
+@property (strong, nonatomic) NSMutableArray *imageDatas;
 
 @property (strong, nonatomic) TabButton *messageBtn;
 
@@ -75,6 +78,7 @@
     [super viewDidLoad];
     Top_Height = 180;
     _datas = [[NSMutableArray alloc]init];
+    _imageDatas= [[NSMutableArray alloc]init];
     [self initView];
 }
 
@@ -88,16 +92,12 @@
     [self.view setBackgroundColor:BACKGROUND_COLOR];
     [self showNavigationBar];
     [self.navBar setTitle:_mainTitle];
-    [self initTopView];
-    [self initTableView];
-    [self initErrorView];
-    [self uploadNew];
+    [self requestBanner];
     
 }
 
 -(void)initTopView
 {
- 
     _scrollerView = [[UIScrollView alloc]init];
     _scrollerView.frame = CGRectMake(0, NavigationBar_HEIGHT + StatuBar_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT - (NavigationBar_HEIGHT + StatuBar_HEIGHT));
     _scrollerView.showsVerticalScrollIndicator = NO;
@@ -108,7 +108,6 @@
     header.lastUpdatedTimeLabel.hidden = YES;
     _scrollerView.header = header;
     [self.view addSubview:_scrollerView];
-
     
     _topScrollerView =[[UIScrollView alloc]init];;
     _topScrollerView.frame = CGRectMake(0, 0, SCREEN_WIDTH, Top_Height);
@@ -116,24 +115,41 @@
     _topScrollerView.showsVerticalScrollIndicator = NO;
     _topScrollerView.delegate = self;
     _topScrollerView.showsHorizontalScrollIndicator = NO;
-    for(int i= 0 ; i < 5 ; i ++)
+    int count = 0;
+    if(!IS_NS_COLLECTION_EMPTY(_imageDatas))
     {
-        UIImageView *imageView = [[UIImageView alloc]init];
-        imageView.contentMode  = UIViewContentModeScaleAspectFill;
-        imageView.image = [UIImage imageNamed:@"test"];
-        imageView.frame = CGRectMake(i*SCREEN_WIDTH, 0, SCREEN_WIDTH, Top_Height);
-        [_topScrollerView addSubview:imageView];
+        count = _imageDatas.count;
+        for(int i= 0 ; i < count ; i ++)
+        {
+            BannerModel *model = [_imageDatas objectAtIndex:i];
+            UIImageView *imageView = [[UIImageView alloc]init];
+            imageView.tag = i;
+            imageView.contentMode  = UIViewContentModeScaleAspectFill;
+            [imageView sd_setImageWithURL:[NSURL URLWithString:model.url] placeholderImage:[UIImage imageNamed:@"net_error"]];
+            imageView.frame = CGRectMake(i*SCREEN_WIDTH, 0, SCREEN_WIDTH, Top_Height);
+            UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(OnImageClick:)];
+            [imageView addGestureRecognizer:recognizer];
+            [_topScrollerView addSubview:imageView];
+        }
+        [_topScrollerView setContentSize:CGSizeMake(count * SCREEN_WIDTH, Top_Height)];
+        [_scrollerView addSubview:_topScrollerView];
+        
+        _page = [[UIPageControl alloc]init];
+        _page.frame = CGRectMake(0, Top_Height-25,SCREEN_WIDTH, 20);
+        _page.numberOfPages = count;
+        _page.currentPage = 0;
+        _page.currentPageIndicatorTintColor = [UIColor whiteColor];
+        _page.pageIndicatorTintColor = [ColorUtil colorWithHexString:@"#ffffff" alpha:0.3];
+        [_scrollerView addSubview:_page];
     }
-    [_topScrollerView setContentSize:CGSizeMake(5 * SCREEN_WIDTH, Top_Height)];
-    [_scrollerView addSubview:_topScrollerView];
+    else{
+        Top_Height = 0;
+    }
     
-    _page = [[UIPageControl alloc]init];
-    _page.frame = CGRectMake(0, Top_Height-25,SCREEN_WIDTH, 20);
-    _page.numberOfPages = 5;
-    _page.currentPage = 0;
-    _page.currentPageIndicatorTintColor = [UIColor whiteColor];
-    _page.pageIndicatorTintColor = [ColorUtil colorWithHexString:@"#ffffff" alpha:0.3];
-    [_scrollerView addSubview:_page];
+    [self initTableView];
+    [self initErrorView];
+    [self uploadNew];
+
 }
 
 -(void)initTableView
@@ -191,7 +207,7 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     if(!IS_NS_COLLECTION_EMPTY(_datas))
     {
-        NewsModel *model = [_datas objectAtIndex:indexPath.row];
+        MsgModel *model = [_datas objectAtIndex:indexPath.row];
         [cell setNewsData:model];
     }
     return cell;
@@ -201,7 +217,7 @@
 {
     if(!IS_NS_COLLECTION_EMPTY(_datas))
     {
-        NewsModel *model = [_datas objectAtIndex:indexPath.row];
+        MsgModel *model = [_datas objectAtIndex:indexPath.row];
         if ([model.type isEqualToString:@"vote"])
         {
             [VoteDetalViewController show:self model:model];
@@ -229,6 +245,16 @@
 -(void)OnLeftClickCallback
 {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+#pragma mark 点击图片
+-(void)OnImageClick : (UITapGestureRecognizer *)recognizer
+{
+    UIView *view = recognizer.view;
+    if(!IS_NS_COLLECTION_EMPTY(_imageDatas))
+    {
+    
+    }
 }
 
 #pragma mark 请求列表数据
@@ -274,7 +300,7 @@
              id data = model.data;
              if(isLoadMore)
              {
-                 NSMutableArray *temp = [NewsModel mj_objectArrayWithKeyValuesArray:data];
+                 NSMutableArray *temp = [MsgModel mj_objectArrayWithKeyValuesArray:data];
                  if(IS_NS_COLLECTION_EMPTY(temp))
                  {
                      [_scrollerView.footer noticeNoMoreData];
@@ -284,7 +310,7 @@
                  {
                      for( int i = 0 ; i < temp.count ; i ++)
                      {
-                         NewsModel *model = [temp objectAtIndex:i];
+                         MsgModel *model = [temp objectAtIndex:i];
                          model.picNotes = [PictureModel mj_objectArrayWithKeyValuesArray:model.picNotes];
                      }
                  }
@@ -292,10 +318,10 @@
              }
              else
              {
-                 _datas = [NewsModel mj_objectArrayWithKeyValuesArray:data];
+                 _datas = [MsgModel mj_objectArrayWithKeyValuesArray:data];
                  for( int i = 0 ; i < _datas.count ; i ++)
                  {
-                     NewsModel *model = [_datas objectAtIndex:i];
+                     MsgModel *model = [_datas objectAtIndex:i];
                      model.picNotes = [PictureModel mj_objectArrayWithKeyValuesArray:model.picNotes];
                  }
              }
@@ -316,5 +342,27 @@
 
 }
 
+
+-(void)requestBanner
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"type"] = _type;
+    [manager GET:Request_Banner parameters:params
+         success:^(AFHTTPRequestOperation *operation, id responseObject)
+     {
+         ResponseModel *model = [ResponseModel mj_objectWithKeyValues:responseObject];
+         if(model.code == SUCCESS_CODE)
+         {
+             _imageDatas = [BannerModel mj_objectArrayWithKeyValuesArray:model.data];
+             [self initTopView];
+         }
+     }
+         failure:^(AFHTTPRequestOperation *operation, NSError *error)
+     {
+         [self showFailView];
+     }];
+
+}
 
 @end

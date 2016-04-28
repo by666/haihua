@@ -7,10 +7,10 @@
 //
 
 #import "BaseViewController.h"
-#import "NewsModel.h"
+#import "MsgModel.h"
 @interface CommentDetailViewController : BaseViewController<UINavigationBarDelegate,UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate>
 
 
-+(void)show : (BaseViewController *)controller model: (NewsModel *)model;
++(void)show : (BaseViewController *)controller model: (MsgModel *)model;
 
 @end

@@ -21,7 +21,7 @@
 
 @property (strong, nonatomic) UIScrollView *scrollView;
 
-@property (strong ,nonatomic) NewsModel *model;
+@property (strong ,nonatomic) MsgModel *model;
 
 @property (strong ,nonatomic) NSMutableArray *datas;
 
@@ -38,7 +38,7 @@
 }
 
 
-+(void)show : (BaseViewController *)controller model: (NewsModel *)model;
++(void)show : (BaseViewController *)controller model: (MsgModel *)model;
 {
     VoteDetalViewController *targetController = [[VoteDetalViewController alloc]init];
     targetController.model = model;

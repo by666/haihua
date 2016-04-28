@@ -26,7 +26,8 @@
 //请求用户信息
 #define Request_GetUserInfo [Root_Url stringByAppendingString: @"api/user/get"]
 
-
+//请求轮播信息
+#define Request_Banner [Root_Url stringByAppendingString: @"api/msg/banner"]
 
 //请求政务信息列表
 #define Request_InfoList [Root_Url stringByAppendingString: @"api/msg/gov/list"]

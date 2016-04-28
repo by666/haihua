@@ -55,6 +55,7 @@
     _progressView.layer.masksToBounds = YES;
     _progressView.userInteractionEnabled = NO;
     _progressView.backgroundColor = [UIColor redColor];
+    _progressView.frame = CGRectMake(10, 10, 0, ITEM_HEIGHT-10);
     [self.contentView addSubview:_progressView];
     
     _optionLabel = [[UILabel alloc]init];
@@ -96,7 +97,13 @@
         {
             _progressView.backgroundColor  = [ColorUtil colorWithHexString:@"#000000" alpha:0.2f];
         }
-        _progressView.frame = CGRectMake(10, 10,  ProgressWidth * percent, ITEM_HEIGHT-10);
+        
+        [UIView animateWithDuration:2.0f animations:^{
+            _progressView.frame = CGRectMake(10, 10,  ProgressWidth * percent, ITEM_HEIGHT-10);
+        } completion:^(BOOL finished) {
+            
+        }];
+        
         if(ProgressWidth * percent > ProgressWidth - (ITEM_HEIGHT - 10 )/2)
         {
             _progressView.layer.cornerRadius = (ITEM_HEIGHT - 10 )/2;

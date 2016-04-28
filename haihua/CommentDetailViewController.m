@@ -29,7 +29,7 @@
 
 @property (strong, nonatomic) UITableView *tableView;
 
-@property (strong ,nonatomic) NewsModel *model;
+@property (strong ,nonatomic) MsgModel *model;
 
 @property (strong, nonatomic) UIView *bottomView;
 
@@ -45,7 +45,7 @@
     int contentHeight;
 }
 
-+(void)show : (BaseViewController *)controller model: (NewsModel *)model;
++(void)show : (BaseViewController *)controller model: (MsgModel *)model;
 {
     CommentDetailViewController *targetController = [[CommentDetailViewController alloc]init];
     targetController.model = model;
