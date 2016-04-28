@@ -445,6 +445,9 @@
 
 -(void)OnLeftClickCallback
 {
+    [_nameTextView resignFirstResponder];
+    [_cardIDTextView resignFirstResponder];
+    [_gateHouseTextView resignFirstResponder];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
