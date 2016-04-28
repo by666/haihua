@@ -56,7 +56,8 @@
 //请求我的意见反馈列表
 #define Request_MyFeedBack_List [Root_Url stringByAppendingString: @"api/feedback/list/my"]
 
-
+//请求消息详情
+#define Request_Msg_Detail [Root_Url stringByAppendingString: @"api/msg/get"]
 
 #define Info_Net_Error @"网络异常，点击刷新"
 

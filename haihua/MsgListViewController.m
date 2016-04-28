@@ -50,6 +50,8 @@
 
 @property (assign , nonatomic) BOOL isMine;
 
+@property (assign , nonatomic) BOOL isVote;
+
 @end
 
 @implementation MsgListViewController
@@ -64,11 +66,13 @@
        title: (NSString *)title
         type: (NSString *)type
         mine:(BOOL)isMine
+     isVote : (BOOL)isVote
 {
     MsgListViewController *openViewControler = [[MsgListViewController alloc]init];
     openViewControler.mainTitle = title;
     openViewControler.type = type;
     openViewControler.isMine = isMine;
+    openViewControler.isVote = isVote;
     [controller.navigationController pushViewController:openViewControler animated:YES];
 }
 
@@ -124,6 +128,7 @@
             BannerModel *model = [_imageDatas objectAtIndex:i];
             UIImageView *imageView = [[UIImageView alloc]init];
             imageView.tag = i;
+            imageView.userInteractionEnabled = YES;
             imageView.contentMode  = UIViewContentModeScaleAspectFill;
             [imageView sd_setImageWithURL:[NSURL URLWithString:model.url] placeholderImage:[UIImage imageNamed:@"net_error"]];
             imageView.frame = CGRectMake(i*SCREEN_WIDTH, 0, SCREEN_WIDTH, Top_Height);
@@ -253,7 +258,15 @@
     UIView *view = recognizer.view;
     if(!IS_NS_COLLECTION_EMPTY(_imageDatas))
     {
-    
+        BannerModel *model = [_imageDatas objectAtIndex:view.tag];
+        if([_type isEqualToString:@"vote"])
+        {
+            [VoteDetalViewController show:self mid:model.mid];
+        }
+        else
+        {
+            [CommentDetailViewController show:self mid:model.mid];
+        }
     }
 }
 
@@ -290,6 +303,14 @@
         url = Request_MyInfoList;
         params[@"uid"] = [[Account sharedAccount] getUid];
         params[@"token"] = [[Account sharedAccount] getToken];
+        if(_isVote)
+        {
+            params[@"isVote"] = @"false";
+        }
+        else
+        {
+            params[@"isVote"] = @"true";
+        }
     }
     [manager GET:url parameters:params
          success:^(AFHTTPRequestOperation *operation, id responseObject)

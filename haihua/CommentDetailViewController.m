@@ -31,6 +31,8 @@
 
 @property (strong ,nonatomic) MsgModel *model;
 
+@property (assign ,nonatomic) int mid;
+
 @property (strong, nonatomic) UIView *bottomView;
 
 @property (strong, nonatomic) UIView *maskView;
@@ -52,6 +54,13 @@
     [controller.navigationController pushViewController:targetController animated:YES];
 }
 
++(void)show : (BaseViewController *)controller mid: (int)mid
+{
+    CommentDetailViewController *targetController = [[CommentDetailViewController alloc]init];
+    targetController.mid = mid;
+    [controller.navigationController pushViewController:targetController animated:YES];
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -65,6 +74,11 @@
 {
     self.view.backgroundColor = BACKGROUND_COLOR;
     [self initNavigationBar];
+    if(_model == nil)
+    {
+        [self requestData];
+        return;
+    }
     [self initTopView];
     [self initBody];
     [self initBottom];
@@ -328,6 +342,37 @@
     } completion:nil];
 }
 
+#pragma mark 请求页面数据
+-(void)requestData
+{
+    __weak MBProgressHUD *hua = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"mid"] = [NSString stringWithFormat:@"%d",_mid];
+    [manager GET:Request_Msg_Detail parameters:params
+         success:^(AFHTTPRequestOperation *operation, id responseObject)
+         {
+             ResponseModel *model = [ResponseModel mj_objectWithKeyValues:responseObject];
+             if(model.code == SUCCESS_CODE)
+             {
+                 id data = model.data;
+                 _model = [MsgModel mj_objectWithKeyValues:data];
+                 _model.picNotes = [PictureModel mj_objectArrayWithKeyValuesArray:_model.picNotes];
+                 [self initTopView];
+                 [self initBody];
+                 [self initBottom];
+                 [self initComment];
+             }
+             hua.hidden = YES;
+         }
+         failure:^(AFHTTPRequestOperation *operation, NSError *error)
+         {
+             [_scrollView.footer endRefreshing];
+             hua.hidden = YES;
+         }
+     ];
+
+}
 
 #pragma mark 请求评论
 -(void)requestComment
@@ -340,7 +385,7 @@
     }
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
 
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    __weak MBProgressHUD *hua = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"uid"] = [account getUid];
@@ -378,11 +423,11 @@
          {
              [DialogHelper showWarnTips:@"评论失败"];
          }
-         [MBProgressHUD hideHUDForView:self.view animated:YES];
+         hua.hidden = YES;
      }
          failure:^(AFHTTPRequestOperation *operation, NSError *error)
      {
-         [MBProgressHUD hideHUDForView:self.view animated:YES];
+         hua.hidden = YES;
          [DialogHelper showWarnTips:@"评论失败"];
      }];
 }
@@ -391,9 +436,10 @@
 #pragma mark 获取评论列表
 -(void)requestCommentList : (BOOL)isLoadMore
 {
+    __weak MBProgressHUD *hua;
     if(!isLoadMore)
     {
-        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        hua = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     }
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
@@ -412,7 +458,7 @@
              if(IS_NS_COLLECTION_EMPTY(requestDatas))
              {
                  [_scrollView.footer noticeNoMoreData];
-                 [MBProgressHUD hideHUDForView:self.view animated:YES];
+                 hua.hidden = YES;
                  return;
              }
              [_datas addObjectsFromArray:requestDatas];
@@ -421,13 +467,13 @@
             _scrollView.contentSize = CGSizeMake(SCREEN_WIDTH, height);
              [_tableView reloadData];
          }
-         [MBProgressHUD hideHUDForView:self.view animated:YES];
          [_scrollView.footer endRefreshing];
+         hua.hidden = YES;
      }
          failure:^(AFHTTPRequestOperation *operation, NSError *error)
      {
          [_scrollView.footer endRefreshing];
-         [MBProgressHUD hideHUDForView:self.view animated:YES];
+         hua.hidden = YES;
      }];
 }
 @end

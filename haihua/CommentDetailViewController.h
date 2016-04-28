@@ -13,4 +13,6 @@
 
 +(void)show : (BaseViewController *)controller model: (MsgModel *)model;
 
++(void)show : (BaseViewController *)controller mid: (int)mid;
+
 @end

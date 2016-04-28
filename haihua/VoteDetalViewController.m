@@ -23,6 +23,8 @@
 
 @property (strong ,nonatomic) MsgModel *model;
 
+@property (assign ,nonatomic) int mid;
+
 @property (strong ,nonatomic) NSMutableArray *datas;
 
 @property (strong, nonatomic) UITableView *tableView;
@@ -46,6 +48,14 @@
     
 }
 
++(void)show : (BaseViewController *)controller mid: (int)mid
+{
+    VoteDetalViewController *targetController = [[VoteDetalViewController alloc]init];
+    targetController.mid = mid;
+    [controller.navigationController pushViewController:targetController animated:YES];
+}
+
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -58,6 +68,11 @@
 {
     self.view.backgroundColor = BACKGROUND_COLOR;
     [self initNavigationBar];
+    if(_model == nil)
+    {
+        [self requestData];
+        return;
+    }
     [self initTopView];
     [self initBody];
     [self initVoteView];
@@ -259,6 +274,36 @@
 -(void)OnLeftClickCallback
 {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+#pragma mark 请求数据
+-(void)requestData
+{
+    __weak MBProgressHUD *hua = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"mid"] = [NSString stringWithFormat:@"%d",_mid];
+    [manager GET:Request_Msg_Detail parameters:params
+         success:^(AFHTTPRequestOperation *operation, id responseObject)
+     {
+         ResponseModel *model = [ResponseModel mj_objectWithKeyValues:responseObject];
+         if(model.code == SUCCESS_CODE)
+         {
+             id data = model.data;
+             _model = [MsgModel mj_objectWithKeyValues:data];
+             _model.picNotes = [PictureModel mj_objectArrayWithKeyValuesArray:_model.picNotes];
+             [self initTopView];
+             [self initBody];
+             [self initVoteView];
+         }
+         hua.hidden = YES;
+     }
+         failure:^(AFHTTPRequestOperation *operation, NSError *error)
+     {
+         [_scrollView.footer endRefreshing];
+         hua.hidden = YES;
+     }
+     ];
 }
 
 #pragma mark 获取投票结果

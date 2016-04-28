@@ -241,11 +241,11 @@
             }
             else if(indexPath.row == 1)
             {
-                [MsgListViewController show:self title:@"我的评论" type:@"discuss" mine:YES];
+                [MsgListViewController show:self title:@"我的评论" type:@"discuss" mine:YES isVote: NO];
             }
             else if(indexPath.row == 2)
             {
-                [MsgListViewController show:self title:@"我的投票" type:@"vote" mine:YES];
+                [MsgListViewController show:self title:@"我的投票" type:@"vote" mine:YES isVote: YES];
             }
             break;
         case 2:

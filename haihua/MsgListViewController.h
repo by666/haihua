@@ -13,6 +13,7 @@
 +(void)show : (UIViewController *)controller
        title: (NSString *)title
         type: (NSString *)type
-       mine : (BOOL) isMine;
+       mine : (BOOL) isMine
+     isVote : (BOOL) isVote;
 
 @end

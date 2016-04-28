@@ -111,15 +111,15 @@
     UIButton *button = sender;
     if(button == _button1)
     {
-        [MsgListViewController show:self title:@"居民议事" type:@"discuss" mine: NO];
+        [MsgListViewController show:self title:@"居民议事" type:@"discuss" mine: NO isVote: NO];
     }
     else if(button == _button2)
     {
-        [MsgListViewController show:self title:@"投票做主" type:@"vote" mine: NO];
+        [MsgListViewController show:self title:@"投票做主" type:@"vote" mine: NO isVote: NO];
     }
     else if(button == _button3)
     {
-        [MsgListViewController show:self title:@"办事指南" type:@"guide" mine: NO];
+        [MsgListViewController show:self title:@"办事指南" type:@"guide" mine: NO isVote: NO];
     }
     else if(button == _button4)
     {
