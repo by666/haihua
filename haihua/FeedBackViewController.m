@@ -25,7 +25,9 @@
 @end
 
 @implementation FeedBackViewController
-
+{
+    NSInteger deletePosition;
+}
 
 +(void)show : (BaseViewController *)controller
 {
@@ -183,31 +185,66 @@
 }
 
 
--(void)OnButtonClick : (id)sender
+-(void)OnButtonClick : (UIGestureRecognizer *)recognizer
 {
     if (![_titleTextView isExclusiveTouch] || ![_contentTextView isExclusiveTouch]) {
         [_titleTextView resignFirstResponder];
         [_contentTextView resignFirstResponder];
     }
     
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"请选择" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles: nil];
-    
-    [actionSheet addButtonWithTitle:@"拍照"];
-    [actionSheet addButtonWithTitle:@"从相册选取"];
-    [actionSheet showInView:self.view];
+    UIImageView *button = (UIImageView *)recognizer.view;
+    if(_images.count > button.tag)
+    {
+        deletePosition = button.tag;
+        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"请选择" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles: nil];
+        actionSheet.tag = 0;
+        [actionSheet addButtonWithTitle:@"删除"];
+        [actionSheet showInView:self.view];
+    }
+    else
+    {
+        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"请选择" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles: nil];
+        actionSheet.tag = 1;
+        [actionSheet addButtonWithTitle:@"拍照"];
+        [actionSheet addButtonWithTitle:@"从相册选取"];
+        [actionSheet showInView:self.view];
+    }
     
 }
 
 
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if(buttonIndex == 1)
+    if(actionSheet.tag == 0)
     {
-        [self takePhoto];
+        if(buttonIndex == 1)
+        {
+            ((UIImageView *)[_buttons objectAtIndex:deletePosition]).image =  [UIImage imageNamed:@"ic_add"];
+            [_images removeObjectAtIndex:deletePosition];
+            for(int i = 0; i< 3; i++)
+            {
+                if([_images count] > i)
+                {
+                    ((UIImageView *)[_buttons objectAtIndex:i]).image = [_images objectAtIndex:i] ;
+                }
+                else
+                {
+                    ((UIImageView *)[_buttons objectAtIndex:i]).image =  [UIImage imageNamed:@"ic_add"];
+                }
+    
+            }
+        }
     }
-    else if(buttonIndex == 2)
+    else if(actionSheet.tag == 1)
     {
-        [self takeAlbum];
+        if(buttonIndex == 1)
+        {
+            [self takePhoto];
+        }
+        else if(buttonIndex == 2)
+        {
+            [self takeAlbum];
+        }
     }
 }
 
