@@ -95,7 +95,7 @@
         {
             NSString *url = [model.pictures objectAtIndex:i];
             UIImageView *imageView = [[UIImageView alloc]init];
-            [imageView sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:[UIImage imageNamed:@"net_error"]];
+            [imageView sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:[UIImage imageNamed:@"bg_logo"]];
             imageView.contentMode = UIViewContentModeScaleAspectFill;
             imageView.clipsToBounds = YES;
             imageView.layer.cornerRadius = 4;

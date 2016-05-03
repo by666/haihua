@@ -116,7 +116,7 @@
     else
     {
         PictureModel *picModel = [model.picNotes objectAtIndex:0];
-        [_showImageView sd_setImageWithURL:[NSURL URLWithString:picModel.data] placeholderImage:[UIImage imageNamed:@"net_error"]];
+        [_showImageView sd_setImageWithURL:[NSURL URLWithString:picModel.data] placeholderImage:[UIImage imageNamed:@"bg_logo"]];
         _titleLabel.frame = CGRectMake(10, 10, SCREEN_WIDTH - 50 -(Item_Height-30) , Item_Height - 50);
     }
     
@@ -146,7 +146,7 @@
     }
     else
     {
-        [_showImageView sd_setImageWithURL:[NSURL URLWithString:[model.pictures objectAtIndex:0]] placeholderImage:[UIImage imageNamed:@"net_error"]];
+        [_showImageView sd_setImageWithURL:[NSURL URLWithString:[model.pictures objectAtIndex:0]] placeholderImage:[UIImage imageNamed:@"bg_logo"]];
         _titleLabel.frame = CGRectMake(10, 10, SCREEN_WIDTH - 50 -(Item_Height-30) , Item_Height - 50);
     }
 

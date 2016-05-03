@@ -130,7 +130,7 @@
             imageView.tag = i;
             imageView.userInteractionEnabled = YES;
             imageView.contentMode  = UIViewContentModeScaleAspectFill;
-            [imageView sd_setImageWithURL:[NSURL URLWithString:model.url] placeholderImage:[UIImage imageNamed:@"net_error"]];
+            [imageView sd_setImageWithURL:[NSURL URLWithString:model.url] placeholderImage:[UIImage imageNamed:@"bg_logo"]];
             imageView.frame = CGRectMake(i*SCREEN_WIDTH, 0, SCREEN_WIDTH, Top_Height);
             UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(OnImageClick:)];
             [imageView addGestureRecognizer:recognizer];

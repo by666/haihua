@@ -164,7 +164,7 @@
                 UIImageView *imageView = [[UIImageView alloc]init];
                 imageView.contentMode = UIViewContentModeScaleAspectFill;
                 imageView.clipsToBounds = YES;
-                [imageView sd_setImageWithURL:[NSURL URLWithString:model.data] placeholderImage:[UIImage imageNamed:@"net_error"]];
+                [imageView sd_setImageWithURL:[NSURL URLWithString:model.data] placeholderImage:[UIImage imageNamed:@"bg_logo"]];
                 imageView.frame = CGRectMake(15, 15 + contentHeight, SCREEN_WIDTH -30, SCREEN_WIDTH -30);
                 [_scrollView addSubview:imageView];
                 contentHeight += (SCREEN_WIDTH - 30 + 15);
