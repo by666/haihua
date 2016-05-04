@@ -32,6 +32,8 @@
 //    [MiPushSDK unregisterMiPush];
 
     
+    [NSThread sleepForTimeInterval:3.0];
+
     [self launchViewController];
     
     return YES;
@@ -105,6 +107,7 @@
 //    }
 //    else
 //    {
+    
         HomeViewController *homeViewController= [[HomeViewController alloc]init];
         controller= [[UINavigationController alloc]initWithRootViewController:homeViewController];
 //    }

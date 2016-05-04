@@ -416,6 +416,10 @@
     params[@"gatehouse"] = _gateHouseTextView.text;
     params[@"token"] = [[Account sharedAccount]getToken];
     params[@"avatar"] = [NSString stringWithFormat:@"%d",headPosition];
+    
+    NSUserDefaults *userDefault= [NSUserDefaults standardUserDefaults];
+    [userDefault setInteger:cid forKey:VillageID];
+    [userDefault setObject:name forKey:VillageName];
     [manager GET:Request_Commit parameters:params
          success:^(AFHTTPRequestOperation *operation, id responseObject)
      {

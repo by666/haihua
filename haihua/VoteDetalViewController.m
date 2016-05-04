@@ -117,14 +117,21 @@
     UIButton *button = [[UIButton alloc]init];
     button.backgroundColor = [UIColor whiteColor];
     button.layer.masksToBounds = YES;
-    button.layer.cornerRadius = 2;
+    button.layer.cornerRadius = 4;
     button.titleLabel.font = [UIFont systemFontOfSize:12.0f];
     [button setTitle:@"投票" forState:UIControlStateNormal];
     [button setTitleColor:MAIN_COLOR forState:UIControlStateNormal];
-    button.frame = CGRectMake(SCREEN_WIDTH - 40 , 40 , 30, 15);
+    [button addTarget:self action:@selector(moveToBottom) forControlEvents:UIControlEventTouchUpInside];
+    button.frame = CGRectMake(SCREEN_WIDTH - 60 , 30 , 50, 25);
     [self.view addSubview:button];
 }
 
+-(void)moveToBottom
+{
+    [UIView animateWithDuration:0.3 animations:^{
+        [_scrollView setContentOffset:CGPointMake(0, _scrollView.contentSize.height - (SCREEN_HEIGHT - TOP_HEIGHT-NavigationBar_HEIGHT -StatuBar_HEIGHT))];
+    }];
+}
 -(void)initBody
 {
     _scrollView = [[UIScrollView alloc]init];
