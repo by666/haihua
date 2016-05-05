@@ -49,6 +49,9 @@
 //投票数
 @property (assign, nonatomic)int total_vote;
 
+//是否是管理员
+@property (assign, nonatomic)int admin;
+
 
 
 @end

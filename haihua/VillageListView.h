@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "VillageModel.h"
+#import "UserModel.h"
 
 @protocol VillageListViewDelegate
 
@@ -18,5 +19,8 @@
 @interface VillageListView : UIView<UITableViewDelegate,UITableViewDataSource>
 
 @property (strong , nonatomic) id delegate;
+
+@property (strong , nonatomic) UserModel *model;
+
 
 @end

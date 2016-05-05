@@ -59,6 +59,9 @@
 //请求消息详情
 #define Request_Msg_Detail [Root_Url stringByAppendingString: @"api/msg/get"]
 
+//请求切换小区
+#define Request_Select_Village [Root_Url stringByAppendingString: @"api/user/cid/update"]
+
 #define Info_Net_Error @"网络异常，点击刷新"
 
 

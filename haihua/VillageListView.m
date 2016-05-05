@@ -10,7 +10,7 @@
 #import "VillageCell.h"
 
 #define VV_WIDTH  SCREEN_WIDTH - 30
-#define VV_HEIGHT 300
+#define VV_HEIGHT 350
 
 
 @interface VillageListView()
@@ -114,9 +114,17 @@
 {
     VillageCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     [cell setSelect:YES];
-    if(self.delegate)
+  
+    if(_model.admin == 1)
     {
-        [self.delegate OnSelectVillage:[_datas objectAtIndex:indexPath.row]];
+        [self requestSelectVillage:indexPath.row];
+    }
+    else
+    {
+        if(self.delegate)
+        {
+            [self.delegate OnSelectVillage:[_datas objectAtIndex:indexPath.row]];
+        }
     }
     [self removeFromSuperview];
     
@@ -130,8 +138,13 @@
 {
     __weak MBProgressHUD *hua = [MBProgressHUD showHUDAddedTo:self animated:YES];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    if(_model.admin == 1)
+    {
+        params[@"uid"] = [NSString stringWithFormat:@"%d",_model.uid];
+    }
     [_datas removeAllObjects];
-    [manager GET:Request_VillageList parameters:nil
+    [manager GET:Request_VillageList parameters:params
          success:^(AFHTTPRequestOperation *operation, id responseObject)
      {
          ResponseModel *model = [ResponseModel mj_objectWithKeyValues:responseObject];
@@ -140,6 +153,38 @@
              id data = model.data;
              _datas = [VillageModel mj_objectArrayWithKeyValuesArray:data];
              [self initView];
+         }
+         hua.hidden = YES;
+     }
+         failure:^(AFHTTPRequestOperation *operation, NSError *error)
+     {
+         hua.hidden = YES;
+     }];
+    
+}
+
+
+/**
+ *  请求切换小区
+ */
+-(void)requestSelectVillage : (NSInteger)position
+{
+    __weak MBProgressHUD *hua = [MBProgressHUD showHUDAddedTo:self animated:YES];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    VillageModel *model =  [_datas objectAtIndex:position];
+    params[@"uid"] = [NSString stringWithFormat:@"%d",_model.uid];
+    params[@"cid"] = [NSString stringWithFormat:@"%d",model.villageId];
+    [manager GET:Request_Select_Village parameters:params
+         success:^(AFHTTPRequestOperation *operation, id responseObject)
+     {
+         ResponseModel *model = [ResponseModel mj_objectWithKeyValues:responseObject];
+         if(model.code == SUCCESS_CODE)
+         {
+             if(self.delegate)
+             {
+                 [self.delegate OnSelectVillage:[_datas objectAtIndex:position]];
+             }
          }
          hua.hidden = YES;
      }
