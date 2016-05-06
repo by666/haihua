@@ -16,6 +16,7 @@
 		CF014E111CA9B28D002D7079 /* UserTableModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CF014E101CA9B28D002D7079 /* UserTableModel.m */; };
 		CF014E1A1CA9B6CE002D7079 /* UserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF014E191CA9B6CE002D7079 /* UserInfoViewController.m */; };
 		CF014E1D1CA9B75A002D7079 /* UserInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CF014E1C1CA9B75A002D7079 /* UserInfoCell.m */; };
+		CF0FE0041CDC7E4D003F8858 /* SecretViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF0FE0031CDC7E4D003F8858 /* SecretViewController.m */; };
 		CF2BEA781C8EC0CC00DA61D9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2BEA771C8EC0CC00DA61D9 /* main.m */; };
 		CF2BEA7B1C8EC0CC00DA61D9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2BEA7A1C8EC0CC00DA61D9 /* AppDelegate.m */; };
 		CF2BEA861C8EC0CC00DA61D9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF2BEA841C8EC0CC00DA61D9 /* LaunchScreen.storyboard */; };
@@ -113,6 +114,8 @@
 		CF014E191CA9B6CE002D7079 /* UserInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoViewController.m; sourceTree = "<group>"; };
 		CF014E1B1CA9B75A002D7079 /* UserInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoCell.h; sourceTree = "<group>"; };
 		CF014E1C1CA9B75A002D7079 /* UserInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoCell.m; sourceTree = "<group>"; };
+		CF0FE0021CDC7E4D003F8858 /* SecretViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecretViewController.h; sourceTree = "<group>"; };
+		CF0FE0031CDC7E4D003F8858 /* SecretViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecretViewController.m; sourceTree = "<group>"; };
 		CF2BEA731C8EC0CC00DA61D9 /* haihua.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = haihua.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF2BEA771C8EC0CC00DA61D9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		CF2BEA791C8EC0CC00DA61D9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -519,6 +522,8 @@
 				CF008A421CA711DB00549EBD /* ImproveInfoViewController.m */,
 				CFA464D51CA1B2B000563CE4 /* LoginViewController.h */,
 				CFC15BB41CC3F4DC0077FA19 /* LoginViewController.m */,
+				CF0FE0021CDC7E4D003F8858 /* SecretViewController.h */,
+				CF0FE0031CDC7E4D003F8858 /* SecretViewController.m */,
 			);
 			name = login;
 			sourceTree = "<group>";
@@ -815,6 +820,7 @@
 				CF2BEA7B1C8EC0CC00DA61D9 /* AppDelegate.m in Sources */,
 				CF2CEDF01CA456AB004FF058 /* MJRefreshComponent.m in Sources */,
 				CFE291DF1C8EC865008C9C26 /* BaseViewController.m in Sources */,
+				CF0FE0041CDC7E4D003F8858 /* SecretViewController.m in Sources */,
 				CFA464E11CA1C33000563CE4 /* DialogHelper.m in Sources */,
 				CFDD2E071CCF14E000E81E3F /* FeedbackModel.m in Sources */,
 				CF2CEDF81CA456AB004FF058 /* MJRefreshBackStateFooter.m in Sources */,

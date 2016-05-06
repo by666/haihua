@@ -16,6 +16,7 @@
 #import "Account.h"
 #import "MiPushSDK.h"
 #import "HomeViewController.h"
+#import "SecretViewController.h"
 
 
 @interface LoginViewController ()
@@ -26,7 +27,9 @@
 
 @property (strong, nonatomic)UIButton *sendButton;
 
-@property (assign, nonatomic)BOOL hideClose;
+@property (strong, nonnull) UIButton *secretBtn;
+
+@property (strong, nonnull) UIButton *contentBtn;
 
 @end
 
@@ -180,6 +183,51 @@
     _sendButton.frame = CGRectMake(SCREEN_WIDTH - 100, topLine.y+5, 80, 30);
     [_sendButton addTarget:self action:@selector(sendMsg) forControlEvents:UIControlEventTouchUpInside];
     [loginView addSubview:_sendButton];
+    
+    
+    _secretBtn = [[UIButton alloc]init];
+    _secretBtn.backgroundColor = [UIColor clearColor];
+    _secretBtn.frame = CGRectMake(SCREEN_WIDTH/2-120, loginBtn.y+loginBtn.height + 10, 120, 30);
+    [_secretBtn setImage:[AppUtil transformImage:[UIImage imageNamed:@"ic_select_normal"] width:20 height:20] forState:UIControlStateNormal];
+    [_secretBtn setImage:[AppUtil transformImage:[UIImage imageNamed:@"ic_select_press"] width:20 height:20] forState:UIControlStateSelected];
+    [_secretBtn setTitle:@"我已阅读并同意" forState:UIControlStateNormal];
+    [_secretBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    _secretBtn.titleLabel.font = [UIFont systemFontOfSize:13.0f];
+    [_secretBtn addTarget:self action:@selector(OnSecretBtnClick) forControlEvents:UIControlEventTouchUpInside];
+    [loginView addSubview:_secretBtn];
+    _secretBtn.selected = YES;
+    
+    NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:@"海华e事通用户协议"];
+    NSRange strRange = {0,[str length]};
+    [str addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:strRange];
+    [str addAttribute:NSForegroundColorAttributeName value:MAIN_COLOR range:strRange];
+    
+    _contentBtn = [[UIButton alloc]init];
+    _contentBtn.backgroundColor = [UIColor clearColor];
+    _contentBtn.frame = CGRectMake(SCREEN_WIDTH/2, loginBtn.y+loginBtn.height + 10, 120, 30);
+    [_contentBtn setAttributedTitle:str forState:UIControlStateNormal];
+    _contentBtn.titleLabel.font = [UIFont systemFontOfSize:13.0f];
+    [_contentBtn addTarget:self action:@selector(OnContentBtnClick) forControlEvents:UIControlEventTouchUpInside];
+    [loginView addSubview:_contentBtn];
+    
+}
+
+-(void)OnContentBtnClick
+{
+    [SecretViewController show:self];
+}
+
+
+-(void)OnSecretBtnClick
+{
+    if([_secretBtn isSelected])
+    {
+        [_secretBtn setSelected:NO];
+    }
+    else
+    {
+        [_secretBtn setSelected:YES];
+    }
 }
 
 -(void)sendMsg
@@ -221,6 +269,10 @@
         {
             [DialogHelper showWarnTips:@"验证码不能为空"];
             return;
+        }
+        else if(![_secretBtn isSelected])
+        {
+            [DialogHelper showWarnTips:@"请您仔细阅读用户协议并同意"];
         }
         else
         {

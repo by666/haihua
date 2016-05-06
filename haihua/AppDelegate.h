@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "MiPushSDK.h"
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate,MiPushSDKDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate,MiPushSDKDelegate,UIAlertViewDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 

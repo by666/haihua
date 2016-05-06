@@ -31,6 +31,8 @@
 #define ERROR_INFO 11
 //小区不存在
 #define ERROR_VILLAGE_NOT_EXIT 12
+//更新
+#define UPDATE 14
 
 @interface ResponseModel : NSObject
 

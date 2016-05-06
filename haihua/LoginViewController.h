@@ -10,6 +10,7 @@
 
 @interface LoginViewController : BaseViewController<ByNavigationBarDelegate>
 
+@property (assign, nonatomic)BOOL hideClose;
 
 +(void)show : (BaseViewController *)controller;
 

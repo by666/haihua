@@ -47,7 +47,14 @@
 -(void)viewDidLoad
 {
     [super viewDidLoad];
-    [self requestUserInfo];
+    if([[Account sharedAccount] isLogin])
+    {
+        [self requestUserInfo];
+    }
+    else
+    {
+        [LoginViewController show:self];
+    }
 }
 
 -(void)initView

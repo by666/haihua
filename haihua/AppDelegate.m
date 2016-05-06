@@ -13,11 +13,15 @@
 #import "MiPushSDK.h"
 #import "Account.h"
 #import "ImproveInfoViewController.h"
+#import "LoginViewController.h"
 @interface AppDelegate ()
 
 @end
 
 @implementation AppDelegate
+{
+    NSString *updateUrl;
+}
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -35,6 +39,7 @@
     [NSThread sleepForTimeInterval:3.0];
 
     [self launchViewController];
+    [self requestUpdate];
     
     return YES;
 }
@@ -99,18 +104,19 @@
 -(void)launchViewController
 {
     UINavigationController *controller;
-//    Account *account = [Account sharedAccount];
-//    if(![account isLogin])
-//    {
-//        VillageListViewController *villageListController =[[VillageListViewController alloc]init];
-//        controller= [[UINavigationController alloc]initWithRootViewController:villageListController];
-//    }
-//    else
-//    {
+    Account *account = [Account sharedAccount];
+    if(![account isLogin])
+    {
+        LoginViewController *loginController = [[LoginViewController alloc]init];
+        loginController.hideClose = YES;
+        controller= [[UINavigationController alloc]initWithRootViewController:loginController];
+    }
+    else
+    {
     
         HomeViewController *homeViewController= [[HomeViewController alloc]init];
         controller= [[UINavigationController alloc]initWithRootViewController:homeViewController];
-//    }
+    }
     _window.rootViewController = controller;
     [_window makeKeyAndVisible];
 }
@@ -167,6 +173,49 @@ didFailToRegisterForRemoteNotificationsWithError:(NSError *)err
 -(void)miPushReceiveNotification:(NSDictionary *)data
 {
     
+}
+
+
+-(void)requestUpdate
+{
+    NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+    NSString *appCurVersionNum = [infoDictionary objectForKey:@"CFBundleVersion"];
+    NSLog(@"当前应用版本号码：%@",appCurVersionNum);
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"pt"] = @"0";
+    params[@"ver"] = appCurVersionNum;
+    
+    [manager GET:Request_Update parameters:params
+         success:^(AFHTTPRequestOperation *operation, id responseObject)
+     {
+         ResponseModel *model = [ResponseModel mj_objectWithKeyValues:responseObject];
+         if(model.code == UPDATE)
+         {
+             UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"发现新版本" message:@"是否更新到最新版本？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+             updateUrl = model.data;
+             [alertView show];
+             
+         }
+         
+     }
+         failure:^(AFHTTPRequestOperation *operation, NSError *error)
+     {
+     }];
+
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(buttonIndex == 1)
+    {
+        if(!IS_NS_STRING_EMPTY(updateUrl))
+        {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:updateUrl]];
+        }
+
+    }
 }
 
 @end

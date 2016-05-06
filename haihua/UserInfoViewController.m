@@ -42,6 +42,9 @@
 @end
 
 @implementation UserInfoViewController
+{
+    NSString *updateUrl;
+}
 
 +(void)show : (UIViewController *)controller
 {
@@ -251,7 +254,7 @@
         case 2:
             if(indexPath.row == 0)
             {
-                [DialogHelper showSuccessTips:@"已是最新版本"];
+                [self requestUpdate];
             }
             else if(indexPath.row == 1)
             {
@@ -324,5 +327,52 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+
+-(void)requestUpdate
+{
+    NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+    NSString *appCurVersionNum = [infoDictionary objectForKey:@"CFBundleVersion"];
+    NSLog(@"当前应用版本号码：%@",appCurVersionNum);
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"pt"] = @"0";
+    params[@"ver"] = appCurVersionNum;
+    
+    [manager GET:Request_Update parameters:params
+         success:^(AFHTTPRequestOperation *operation, id responseObject)
+     {
+         ResponseModel *model = [ResponseModel mj_objectWithKeyValues:responseObject];
+         if(model.code == UPDATE)
+         {
+             UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"发现新版本" message:@"是否更新到最新版本？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+             updateUrl = model.data;
+             [alertView show];
+         }
+         else
+         {
+             [DialogHelper showSuccessTips:@"已是最新版本"];
+         }
+         
+     }
+         failure:^(AFHTTPRequestOperation *operation, NSError *error)
+     {
+         [DialogHelper showTips:@"请检查您的网络"];
+
+     }];
+    
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(buttonIndex == 1)
+    {
+        if(!IS_NS_STRING_EMPTY(updateUrl))
+        {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:updateUrl]];
+        }
+        
+    }
+}
 
 @end

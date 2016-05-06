@@ -20,4 +20,8 @@
 
 +(NSString*)fileMD5:(NSString*)path;
 
++(UIImage*)transformImage : (UIImage *)image
+                    width  : (CGFloat)width
+                    height : (CGFloat)height;
+
 @end

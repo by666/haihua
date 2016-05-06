@@ -62,6 +62,9 @@
 //请求切换小区
 #define Request_Select_Village [Root_Url stringByAppendingString: @"api/user/cid/update"]
 
+//检查更新
+#define Request_Update [Root_Url stringByAppendingString: @"api/update"]
+
 #define Info_Net_Error @"网络异常，点击刷新"
 
 
