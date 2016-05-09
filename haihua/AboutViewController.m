@@ -68,7 +68,7 @@
     [self.view addSubview:fromLabel];
     
     UILabel *copyRightLabel = [[UILabel alloc]init];
-    copyRightLabel.text = @"Copyright @2016 Scrat.All Right Reserve.";
+    copyRightLabel.text = @"Copyright ©2016 Scrat.All Right Reserve.";
     copyRightLabel.textColor = [ColorUtil colorWithHexString:@"#000000" alpha:0.6f];
     copyRightLabel.font = [UIFont systemFontOfSize:12.0f];
     copyRightLabel.textAlignment = NSTextAlignmentCenter;

@@ -327,6 +327,8 @@
     params[@"tel"] = _phoneTextView.text;
     params[@"code"] = _passwordTextView.text;
     params[@"cid"] = [NSString stringWithFormat:@"%d",(int)[userDefaults integerForKey:VillageID]];
+    [[Account sharedAccount] saveTel:_phoneTextView.text];
+
         [manager POST:Request_VerifyCode parameters:params
          success:^(AFHTTPRequestOperation *operation, id responseObject)
      {

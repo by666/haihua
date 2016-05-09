@@ -13,6 +13,7 @@
 #import "LoginViewController.h"
 #import "FeedbackListViewController.h"
 #import "UserModel.h"
+#import "ImproveInfoViewController.h"
 #define BUTTON_WIDTH 70
 
 @interface HomeViewController()
@@ -47,6 +48,7 @@
 -(void)viewDidLoad
 {
     [super viewDidLoad];
+    self.view.backgroundColor = BACKGROUND_COLOR;
     if([[Account sharedAccount] isLogin])
     {
         [self requestUserInfo];
@@ -189,7 +191,8 @@
          success:^(AFHTTPRequestOperation *operation, id responseObject)
      {
          ResponseModel *model = [ResponseModel mj_objectWithKeyValues:responseObject];
-         if(model.code == SUCCESS_CODE)
+        
+         if(model.code == SUCCESS_CODE || model.code == SUCCESS_VERIFY_FAIL)
          {
              id data = model.data;
              _userModel = [UserModel mj_objectWithKeyValues:data];
@@ -199,7 +202,16 @@
              [userDefaults setValue:_userModel.communityName forKey:VillageName];
              [self initView];
          }
-         else if(model.code == ERROR_TOKEN)
+         else if(model.code == SUCCESS_NEED_VERIFY)
+         {
+             ImproveInfoViewController *targetController = [[ImproveInfoViewController alloc]init];
+             targetController.tel = [[Account sharedAccount]getTel];
+             UINavigationController *controller = [[UINavigationController alloc]initWithRootViewController:targetController];
+             [self presentViewController:controller animated:YES completion:nil];
+             
+//             [ImproveInfoViewController show:self tel:[[Account sharedAccount]  getTel]];
+         }
+         else
          {
              [LoginViewController show:self];
          }
@@ -207,6 +219,7 @@
      }
          failure:^(AFHTTPRequestOperation *operation, NSError *error)
      {
+         [LoginViewController show:self];
          [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
      }];
 }

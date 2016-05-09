@@ -7,7 +7,7 @@
 //
 
 #import <MJExtension.h>
-
+//成功
 #define SUCCESS_CODE 1
 //参数异常
 #define ERROR_PARAM 2
