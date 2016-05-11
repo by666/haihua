@@ -78,6 +78,7 @@
     _tableView = [[UITableView alloc]init];
     _tableView.showsVerticalScrollIndicator = NO;
     _tableView.showsHorizontalScrollIndicator = NO;
+    _tableView.backgroundColor = [UIColor clearColor];
     _tableView.scrollEnabled = NO;
     _tableView.delegate = self;
     _tableView.dataSource = self;
@@ -107,7 +108,6 @@
     [_datas addObject:[UserTableModel buildModel:[UIImage imageNamed:@"ic_bby"] title :@"我的建议" content:[NSString stringWithFormat:@"%d",model.total_feedback] isClick:YES]];
     [_datas addObject:[UserTableModel buildModel:[UIImage imageNamed:@"ic_ppl"] title :@"我的评论" content:[NSString stringWithFormat:@"%d",model.total_msg] isClick:YES]];
     [_datas addObject:[UserTableModel buildModel:[UIImage imageNamed:@"ic_ttl"] title :@"我的投票" content:[NSString stringWithFormat:@"%d",model.total_vote] isClick:YES]];
-    [_datas addObject:[UserTableModel buildModel:[UIImage imageNamed:@"ic_xxl"] title :@"检查更新" content:nil isClick:YES]];
     [_datas addObject:[UserTableModel buildModel:[UIImage imageNamed:@"ic_ggy"] title :@"关于" content:nil isClick:YES]];
     [_datas addObject:[UserTableModel buildModel:[UIImage imageNamed:@"ic_set"] title :@"设置" content:nil isClick:YES]];
     
@@ -168,7 +168,7 @@
             count = 3;
             break;
         case 2:
-            count = 2;
+            count = 1;
             break;
         case 3:
             count = 1;
@@ -220,7 +220,7 @@
                 }
                 break;
             case 3:
-                model = [_datas objectAtIndex:indexPath.row +6];
+                model = [_datas objectAtIndex:indexPath.row +5];
                 [cell hideLine];
                 break;
             default:
@@ -254,12 +254,14 @@
         case 2:
             if(indexPath.row == 0)
             {
-                [self requestUpdate];
-            }
-            else if(indexPath.row == 1)
-            {
+//                [self requestUpdate];
                 [AboutViewController show:self];
+
             }
+//            else if(indexPath.row == 1)
+//            {
+//                [AboutViewController show:self];
+//            }
             break;
         case 3:
             if(indexPath.row == 0)

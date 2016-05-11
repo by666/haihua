@@ -14,6 +14,7 @@
 #import "Account.h"
 #import "ImproveInfoViewController.h"
 #import "LoginViewController.h"
+#import "CheckUpdateUtil.h"
 @interface AppDelegate ()
 
 @end
@@ -39,8 +40,9 @@
     [NSThread sleepForTimeInterval:3.0];
 
     [self launchViewController];
-    [self requestUpdate];
-    
+//    [self requestUpdate];
+
+    [[CheckUpdateUtil sharedCheckUpdateUtil] check];
     return YES;
 }
 
@@ -205,6 +207,8 @@ didFailToRegisterForRemoteNotificationsWithError:(NSError *)err
      }];
 
 }
+
+
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {

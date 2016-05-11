@@ -17,6 +17,8 @@
 		CF014E1A1CA9B6CE002D7079 /* UserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF014E191CA9B6CE002D7079 /* UserInfoViewController.m */; };
 		CF014E1D1CA9B75A002D7079 /* UserInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CF014E1C1CA9B75A002D7079 /* UserInfoCell.m */; };
 		CF0FE0041CDC7E4D003F8858 /* SecretViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF0FE0031CDC7E4D003F8858 /* SecretViewController.m */; };
+		CF2A50FB1CE30A8300F0EF3D /* CheckUpdateUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2A50FA1CE30A8300F0EF3D /* CheckUpdateUtil.m */; };
+		CF2A50FF1CE30F7C00F0EF3D /* UpdateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2A50FE1CE30F7C00F0EF3D /* UpdateModel.m */; };
 		CF2BEA781C8EC0CC00DA61D9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2BEA771C8EC0CC00DA61D9 /* main.m */; };
 		CF2BEA7B1C8EC0CC00DA61D9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2BEA7A1C8EC0CC00DA61D9 /* AppDelegate.m */; };
 		CF2BEA861C8EC0CC00DA61D9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF2BEA841C8EC0CC00DA61D9 /* LaunchScreen.storyboard */; };
@@ -116,6 +118,10 @@
 		CF014E1C1CA9B75A002D7079 /* UserInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoCell.m; sourceTree = "<group>"; };
 		CF0FE0021CDC7E4D003F8858 /* SecretViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecretViewController.h; sourceTree = "<group>"; };
 		CF0FE0031CDC7E4D003F8858 /* SecretViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecretViewController.m; sourceTree = "<group>"; };
+		CF2A50F91CE30A8300F0EF3D /* CheckUpdateUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckUpdateUtil.h; sourceTree = "<group>"; };
+		CF2A50FA1CE30A8300F0EF3D /* CheckUpdateUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckUpdateUtil.m; sourceTree = "<group>"; };
+		CF2A50FD1CE30F7C00F0EF3D /* UpdateModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateModel.h; sourceTree = "<group>"; };
+		CF2A50FE1CE30F7C00F0EF3D /* UpdateModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateModel.m; sourceTree = "<group>"; };
 		CF2BEA731C8EC0CC00DA61D9 /* haihua.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = haihua.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF2BEA771C8EC0CC00DA61D9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		CF2BEA791C8EC0CC00DA61D9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -310,6 +316,17 @@
 				BF9B174712C9F8ADFD80E8B0 /* Pods-haihua.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		CF2A50FC1CE30F6800F0EF3D /* update */ = {
+			isa = PBXGroup;
+			children = (
+				CF2A50F91CE30A8300F0EF3D /* CheckUpdateUtil.h */,
+				CF2A50FA1CE30A8300F0EF3D /* CheckUpdateUtil.m */,
+				CF2A50FD1CE30F7C00F0EF3D /* UpdateModel.h */,
+				CF2A50FE1CE30F7C00F0EF3D /* UpdateModel.m */,
+			);
+			name = update;
 			sourceTree = "<group>";
 		};
 		CF2BEA6A1C8EC0CC00DA61D9 = {
@@ -618,6 +635,7 @@
 		CFE291DB1C8EC7F0008C9C26 /* utils */ = {
 			isa = PBXGroup;
 			children = (
+				CF2A50FC1CE30F6800F0EF3D /* update */,
 				CFDD2DFF1CCE39C000E81E3F /* TimeUtil.h */,
 				CFDD2E001CCE39C000E81E3F /* TimeUtil.m */,
 				CF014DFE1CA8FCD9002D7079 /* Singleton.h */,
@@ -816,6 +834,7 @@
 				CF48C6371CD120B200BF4EF9 /* HeadUtil.m in Sources */,
 				CF014DFD1CA8FC16002D7079 /* Account.m in Sources */,
 				CFB9BFBC1CAAE0E600A2BCE0 /* VoteModel.m in Sources */,
+				CF2A50FF1CE30F7C00F0EF3D /* UpdateModel.m in Sources */,
 				CF008A3A1CA5AB1E00549EBD /* CommentModel.m in Sources */,
 				CF2BEA7B1C8EC0CC00DA61D9 /* AppDelegate.m in Sources */,
 				CF2CEDF01CA456AB004FF058 /* MJRefreshComponent.m in Sources */,
@@ -848,6 +867,7 @@
 				CFA4923B1CA063E8006C8F23 /* TabButton.m in Sources */,
 				CFA492321CA04DA0006C8F23 /* MsgModel.m in Sources */,
 				CF71665D1C904D8A00711656 /* ColorUtil.m in Sources */,
+				CF2A50FB1CE30A8300F0EF3D /* CheckUpdateUtil.m in Sources */,
 				CF48C63A1CD1424F00BF4EF9 /* LogoutViewController.m in Sources */,
 				CF014E111CA9B28D002D7079 /* UserTableModel.m in Sources */,
 				CF48C6281CCFCDB900BF4EF9 /* FeedbackCell.m in Sources */,
