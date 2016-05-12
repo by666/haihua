@@ -34,6 +34,7 @@
     
     // 同时启用APNs跟应用内长连接
     [MiPushSDK registerMiPush:self type:0 connect:YES];
+
 //    [MiPushSDK unregisterMiPush];
 
     
@@ -61,48 +62,7 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
 }
 
-/*
--(void)firstScreen
-{
-    UIImageView *niceView = [[UIImageView alloc] initWithFrame:self.window.frame];
-    niceView.image = [UIImage imageNamed:@"splash"];
-    [self.window addSubview:niceView];
-    [self.window bringSubviewToFront:niceView];
-    [UIView beginAnimations:nil context:nil];
-    [UIView setAnimationDuration:3.0];
-    [UIView setAnimationTransition:UIViewAnimationTransitionNone forView:self.window cache:YES];
-    [UIView setAnimationDelegate:self];
-    niceView.alpha = 0.0;
-    niceView.frame = CGRectMake(-SCREEN_WIDTH * 0.25, -SCREEN_HEIGHT * 0.25, SCREEN_WIDTH *1.5, SCREEN_HEIGHT * 1.5);
-    [UIView commitAnimations];
 
-//    UIView *firstScreenView = [[UIView alloc]init];
-//    firstScreenView.frame = self.window.bounds;
-//    firstScreenView.backgroundColor = [UIColor whiteColor];
-//    [self.window addSubview:firstScreenView];
-//    
-//    NSArray *array = @[@"上",@"善",@"若",@"水",@"厚",@"德",@"载",@"物"];
-//    NSMutableArray *labels = [[NSMutableArray alloc]init];
-//    for(int i = 0; i<[array count] ; i++)
-//    {
-//        UILabel *label = [[UILabel alloc]init];
-//        label.font =  [UIFont systemFontOfSize:30];
-//        label.text = [array objectAtIndex:i];
-//        if(i < [array count]/2)
-//        {
-//            label.frame = CGRectMake(SCREEN_WIDTH *2/3, SCREEN_HEIGHT /6 + 60 * i, label.contentSize.width, label.contentSize.height);
-//        }
-//  
-//        else
-//        {
-//            label.frame = CGRectMake(SCREEN_WIDTH *1/3, SCREEN_HEIGHT /6 + 30 + 60 * (i - 4), label.contentSize.width, label.contentSize.height);
-//        }
-//        [firstScreenView addSubview:label];
-//        [labels addObject:label];
-//    }
-    
-}
-*/
 -(void)launchViewController
 {
     UINavigationController *controller;
@@ -134,25 +94,28 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
     [MiPushSDK openAppNotify:messageId];
 }
 
--(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
-    [ MiPushSDK handleReceiveRemoteNotification :userInfo];
+    [MiPushSDK handleReceiveRemoteNotification:userInfo];
 }
 
 #pragma mark UIApplicationDelegate
 - (void)application:(UIApplication *)app
 didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
-    // 注册APNS成功, 注册deviceToken
-    [MiPushSDK bindDeviceToken:deviceToken];
+   
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSInteger villageId = [userDefaults integerForKey:VillageID];
     // 设置别名
     [MiPushSDK setAlias:[[Account sharedAccount] getUid]];
     // 订阅内容
     [MiPushSDK subscribe:[NSString stringWithFormat:@"%d",(int)villageId]];
-    // 设置帐号
-    [MiPushSDK setAccount:@"account"];
+//    // 设置帐号
+//    [MiPushSDK setAccount:@"account"];
+    
+    // 注册APNS成功, 注册deviceToken
+    [MiPushSDK bindDeviceToken:deviceToken];
+    
 }
 
 - (void)application:(UIApplication *)app
