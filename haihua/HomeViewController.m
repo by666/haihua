@@ -49,6 +49,7 @@
 {
     [super viewDidLoad];
     self.view.backgroundColor = BACKGROUND_COLOR;
+    [self initView];
     if([[Account sharedAccount] isLogin])
     {
         [self requestUserInfo];
@@ -61,7 +62,6 @@
 
 -(void)initView
 {
-    int left = (SCREEN_WIDTH - BUTTON_WIDTH * 3)/4;
     
     UIImageView *bgImageView = [[UIImageView alloc]init];
     bgImageView.image = [UIImage imageNamed:@"bg_aaa"];
@@ -74,10 +74,26 @@
     _villageLabel.textColor = [ColorUtil colorWithHexString:@"#000000" alpha:0.6f];
     _villageLabel.font = [UIFont systemFontOfSize:18.0f];
     _villageLabel.textAlignment = NSTextAlignmentCenter;
-    _villageLabel.text = _userModel.communityName;
     _villageLabel.frame = CGRectMake(0, 40, SCREEN_WIDTH, 40);
     [self.view addSubview:_villageLabel];
     
+
+    _personButton = [[UIButton alloc]init];
+    _personButton.frame = CGRectMake(SCREEN_WIDTH - 15 -40 , 40, 40, 40);
+    [_personButton setImage:[UIImage imageNamed:@"ic_our"] forState:UIControlStateNormal];
+    [_personButton addTarget:self action:@selector(OnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_personButton];
+
+
+}
+
+
+-(void)updateView
+{
+    int left = (SCREEN_WIDTH - BUTTON_WIDTH * 3)/4;
+
+    _villageLabel.text = _userModel.communityName;
+
     if(_userModel.admin == 0)
     {
         _button1 = [self build:_button1 image:[UIImage imageNamed:@"ic_ppp"] text:@"居民议事" frame:CGRectMake(left +(left + BUTTON_WIDTH)/2-20,SCREEN_HEIGHT*2/3-100,BUTTON_WIDTH,BUTTON_WIDTH)];
@@ -93,15 +109,6 @@
         _button4 = [self build:_button4 image:[UIImage imageNamed:@"ic_bbb"] text:@"意见采集" frame:CGRectMake(left *2+BUTTON_WIDTH,SCREEN_HEIGHT*2/3+20,BUTTON_WIDTH,BUTTON_WIDTH)];
         _button5 = [self build:_button5 image:[UIImage imageNamed:@"ic_qqq"] text:@"其他小区" frame:CGRectMake(left *3+BUTTON_WIDTH*2,SCREEN_HEIGHT *2/3+20,BUTTON_WIDTH,BUTTON_WIDTH)];
     }
-
-    
-    _personButton = [[UIButton alloc]init];
-    _personButton.frame = CGRectMake(SCREEN_WIDTH - 15 -40 , 40, 40, 40);
-    [_personButton setImage:[UIImage imageNamed:@"ic_our"] forState:UIControlStateNormal];
-    [_personButton addTarget:self action:@selector(OnClick:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:_personButton];
-
-
 }
 
 -(UIButton *)build : (UIButton *)button
@@ -199,7 +206,7 @@
              NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
              [userDefaults setInteger:_userModel.cid forKey:VillageID];
              [userDefaults setValue:_userModel.communityName forKey:VillageName];
-             [self initView];
+             [self updateView];
          }
          else if(model.code == SUCCESS_NEED_VERIFY)
          {

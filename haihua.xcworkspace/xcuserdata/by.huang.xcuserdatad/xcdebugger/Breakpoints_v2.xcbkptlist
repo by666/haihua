@@ -218,11 +218,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "haihua/HomeViewController.m"
-            timestampString = "484886234.611434"
+            timestampString = "484886619.855532"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "196"
-            endingLineNumber = "196"
+            startingLineNumber = "203"
+            endingLineNumber = "203"
             landmarkName = "-requestUserInfo"
             landmarkType = "5">
          </BreakpointContent>
