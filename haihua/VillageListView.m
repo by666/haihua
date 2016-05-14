@@ -28,10 +28,11 @@
 @implementation VillageListView
 
 
--(instancetype)init
+-(instancetype)initWithData : (UserModel *)userModel
 {
     if(self == [super init])
     {
+        self.userModel = userModel;
         _datas = [[NSMutableArray alloc]init];
         self.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
         self.backgroundColor = [ColorUtil colorWithHexString:@"#000000" alpha:0.2f];
@@ -115,7 +116,7 @@
     VillageCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     [cell setSelect:YES];
   
-    if(_model.admin == 1)
+    if(_userModel.admin == 1)
     {
         [self requestSelectVillage:indexPath.row];
     }
@@ -139,9 +140,9 @@
     __weak MBProgressHUD *hua = [MBProgressHUD showHUDAddedTo:self animated:YES];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    if(_model.admin == 1)
+    if(_userModel.admin == 1)
     {
-        params[@"uid"] = [NSString stringWithFormat:@"%d",_model.uid];
+        params[@"uid"] = [NSString stringWithFormat:@"%d",_userModel.uid];
     }
     [_datas removeAllObjects];
     [manager GET:Request_VillageList parameters:params
@@ -173,7 +174,7 @@
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     VillageModel *model =  [_datas objectAtIndex:position];
-    params[@"uid"] = [NSString stringWithFormat:@"%d",_model.uid];
+    params[@"uid"] = [NSString stringWithFormat:@"%d",_userModel.uid];
     params[@"cid"] = [NSString stringWithFormat:@"%d",model.villageId];
     [manager GET:Request_Select_Village parameters:params
          success:^(AFHTTPRequestOperation *operation, id responseObject)

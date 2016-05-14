@@ -149,8 +149,7 @@
     else if(button == _button5)
     {
         
-        VillageListView *view = [[VillageListView alloc]init];
-        view.model = _userModel;
+        VillageListView *view = [[VillageListView alloc]initWithData:_userModel];
         view.delegate = self;
         [self.view addSubview:view];
     }

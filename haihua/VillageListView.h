@@ -20,7 +20,8 @@
 
 @property (strong , nonatomic) id delegate;
 
-@property (strong , nonatomic) UserModel *model;
+@property (strong , nonatomic) UserModel *userModel;
 
+-(instancetype)initWithData : (UserModel *)userModel;
 
 @end

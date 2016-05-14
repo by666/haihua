@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 #pragma mark 网络请求相关
-#define Root_Url @"http://120.25.196.33/est/"
+#define Root_Url @"http://112.74.91.50/est/"
 
 //请求小区列表
 #define Request_VillageList [Root_Url stringByAppendingString: @"api/community/list"]

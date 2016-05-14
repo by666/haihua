@@ -366,9 +366,11 @@
 
 -(void)requestBanner
 {
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"type"] = _type;
+    params[@"cid"] = [userDefault objectForKey:VillageID];
     [manager GET:Request_Banner parameters:params
          success:^(AFHTTPRequestOperation *operation, id responseObject)
      {

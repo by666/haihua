@@ -335,7 +335,7 @@
     [_cardIDTextView resignFirstResponder];
     [_gateHouseTextView resignFirstResponder];
     
-    VillageListView *view = [[VillageListView alloc]init];
+    VillageListView *view = [[VillageListView alloc]initWithData:nil];
     view.delegate = self;
     [self.view addSubview:view];
 }
