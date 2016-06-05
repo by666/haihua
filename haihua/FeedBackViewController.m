@@ -22,11 +22,13 @@
 
 @property (strong, nonatomic) NSMutableArray *buttons;
 
+
 @end
 
 @implementation FeedBackViewController
 {
     NSInteger deletePosition;
+    __weak MBProgressHUD *hua;
 }
 
 +(void)show : (BaseViewController *)controller
@@ -285,7 +287,7 @@
         [DialogHelper showWarnTips:@"请填写内容"];
         return;
     }
-    __weak MBProgressHUD *hua = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hua = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSString *md5s = [self createMd5s];
     NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] multipartFormRequestWithMethod:@"POST" URLString:Request_FeedBack parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         if(!IS_NS_COLLECTION_EMPTY(_images))
@@ -312,9 +314,12 @@
     AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
     
     NSURLSessionUploadTask *uploadTask;
+    
+    
+    NSProgress *_progress = nil;
     uploadTask = [manager
                   uploadTaskWithStreamedRequest:request
-                  progress:nil
+                  progress:&_progress
                   completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
                       if (error) {
                           [DialogHelper showWarnTips:@"上传失败,请重试"];
@@ -323,6 +328,9 @@
                           if(model.code == SUCCESS_CODE)
                           {
                               [DialogHelper showSuccessTips:@"上传成功，感谢您的支持"];
+                             
+                              [[NSNotificationCenter defaultCenter]postNotificationName:@"updatefeedback" object:nil];
+                              [self dismissViewControllerAnimated:YES completion:nil];
 
                           }
                           else{
@@ -334,5 +342,15 @@
                   }];
     
     [uploadTask resume];
+    [_progress addObserver:self forKeyPath:@"fractionCompleted" options:NSKeyValueObservingOptionNew context:nil];
+
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+
+{
+    NSProgress *progress = object;
+    hua.labelText = [NSString stringWithFormat:@"%.2f％",progress.fractionCompleted * 100];
+    
 }
 @end

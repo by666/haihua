@@ -49,7 +49,7 @@
     _contentLabel.font = [UIFont systemFontOfSize:13.0f];
     _contentLabel.textColor = [ColorUtil colorWithHexString:@"#000000" alpha:0.6];
     _contentLabel.numberOfLines = 0;
-      _contentLabel.lineBreakMode = NSLineBreakByWordWrapping | NSLineBreakByTruncatingTail;
+    _contentLabel.lineBreakMode = NSLineBreakByCharWrapping;
     [self.contentView addSubview:_contentLabel];
     
     _timeLabel = [[UILabel alloc]init];
@@ -64,15 +64,22 @@
     _genderImageView.image = [HeadUtil getHeadImage:model.sex position:model.avatar];
     
     _nameLabel.text = model.name;
-    _nameLabel.frame = CGRectMake(_genderImageView.x + 30 + 5, 10 + (30 - _nameLabel.contentSize.height)/2, _nameLabel.contentSize.width, _nameLabel.contentSize.height);
+    _nameLabel.frame = CGRectMake(45, 10 + (30 - _nameLabel.contentSize.height)/2, _nameLabel.contentSize.width, _nameLabel.contentSize.height);
     
     _contentLabel.text = model.content;
-    _contentLabel.frame = CGRectMake(_genderImageView.x + 30 + 5, _genderImageView.y + 30, SCREEN_WIDTH - (_genderImageView.x + 30 + 5) - 10 , 48);
+   
+    CGSize size  =[_contentLabel boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 60 , MAXFLOAT) ];
+//    CGSize size = [_contentLabel.text sizeWithFont:_contentLabel.font constrainedToSize:CGSizeMake(SCREEN_WIDTH - 60 , MAXFLOAT) lineBreakMode:NSLineBreakByCharWrapping];
+    _contentLabel.frame = CGRectMake(45, 40, SCREEN_WIDTH - 60 , size.height+10);
     
- 
     NSDate *date = [NSDate dateWithTimeIntervalSince1970:model.ts];
     _timeLabel.text =[TimeUtil cl_prettyDateWithReference:date];
     _timeLabel.frame = CGRectMake(SCREEN_WIDTH - 15 - _timeLabel.contentSize.width , 10 + (30 - _nameLabel.contentSize.height)/2, _timeLabel.contentSize.width,_timeLabel.contentSize.height);
+}
+
+-(UILabel *)getLabel
+{
+    return _contentLabel;
 }
 
 +(NSString *)identify

@@ -80,6 +80,7 @@
 		CFB9BFBC1CAAE0E600A2BCE0 /* VoteModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFB9BFBB1CAAE0E600A2BCE0 /* VoteModel.m */; };
 		CFB9BFBF1CAAED9100A2BCE0 /* FileDataParams.m in Sources */ = {isa = PBXBuildFile; fileRef = CFB9BFBE1CAAED9100A2BCE0 /* FileDataParams.m */; };
 		CFC15BB51CC3F4DC0077FA19 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFC15BB41CC3F4DC0077FA19 /* LoginViewController.m */; };
+		CFD37E561D045DD100297DE2 /* UILabel+StringFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = CFD37E551D045DD100297DE2 /* UILabel+StringFrame.m */; };
 		CFDD2DFB1CCDFD0B00E81E3F /* VillageListView.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDD2DFA1CCDFD0B00E81E3F /* VillageListView.m */; };
 		CFDD2DFE1CCE00D800E81E3F /* VillageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDD2DFD1CCE00D800E81E3F /* VillageCell.m */; };
 		CFDD2E011CCE39C000E81E3F /* TimeUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDD2E001CCE39C000E81E3F /* TimeUtil.m */; };
@@ -238,6 +239,8 @@
 		CFB9BFBD1CAAED9100A2BCE0 /* FileDataParams.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileDataParams.h; sourceTree = "<group>"; };
 		CFB9BFBE1CAAED9100A2BCE0 /* FileDataParams.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileDataParams.m; sourceTree = "<group>"; };
 		CFC15BB41CC3F4DC0077FA19 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		CFD37E541D045DD100297DE2 /* UILabel+StringFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+StringFrame.h"; sourceTree = "<group>"; };
+		CFD37E551D045DD100297DE2 /* UILabel+StringFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+StringFrame.m"; sourceTree = "<group>"; };
 		CFDD2DF91CCDFD0B00E81E3F /* VillageListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VillageListView.h; sourceTree = "<group>"; };
 		CFDD2DFA1CCDFD0B00E81E3F /* VillageListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VillageListView.m; sourceTree = "<group>"; };
 		CFDD2DFC1CCE00D800E81E3F /* VillageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VillageCell.h; sourceTree = "<group>"; };
@@ -496,6 +499,8 @@
 				CFA464DC1CA1BBDF00563CE4 /* UIView+Frame.m */,
 				CF7166601C9051C800711656 /* UILabel+ContentSize.h */,
 				CF7166611C9051C800711656 /* UILabel+ContentSize.m */,
+				CFD37E541D045DD100297DE2 /* UILabel+StringFrame.h */,
+				CFD37E551D045DD100297DE2 /* UILabel+StringFrame.m */,
 			);
 			name = extra;
 			sourceTree = "<group>";
@@ -846,6 +851,7 @@
 				CF2CEDFE1CA456AB004FF058 /* UIScrollView+MJExtension.m in Sources */,
 				CF2CEDEF1CA456AB004FF058 /* MJRefreshBackFooter.m in Sources */,
 				CF2BEA781C8EC0CC00DA61D9 /* main.m in Sources */,
+				CFD37E561D045DD100297DE2 /* UILabel+StringFrame.m in Sources */,
 				CF2CEE041CA456E8004FF058 /* IDSRefresh.m in Sources */,
 				CF7166591C8F202700711656 /* ByNavigationBar.m in Sources */,
 				CFDD2DFE1CCE00D800E81E3F /* VillageCell.m in Sources */,

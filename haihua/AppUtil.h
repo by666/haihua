@@ -24,4 +24,6 @@
                     width  : (CGFloat)width
                     height : (CGFloat)height;
 
++ (UIImage *)imageCompressForSize:(UIImage *)sourceImage targetSize:(CGSize)size;
+
 @end

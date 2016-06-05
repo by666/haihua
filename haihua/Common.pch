@@ -17,6 +17,7 @@
 #import "UIView+Frame.h"
 #import "Singleton.h"
 #import "AppUtil.h"
+#import "UILabel+StringFrame.h"
 #import <UIImageView+WebCache.h>
 
 

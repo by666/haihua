@@ -11,6 +11,8 @@
 
 @interface CommentCell : UITableViewCell
 
+-(UILabel *)getLabel;
+
 -(void)setData : (CommentModel *)model;
 
 +(NSString *)identify;

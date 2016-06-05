@@ -38,6 +38,7 @@
 @property (strong, nonatomic) UIView *maskView;
 
 @property (strong, nonatomic) NSMutableArray *datas;
+@property (strong, nonatomic) UILabel *heightLabel;
 
 @end
 
@@ -45,6 +46,8 @@
 {
     int CURRENT;
     int contentHeight;
+    int itemHeight;
+    int Height;
 }
 
 +(void)show : (BaseViewController *)controller model: (MsgModel *)model;
@@ -74,6 +77,10 @@
 {
     self.view.backgroundColor = BACKGROUND_COLOR;
     [self initNavigationBar];
+    _heightLabel = [[UILabel alloc]init];
+    _heightLabel.font = [UIFont systemFontOfSize:13.0f];
+    _heightLabel.numberOfLines = 0;
+    _heightLabel.lineBreakMode = NSLineBreakByCharWrapping;
     if(_model == nil)
     {
         [self requestData];
@@ -273,7 +280,17 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return ITEM_HEIGHT;
+    if(!IS_NS_COLLECTION_EMPTY(_datas))
+    {
+        CommentModel *model = [_datas objectAtIndex:indexPath.row];
+        _heightLabel.text = model.content;
+//        CGSize size = [_heightLabel.text sizeWithFont:_heightLabel.font constrainedToSize:CGSizeMake(SCREEN_WIDTH - 60 , MAXFLOAT) lineBreakMode:NSLineBreakByCharWrapping];
+        CGSize size  =[_heightLabel boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 60 , MAXFLOAT)];
+
+        return size.height+50;
+    }
+    return 0;
+
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -462,9 +479,19 @@
                  return;
              }
              [_datas addObjectsFromArray:requestDatas];
-             int height = contentHeight + 30 +([_datas count] *ITEM_HEIGHT);
-             _tableView.frame = CGRectMake(0, contentHeight + 30 , SCREEN_WIDTH, ([_datas count] *ITEM_HEIGHT));
-            _scrollView.contentSize = CGSizeMake(SCREEN_WIDTH, height);
+             
+             int tableViewHeight = 0;
+             int height = contentHeight + 30;
+             for(CommentModel *model in _datas)
+             {
+                 _heightLabel.text = model.content;
+//                 CGSize size = [_heightLabel.text sizeWithFont:_heightLabel.font constrainedToSize:CGSizeMake(SCREEN_WIDTH - 60 , MAXFLOAT) lineBreakMode:NSLineBreakByCharWrapping];
+                 CGSize size  =[_heightLabel boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 60 , MAXFLOAT) ];
+
+                 tableViewHeight += (size.height+50);
+             }
+             _tableView.frame = CGRectMake(0, contentHeight + 30 , SCREEN_WIDTH, tableViewHeight);
+            _scrollView.contentSize = CGSizeMake(SCREEN_WIDTH, height +tableViewHeight);
              [_tableView reloadData];
          }
          [_scrollView.footer endRefreshing];

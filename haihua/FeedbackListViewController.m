@@ -47,6 +47,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(uploadNew) name:@"updatefeedback" object:nil];
     _datas = [[NSMutableArray alloc]init];
     [self initView];
 }
@@ -61,6 +62,12 @@
     [self initErrorView];
     [self uploadNew];
     
+}
+
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"updatefeedback" object:nil];
+
 }
 
 -(void)initTableView
