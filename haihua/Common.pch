@@ -34,6 +34,10 @@
 #define SCREEN_WIDTH ([UIScreen  mainScreen].bounds.size.width)
 #define SCREEN_HEIGHT ([UIScreen mainScreen].bounds.size.height)
 
+//适配尺寸
+#define IDSPointValue(X)                       [AppUtil pointValue:(X)]
+
+
 //-------------------检查nil-------------------------
 #define IS_NS_COLLECTION_EMPTY(collection) (collection == nil || [collection count] == 0)
 

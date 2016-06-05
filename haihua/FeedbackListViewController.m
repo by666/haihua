@@ -14,7 +14,7 @@
 #import "FeedbackDetailViewController.h"
 #import "Account.h"
 
-#define ITEM_HEIGHT 240
+#define ITEM_HEIGHT IDSPointValue(200)
 #define REQUEST_SIZE 10
 
 @interface FeedbackListViewController ()

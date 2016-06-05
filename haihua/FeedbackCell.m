@@ -9,7 +9,7 @@
 #import "FeedbackCell.h"
 #import "TimeUtil.h"
 #import "HeadUtil.h"
-#define Item_Height 240
+#define ITEM_HEIGHT IDSPointValue(200)
 
 @interface FeedbackCell()
 
@@ -42,14 +42,14 @@
 -(void)initView
 {
     self.contentView.backgroundColor = BACKGROUND_COLOR;
-    self.contentView.frame = CGRectMake(0, 0, SCREEN_WIDTH, Item_Height);
+    self.contentView.frame = CGRectMake(0, 0, SCREEN_WIDTH, ITEM_HEIGHT);
     
     _rootView = [[UIButton alloc]init];
     _rootView.userInteractionEnabled = NO;
     _rootView.backgroundColor = [UIColor whiteColor];
     _rootView.layer.masksToBounds = YES;
     _rootView.layer.cornerRadius = 4;
-    _rootView.frame = CGRectMake(10, 0, SCREEN_WIDTH - 20, Item_Height-10);
+    _rootView.frame = CGRectMake(10, 0, SCREEN_WIDTH - 20, ITEM_HEIGHT-10);
     [self.contentView addSubview:_rootView];
     
     _headImageView = [[UIImageView alloc]init];

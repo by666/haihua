@@ -26,4 +26,6 @@
 
 + (UIImage *)imageCompressForSize:(UIImage *)sourceImage targetSize:(CGSize)size;
 
++ (CGFloat)pointValue:(CGFloat)pixel;
+
 @end

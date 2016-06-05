@@ -187,4 +187,17 @@
     return newImage;
 }
 
+
++ (CGFloat)pointValue:(CGFloat)pixel
+{
+    CGFloat deviceWidth = [[UIScreen mainScreen] bounds].size.width;
+    
+    if (deviceWidth == 320.0f) {
+        return pixel;
+    }
+    else {
+        return roundf(pixel * deviceWidth / 320.0f);
+    }
+}
+
 @end
