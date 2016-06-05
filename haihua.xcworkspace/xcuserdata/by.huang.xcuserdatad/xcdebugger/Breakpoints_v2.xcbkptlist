@@ -121,13 +121,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "haihua/FeedBackViewController.m"
-            timestampString = "485111420.435011"
+            filePath = "haihua/CommentDetailViewController.m"
+            timestampString = "486838284.854571"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "324"
-            endingLineNumber = "324"
-            landmarkName = "-upload"
+            startingLineNumber = "462"
+            endingLineNumber = "462"
+            landmarkName = "-requestCommentList:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

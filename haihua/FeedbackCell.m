@@ -9,7 +9,7 @@
 #import "FeedbackCell.h"
 #import "TimeUtil.h"
 #import "HeadUtil.h"
-#define Item_Height 200
+#define Item_Height 240
 
 @interface FeedbackCell()
 

@@ -14,7 +14,7 @@
 #import "FeedbackDetailViewController.h"
 #import "Account.h"
 
-#define ITEM_HEIGHT 200
+#define ITEM_HEIGHT 240
 #define REQUEST_SIZE 10
 
 @interface FeedbackListViewController ()
@@ -192,7 +192,7 @@
     NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    params[@"cid"] = [NSString stringWithFormat:@"%d", [userDefault integerForKey:VillageID]];
+    params[@"cid"] = [NSString stringWithFormat:@"%ld", [userDefault integerForKey:VillageID]];
     params[@"index"] = [NSString stringWithFormat:@"%d",CURRENT];
     params[@"length"] = [NSString stringWithFormat:@"%d",REQUEST_SIZE];
     NSString *url = Request_FeedBack_List;

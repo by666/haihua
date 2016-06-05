@@ -38,6 +38,7 @@
 @property (strong, nonatomic) UIView *maskView;
 
 @property (strong, nonatomic) NSMutableArray *datas;
+
 @property (strong, nonatomic) UILabel *heightLabel;
 
 @end
@@ -46,7 +47,6 @@
 {
     int CURRENT;
     int contentHeight;
-    int itemHeight;
     int Height;
 }
 
@@ -485,7 +485,6 @@
              for(CommentModel *model in _datas)
              {
                  _heightLabel.text = model.content;
-//                 CGSize size = [_heightLabel.text sizeWithFont:_heightLabel.font constrainedToSize:CGSizeMake(SCREEN_WIDTH - 60 , MAXFLOAT) lineBreakMode:NSLineBreakByCharWrapping];
                  CGSize size  =[_heightLabel boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 60 , MAXFLOAT) ];
 
                  tableViewHeight += (size.height+50);
