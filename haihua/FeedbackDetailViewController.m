@@ -84,7 +84,7 @@
     UILabel *timeLabel = [[UILabel alloc]init];
     timeLabel.textColor = [ColorUtil colorWithHexString:@"#000000" alpha:0.6f];
     timeLabel.font = [UIFont systemFontOfSize:14.0f];
-    timeLabel.text =[TimeUtil cl_prettyDateWithReference : date];
+    timeLabel.text =[TimeUtil formatTime: date];
     timeLabel.frame = CGRectMake(SCREEN_WIDTH - 10 - timeLabel.contentSize.width, 10 + (30 - timeLabel.contentSize.height)/2, timeLabel.contentSize.width, timeLabel.contentSize.height);
     [_scrollView addSubview:timeLabel];
     

@@ -83,7 +83,7 @@
     _nameLabel.frame = CGRectMake(50, 10 + (30 - _nameLabel.contentSize.height)/2, _nameLabel.contentSize.width, _nameLabel.contentSize.height);
     
     NSDate *date = [NSDate dateWithTimeIntervalSince1970:model.ts];
-    _timeLabel.text =[TimeUtil cl_prettyDateWithReference : date];
+    _timeLabel.text =[TimeUtil formatTime: date];
     _timeLabel.frame = CGRectMake(SCREEN_WIDTH - 30 - _timeLabel.contentSize.width, 10 + (30 - _timeLabel.contentSize.height)/2, _timeLabel.contentSize.width, _timeLabel.contentSize.height);
     
     _contentLabel.text = model.content;

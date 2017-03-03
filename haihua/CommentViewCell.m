@@ -121,7 +121,7 @@
     }
     
     NSDate *date = [NSDate dateWithTimeIntervalSince1970:model.publishTs];
-    _timeLabel.text =[TimeUtil cl_prettyDateWithReference : date];
+    _timeLabel.text =[TimeUtil formatTime: date];
     _timeLabel.frame = CGRectMake(10, Item_Height-20 - _timeLabel.contentSize.height, _timeLabel.contentSize.width, _timeLabel.contentSize.height);
     
     
@@ -151,7 +151,7 @@
     }
 
     NSDate *date = [NSDate dateWithTimeIntervalSince1970:model.ts];
-    _timeLabel.text =[TimeUtil cl_prettyDateWithReference : date];
+    _timeLabel.text =[TimeUtil formatTime: date];
     _timeLabel.frame = CGRectMake(10, Item_Height-20 - _timeLabel.contentSize.height, _timeLabel.contentSize.width, _timeLabel.contentSize.height);
     
     

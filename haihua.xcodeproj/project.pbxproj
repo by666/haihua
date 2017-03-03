@@ -50,12 +50,13 @@
 		CF2CEDFF1CA456AB004FF058 /* UIScrollView+MJRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2CEDE91CA456AB004FF058 /* UIScrollView+MJRefresh.m */; };
 		CF2CEE001CA456AB004FF058 /* UIView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2CEDEB1CA456AB004FF058 /* UIView+MJExtension.m */; };
 		CF2CEE041CA456E8004FF058 /* IDSRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2CEE031CA456E8004FF058 /* IDSRefresh.m */; };
+		CF3733AD1E69655E00631412 /* TimeUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = CF3733AC1E69655E00631412 /* TimeUtil.m */; };
+		CF3733AF1E696E9C00631412 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF3733AE1E696E9C00631412 /* HomeViewController.m */; };
 		CF48C6281CCFCDB900BF4EF9 /* FeedbackCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CF48C6271CCFCDB900BF4EF9 /* FeedbackCell.m */; };
 		CF48C62B1CCFF43800BF4EF9 /* PictureModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CF48C62A1CCFF43800BF4EF9 /* PictureModel.m */; };
 		CF48C6371CD120B200BF4EF9 /* HeadUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = CF48C6361CD120B200BF4EF9 /* HeadUtil.m */; };
 		CF48C63A1CD1424F00BF4EF9 /* LogoutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF48C6391CD1424F00BF4EF9 /* LogoutViewController.m */; };
 		CF48C63D1CD1DF3300BF4EF9 /* BannerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CF48C63C1CD1DF3300BF4EF9 /* BannerModel.m */; };
-		CF4A6D061CBDE39B00B36C93 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF4A6D051CBDE39B00B36C93 /* HomeViewController.m */; };
 		CF7166591C8F202700711656 /* ByNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = CF7166581C8F202700711656 /* ByNavigationBar.m */; };
 		CF71665D1C904D8A00711656 /* ColorUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = CF71665C1C904D8A00711656 /* ColorUtil.m */; };
 		CF7166631C9051C800711656 /* UILabel+ContentSize.m in Sources */ = {isa = PBXBuildFile; fileRef = CF7166611C9051C800711656 /* UILabel+ContentSize.m */; };
@@ -83,7 +84,6 @@
 		CFD37E561D045DD100297DE2 /* UILabel+StringFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = CFD37E551D045DD100297DE2 /* UILabel+StringFrame.m */; };
 		CFDD2DFB1CCDFD0B00E81E3F /* VillageListView.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDD2DFA1CCDFD0B00E81E3F /* VillageListView.m */; };
 		CFDD2DFE1CCE00D800E81E3F /* VillageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDD2DFD1CCE00D800E81E3F /* VillageCell.m */; };
-		CFDD2E011CCE39C000E81E3F /* TimeUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDD2E001CCE39C000E81E3F /* TimeUtil.m */; };
 		CFDD2E041CCF0CE400E81E3F /* FeedbackListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDD2E031CCF0CE400E81E3F /* FeedbackListViewController.m */; };
 		CFDD2E071CCF14E000E81E3F /* FeedbackModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDD2E061CCF14E000E81E3F /* FeedbackModel.m */; };
 		CFDD2E0A1CCF3BF700E81E3F /* FeedbackDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDD2E091CCF3BF700E81E3F /* FeedbackDetailViewController.m */; };
@@ -179,6 +179,9 @@
 		CF2CEDEC1CA456AB004FF058 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		CF2CEE021CA456E8004FF058 /* IDSRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDSRefresh.h; sourceTree = "<group>"; };
 		CF2CEE031CA456E8004FF058 /* IDSRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDSRefresh.m; sourceTree = "<group>"; };
+		CF3733AB1E69655E00631412 /* TimeUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeUtil.h; sourceTree = "<group>"; };
+		CF3733AC1E69655E00631412 /* TimeUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeUtil.m; sourceTree = "<group>"; };
+		CF3733AE1E696E9C00631412 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		CF48C6261CCFCDB900BF4EF9 /* FeedbackCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackCell.h; sourceTree = "<group>"; };
 		CF48C6271CCFCDB900BF4EF9 /* FeedbackCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackCell.m; sourceTree = "<group>"; };
 		CF48C6291CCFF43800BF4EF9 /* PictureModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PictureModel.h; sourceTree = "<group>"; };
@@ -190,7 +193,6 @@
 		CF48C63B1CD1DF3300BF4EF9 /* BannerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BannerModel.h; sourceTree = "<group>"; };
 		CF48C63C1CD1DF3300BF4EF9 /* BannerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BannerModel.m; sourceTree = "<group>"; };
 		CF4A6D041CBDE39B00B36C93 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
-		CF4A6D051CBDE39B00B36C93 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		CF7166571C8F202700711656 /* ByNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ByNavigationBar.h; sourceTree = "<group>"; };
 		CF7166581C8F202700711656 /* ByNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ByNavigationBar.m; sourceTree = "<group>"; };
 		CF71665B1C904D8A00711656 /* ColorUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorUtil.h; sourceTree = "<group>"; };
@@ -245,8 +247,6 @@
 		CFDD2DFA1CCDFD0B00E81E3F /* VillageListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VillageListView.m; sourceTree = "<group>"; };
 		CFDD2DFC1CCE00D800E81E3F /* VillageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VillageCell.h; sourceTree = "<group>"; };
 		CFDD2DFD1CCE00D800E81E3F /* VillageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VillageCell.m; sourceTree = "<group>"; };
-		CFDD2DFF1CCE39C000E81E3F /* TimeUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TimeUtil.h; path = ../../../ios/ios/trunks/master/Radar/Radar/Classes/libs/CoreLibrary/Classes/CoreUtility/TimeUtil.h; sourceTree = "<group>"; };
-		CFDD2E001CCE39C000E81E3F /* TimeUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TimeUtil.m; path = ../../../ios/ios/trunks/master/Radar/Radar/Classes/libs/CoreLibrary/Classes/CoreUtility/TimeUtil.m; sourceTree = "<group>"; };
 		CFDD2E021CCF0CE400E81E3F /* FeedbackListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackListViewController.h; sourceTree = "<group>"; };
 		CFDD2E031CCF0CE400E81E3F /* FeedbackListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackListViewController.m; sourceTree = "<group>"; };
 		CFDD2E051CCF14E000E81E3F /* FeedbackModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackModel.h; sourceTree = "<group>"; };
@@ -574,7 +574,7 @@
 			isa = PBXGroup;
 			children = (
 				CF4A6D041CBDE39B00B36C93 /* HomeViewController.h */,
-				CF4A6D051CBDE39B00B36C93 /* HomeViewController.m */,
+				CF3733AE1E696E9C00631412 /* HomeViewController.m */,
 				CF004BA11C8ED6F200CD389E /* MsgListViewController.h */,
 				CF004BA21C8ED6F200CD389E /* MsgListViewController.m */,
 				CF014E181CA9B6CE002D7079 /* UserInfoViewController.h */,
@@ -641,8 +641,6 @@
 			isa = PBXGroup;
 			children = (
 				CF2A50FC1CE30F6800F0EF3D /* update */,
-				CFDD2DFF1CCE39C000E81E3F /* TimeUtil.h */,
-				CFDD2E001CCE39C000E81E3F /* TimeUtil.m */,
 				CF014DFE1CA8FCD9002D7079 /* Singleton.h */,
 				CFA464E21CA1C3EC00563CE4 /* IDSAlertSheet.h */,
 				CFA464E31CA1C3EC00563CE4 /* IDSAlertSheet.m */,
@@ -657,6 +655,8 @@
 				CF014DFC1CA8FC16002D7079 /* Account.m */,
 				CF48C6351CD120B200BF4EF9 /* HeadUtil.h */,
 				CF48C6361CD120B200BF4EF9 /* HeadUtil.m */,
+				CF3733AB1E69655E00631412 /* TimeUtil.h */,
+				CF3733AC1E69655E00631412 /* TimeUtil.m */,
 			);
 			name = utils;
 			sourceTree = "<group>";
@@ -830,7 +830,6 @@
 				CFA464DA1CA1BA9900563CE4 /* UIPlaceholderTextView.m in Sources */,
 				CF2CEDF61CA456AB004FF058 /* MJRefreshBackGifFooter.m in Sources */,
 				CFA46B301C954FE200408084 /* VillageModel.m in Sources */,
-				CFDD2E011CCE39C000E81E3F /* TimeUtil.m in Sources */,
 				CF48C63D1CD1DF3300BF4EF9 /* BannerModel.m in Sources */,
 				CF008A431CA711DB00549EBD /* ImproveInfoViewController.m in Sources */,
 				CFA4923E1CA06C64006C8F23 /* AppUtil.m in Sources */,
@@ -861,6 +860,7 @@
 				CFA464DD1CA1BBDF00563CE4 /* UIView+Frame.m in Sources */,
 				CF2CEDF41CA456AB004FF058 /* MJRefreshAutoNormalFooter.m in Sources */,
 				CFB9BFBF1CAAED9100A2BCE0 /* FileDataParams.m in Sources */,
+				CF3733AF1E696E9C00631412 /* HomeViewController.m in Sources */,
 				CF2CEDF71CA456AB004FF058 /* MJRefreshBackNormalFooter.m in Sources */,
 				CF2CEDFA1CA456AB004FF058 /* MJRefreshNormalHeader.m in Sources */,
 				CF2CEDF91CA456AB004FF058 /* MJRefreshGifHeader.m in Sources */,
@@ -879,6 +879,7 @@
 				CF48C6281CCFCDB900BF4EF9 /* FeedbackCell.m in Sources */,
 				CFA464E71CA1C4FD00563CE4 /* IDSExtendedLabel.m in Sources */,
 				CF2CEDF11CA456AB004FF058 /* MJRefreshFooter.m in Sources */,
+				CF3733AD1E69655E00631412 /* TimeUtil.m in Sources */,
 				CF2CEDFF1CA456AB004FF058 /* UIScrollView+MJRefresh.m in Sources */,
 				CF88B5C91CA30BA900660CD4 /* VoteDetalViewController.m in Sources */,
 				CF008A3D1CA5AC9400549EBD /* CommentCell.m in Sources */,
@@ -886,7 +887,6 @@
 				CFDD2E041CCF0CE400E81E3F /* FeedbackListViewController.m in Sources */,
 				CF48C62B1CCFF43800BF4EF9 /* PictureModel.m in Sources */,
 				CF2CEDEE1CA456AB004FF058 /* MJRefreshAutoFooter.m in Sources */,
-				CF4A6D061CBDE39B00B36C93 /* HomeViewController.m in Sources */,
 				CFA4922F1CA03D87006C8F23 /* ResponseModel.m in Sources */,
 				CF014E1D1CA9B75A002D7079 /* UserInfoCell.m in Sources */,
 				CF2CEDF51CA456AB004FF058 /* MJRefreshAutoStateFooter.m in Sources */,
@@ -1002,6 +1002,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: chengshi huang (H7AY58X99M)";
+				DEVELOPMENT_TEAM = AB86U4DT8H;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/haihua/SMS_SDK",
@@ -1013,9 +1014,10 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/haihua/PUSH_SDK",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ios.by.haihua;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ios.by.xingdong;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "795ad761-ec55-4208-957f-26325125d3d1";
+				PROVISIONING_PROFILE = "e7146122-ca68-40fa-9057-7b7d4b703ece";
+				PROVISIONING_PROFILE_SPECIFIER = dev_xingdong;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -1028,6 +1030,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: chengshi huang (H7AY58X99M)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: chengshi huang (AB86U4DT8H)";
+				DEVELOPMENT_TEAM = AB86U4DT8H;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/haihua/SMS_SDK",
@@ -1039,10 +1042,11 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/haihua/PUSH_SDK",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ios.by.haihua;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ios.by.xingdong;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "795ad761-ec55-4208-957f-26325125d3d1";
+				PROVISIONING_PROFILE = "d47e16b3-4de0-449a-923b-f40e9dc82a0c";
 				"PROVISIONING_PROFILE[sdk=*]" = "661339af-12be-4d99-a83e-f70b7c40237c";
+				PROVISIONING_PROFILE_SPECIFIER = dis_xingdong;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
