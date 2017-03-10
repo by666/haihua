@@ -53,14 +53,14 @@
     
     
     UILabel *appNameLabel = [[UILabel alloc]init];
-    appNameLabel.text = @"海华e事通 v1.0";
+    appNameLabel.text = @"e事会 v1.0";
     appNameLabel.textColor = [UIColor blackColor];
     appNameLabel.font = [UIFont systemFontOfSize:15.0f];
     appNameLabel.frame = CGRectMake((SCREEN_WIDTH - appNameLabel.contentSize.width)/2, imageView.y + imageView.size.height + 20, appNameLabel.contentSize.width, appNameLabel.contentSize.height);
     [self.view addSubview:appNameLabel];
     
     UILabel *fromLabel = [[UILabel alloc]init];
-    fromLabel.text = @"深圳市宝安区海华社区工作站 版权所有";
+    fromLabel.text = @"深圳市宝安区兴东社区工作站 版权所有";
     fromLabel.textColor = [ColorUtil colorWithHexString:@"#000000" alpha:0.6f];
     fromLabel.font = [UIFont systemFontOfSize:12.0f];
     fromLabel.textAlignment = NSTextAlignmentCenter;

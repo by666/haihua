@@ -11,7 +11,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>海华e事通</string>
+	<string>e事会</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -25,9 +25,9 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>MiSDKAppID</key>
-	<string>2882303761517458378</string>
+	<string>2882303761517548107</string>
 	<key>MiSDKAppKey</key>
-	<string>5311745831378</string>
+	<string>5671754882107</string>
 	<key>MiSDKRun</key>
 	<string>Online</string>
 	<key>NSAppTransportSecurity</key>

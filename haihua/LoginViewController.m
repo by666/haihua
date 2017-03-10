@@ -197,7 +197,7 @@
     [loginView addSubview:_secretBtn];
     _secretBtn.selected = YES;
     
-    NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:@"海华e事通用户协议"];
+    NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:@"e事会用户协议"];
     NSRange strRange = {0,[str length]};
     [str addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:strRange];
     [str addAttribute:NSForegroundColorAttributeName value:MAIN_COLOR range:strRange];

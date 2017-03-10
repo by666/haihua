@@ -30,7 +30,7 @@
     _window.backgroundColor = BACKGROUND_COLOR;
     
     //注册短信验证码
-    [SMSSDK registerApp:@"1134ecdcdc9a0" withSecret:@"9270e02945484275b3946ced8ae91392"];
+    [SMSSDK registerApp:@"1aa17da0ab818" withSecret:@"8074bcf8ed9a0fe39d048955e326b601"];
     
     // 同时启用APNs跟应用内长连接
     [MiPushSDK registerMiPush:self type:0 connect:YES];
