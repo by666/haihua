@@ -8,7 +8,8 @@
 
 #import "BaseViewController.h"
 #import "MsgModel.h"
-@interface CommentDetailViewController : BaseViewController<UINavigationBarDelegate,UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate>
+#import "UIPlaceholderTextView.h"
+@interface CommentDetailViewController : BaseViewController<UINavigationBarDelegate,UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate,UIPlaceholderTextViewDelegate>
 
 
 +(void)show : (BaseViewController *)controller model: (MsgModel *)model;

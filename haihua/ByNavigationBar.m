@@ -9,6 +9,7 @@
 #import "ByNavigationBar.h"
 #import "UILabel+ContentSize.h"
 
+
 @implementation ByNavigationBar
 
 
@@ -29,7 +30,7 @@
     _leftBtn.frame = CGRectMake(0, StatuBar_HEIGHT, NavigationBar_HEIGHT, NavigationBar_HEIGHT);
     [_leftBtn setContentEdgeInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
     [_leftBtn addTarget:self action:@selector(OnLeftCallBack) forControlEvents:UIControlEventTouchUpInside];
-    [_leftBtn setImage:[UIImage imageNamed:@"ic_back"] forState:UIControlStateNormal];
+    [_leftBtn setImage:[UIImage imageNamed:@"topbar_back"] forState:UIControlStateNormal];
     
 //    _rightBtn = [[UIButton alloc]init];
 //    _rightBtn.frame = CGRectMake(0, StatuBar_HEIGHT, NavigationBar_HEIGHT, NavigationBar_HEIGHT);
@@ -38,7 +39,7 @@
 //    [_rightBtn setImage:[UIImage imageNamed:@"ic_back"] forState:UIControlStateNormal];
     
     _titleLabel = [[UILabel alloc]init];
-    _titleLabel.textColor = [UIColor whiteColor];
+    _titleLabel.textColor = [ColorUtil colorWithHexString:@"#333333"];
     _titleLabel.textAlignment = NSTextAlignmentCenter;
     _titleLabel.font = [UIFont systemFontOfSize:18.0f];
     
@@ -49,10 +50,16 @@
     [_titleClickBtn addTarget:self action:@selector(OnTapTitle) forControlEvents:UIControlEventTouchUpInside];
     
     
+    UIView *lineView = [[UIView alloc]init];
+    lineView.frame = CGRectMake(0,NavigationBar_HEIGHT + StatuBar_HEIGHT-0.5 , SCREEN_WIDTH, 0.5);
+    lineView.backgroundColor = LINE_COLOR;
+    
+    
     [self addSubview:_leftBtn];
 //    [self addSubview:_rightBtn];
     [self addSubview:_titleLabel];
     [self addSubview:_titleClickBtn];
+    [self addSubview:lineView];
 }
 
 -(void)OnTapTitle

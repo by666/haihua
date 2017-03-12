@@ -19,6 +19,8 @@
 
 @property (strong, nonatomic) UILabel *titleLabel;
 
+@property (strong, nonatomic) UIImageView *timeImage;
+
 @property (strong, nonatomic) UILabel *timeLabel;
 
 @property (strong, nonatomic) UIImageView *commentImage;
@@ -72,18 +74,22 @@
     [_rootView addSubview:_titleLabel];
     
     _timeLabel = [[UILabel alloc]init];
-    _timeLabel.textColor = [ColorUtil colorWithHexString:@"#a9b7b7"];
+    _timeLabel.textColor = [ColorUtil colorWithHexString:@"#999999"];
     _timeLabel.font = [UIFont systemFontOfSize:12.0f];
     [_rootView addSubview:_timeLabel];
 
 
     
     _commentImage = [[UIImageView alloc]init];
-    _commentImage.image = [UIImage imageNamed:@"ic_talk"];
+    _commentImage.image = [UIImage imageNamed:@"home_comment"];
     [_rootView addSubview:_commentImage];
     
+    _timeImage = [[UIImageView alloc]init];
+    _timeImage.image = [UIImage imageNamed:@"home_time"];
+    [_rootView addSubview:_timeImage];
+    
     _countLabel = [[UILabel alloc]init];
-    _countLabel.textColor = [ColorUtil colorWithHexString:@"#a9b7b7"];
+    _countLabel.textColor = [ColorUtil colorWithHexString:@"#999999"];
     _countLabel.font = [UIFont systemFontOfSize:12.0f];
     [_rootView addSubview:_countLabel];
     
@@ -120,12 +126,16 @@
         _titleLabel.frame = CGRectMake(10, 10, SCREEN_WIDTH - 50 -(Item_Height-30) , Item_Height - 50);
     }
     
+    
+    
     NSDate *date = [NSDate dateWithTimeIntervalSince1970:model.publishTs];
     _timeLabel.text =[TimeUtil formatTime: date];
-    _timeLabel.frame = CGRectMake(10, Item_Height-20 - _timeLabel.contentSize.height, _timeLabel.contentSize.width, _timeLabel.contentSize.height);
+    _timeLabel.frame = CGRectMake(80, Item_Height-20 - _timeLabel.contentSize.height, _timeLabel.contentSize.width, _timeLabel.contentSize.height);
+    
+    _timeImage.frame = CGRectMake(60,  Item_Height-20 - _timeLabel.contentSize.height, 15, 15);
     
     
-    _commentImage.frame = CGRectMake(100,  Item_Height-20 - _timeLabel.contentSize.height, 15, 15);
+    _commentImage.frame = CGRectMake(10,  Item_Height-20 - _timeLabel.contentSize.height, 15, 15);
 
     _countLabel.text = [NSString stringWithFormat:@"%d",model.totalComment];
     _countLabel.frame = CGRectMake(_commentImage.x + _commentImage.width + 5, Item_Height-20 - _timeLabel.contentSize.height, _countLabel.contentSize.width, _countLabel.contentSize.height);
@@ -135,8 +145,6 @@
 
 -(void)setFeedBackData:(FeedbackModel *)model
 {
-    
-    _showImageView.image = [UIImage imageNamed:@"test"];
     
     _titleLabel.text = model.title;
     if(IS_NS_COLLECTION_EMPTY(model.pictures))

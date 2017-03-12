@@ -20,17 +20,34 @@
 @implementation UIPlaceholderTextView
 @synthesize placeholder;
 @synthesize textColor;
-- (id) initWithFrame:(CGRect)frame {
-    if ((self = [super initWithFrame:frame])) {
-        [self awakeFromNib];
+
+//当用nib创建时会调用此方法
+- (instancetype)init {
+    if(self == [super init])
+    {
+        self.delegate = self;
+        self.returnKeyType = UIReturnKeyDone;
+        [self addObserver];
     }
     return self;
 }
-//当用nib创建时会调用此方法
-- (void)awakeFromNib {
-    textColor = [UIColor redColor];
-    [self addObserver];
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
+    if ([text isEqualToString:@"\n"]){
+        if(_holderDelegate != nil)
+        {
+            if([(NSObject *)_holderDelegate respondsToSelector:@selector(OnClickConfirm)] == YES )
+            {
+                [_holderDelegate OnClickConfirm];
+            }
+        }
+        return NO;
+    }
+    
+    return YES;
 }
+
+
 -(void)addObserver
 {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(beginEditing:) name:UITextViewTextDidBeginEditingNotification object:self];

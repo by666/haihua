@@ -16,9 +16,10 @@
 #import "Account.h"
 
 #define ITEM_HEIGHT 100
-#define TOP_HEIGHT 60
+#define TOP_HEIGHT 80
 #define REQUEST_SIZE 10
 #define MORE_HEIGHT 50
+#define COMMENTTITLE_HEIGHT 50
 @interface CommentDetailViewController ()
 
 @property (strong, nonatomic) UIScrollView *scrollView;
@@ -40,6 +41,13 @@
 @property (strong, nonatomic) NSMutableArray *datas;
 
 @property (strong, nonatomic) UILabel *heightLabel;
+
+@property (strong, nonatomic) UIView *commentTitleView;
+
+@property (strong, nonatomic) UILabel *commentTitleLabel;
+
+@property (strong, nonatomic) UILabel *countLabel;
+
 
 @end
 
@@ -72,6 +80,7 @@
     [self registerForKeyboardNotifications];
 }
 
+
 #pragma mark 初始化视图
 -(void)initView
 {
@@ -98,7 +107,8 @@
     [self showNavigationBar];
     [self.navBar.leftBtn setHidden:NO];
     self.navBar.delegate = self;
-    [self.navBar.leftBtn setImage:[UIImage imageNamed:@"ic_back"] forState:UIControlStateNormal];
+    [self.navBar.leftBtn setImage:[UIImage imageNamed:@"topbar_back"] forState:UIControlStateNormal];
+    [self.navBar setTitle:@"议事详情"];
 }
 
 -(void)initTopView
@@ -108,25 +118,44 @@
     topView.frame = CGRectMake(0, NavigationBar_HEIGHT +StatuBar_HEIGHT, SCREEN_WIDTH, TOP_HEIGHT);
     [self.view addSubview:topView];
     
+    
     UILabel *titleLabel = [[UILabel alloc]init];
-    titleLabel.textColor = [UIColor whiteColor];
-    titleLabel.font = [UIFont systemFontOfSize:15.0f];
+    titleLabel.textColor = [UIColor blackColor];
+    titleLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:20];
     titleLabel.numberOfLines = 0;
     titleLabel.contentMode = NSLineBreakByWordWrapping;
     titleLabel.text = _model.title;
     CGSize size = [titleLabel.text sizeWithFont:titleLabel.font constrainedToSize:CGSizeMake(SCREEN_WIDTH-30, MAXFLOAT) lineBreakMode:NSLineBreakByWordWrapping];
-    titleLabel.frame = CGRectMake(15, 0, SCREEN_WIDTH-30, size.height);
+    titleLabel.frame = CGRectMake(15, 10, SCREEN_WIDTH-30, size.height);
     [topView addSubview:titleLabel];
     
+    UIImageView *commentImage = [[UIImageView alloc]init];
+    commentImage.image = [UIImage imageNamed:@"home_comment"];
+    commentImage.frame = CGRectMake(15, 20 + size.height, 15 ,15);
+    [topView addSubview:commentImage];
+    
+    _countLabel = [[UILabel alloc]init];
+    _countLabel.textColor = [ColorUtil colorWithHexString:@"#999999"];
+    _countLabel.font = [UIFont systemFontOfSize:13.0f];
+    _countLabel.text = [NSString stringWithFormat:@"%d",_model.totalComment];
+    [topView addSubview:_countLabel];
+    _countLabel.frame = CGRectMake(35, 20 + size.height, _countLabel.contentSize.width, _countLabel.contentSize.height);
+
+    UIImageView *timeImage = [[UIImageView alloc]init];
+    timeImage.image = [UIImage imageNamed:@"home_time"];
+    timeImage.frame = CGRectMake(80, 20 + size.height, 15 ,15);
+    [topView addSubview:timeImage];
+    
     UILabel *timeLabel = [[UILabel alloc]init];
-    timeLabel.textColor = [UIColor whiteColor];
+    timeLabel.textColor = [ColorUtil colorWithHexString:@"#999999"];
     timeLabel.font = [UIFont systemFontOfSize:13.0f];
     NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyy-MM-dd"];
     NSDate *date = [NSDate dateWithTimeIntervalSince1970:_model.publishTs];
     timeLabel.text = [formatter stringFromDate:date];
-    timeLabel.frame = CGRectMake(15, 5 + size.height, timeLabel.contentSize.width, timeLabel.contentSize.height);
+    timeLabel.frame = CGRectMake(100, 20 + size.height, timeLabel.contentSize.width, timeLabel.contentSize.height);
     [topView addSubview:timeLabel];
+    
 }
 
 -(void)initBody
@@ -179,7 +208,7 @@
     }
     
     bodyView.frame = CGRectMake(0, 0, SCREEN_WIDTH, contentHeight  + 15);
-    [_scrollView setContentSize:CGSizeMake(SCREEN_WIDTH, contentHeight + 15)];
+    [_scrollView setContentSize:CGSizeMake(SCREEN_WIDTH, contentHeight + 15 +COMMENTTITLE_HEIGHT)];
     
     [self requestCommentList:NO];
 }
@@ -187,6 +216,27 @@
 
 -(void)initComment
 {
+    _commentTitleView = [[UIView alloc]init];
+    _commentTitleView.backgroundColor = [UIColor whiteColor];
+    _commentTitleView.frame = CGRectMake(0, contentHeight + 30 , SCREEN_WIDTH, COMMENTTITLE_HEIGHT);
+    [_scrollView addSubview:_commentTitleView];
+    contentHeight += COMMENTTITLE_HEIGHT;
+    
+    UIView *view = [[UIView alloc]init];
+    view.frame = CGRectMake(10, (COMMENTTITLE_HEIGHT - 32)/2, 6, 32);
+    view.backgroundColor = [ColorUtil colorWithHexString:@"#2082D0"];
+    view.layer.masksToBounds = YES;
+    view.layer.cornerRadius = 3;
+    [_commentTitleView addSubview:view];
+    
+    _commentTitleLabel = [[UILabel alloc]init];
+    _commentTitleLabel.textColor = [UIColor blackColor];
+    _commentTitleLabel.text = [NSString stringWithFormat:@"评论(%d)",_model.totalComment];
+    _commentTitleLabel.font = [UIFont systemFontOfSize:16.0f];
+    _commentTitleLabel.frame = CGRectMake(26, (COMMENTTITLE_HEIGHT - _commentTitleLabel.contentSize.height)/2, _commentTitleLabel.contentSize.width, _commentTitleLabel.contentSize.height);
+    [_commentTitleView addSubview:_commentTitleLabel];
+
+    
     _tableView = [[UITableView alloc]init];
     _tableView.frame = CGRectMake(0, contentHeight + 30 , SCREEN_WIDTH, 0);
     _tableView.delegate = self;
@@ -228,13 +278,15 @@
     _commentTextView.layer.cornerRadius = 2;
     _commentTextView.textColor = [UIColor blackColor];
     _commentTextView.frame = CGRectMake(10, 8 ,SCREEN_WIDTH -80,34);
+    _commentTextView.holderDelegate = self;
     [_bottomView addSubview:_commentTextView];
     
 
     _sendButton = [[UIButton alloc]init];
     _sendButton.layer.masksToBounds = YES;
     _sendButton.layer.cornerRadius = 2;
-    [_sendButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [_sendButton setImage:[UIImage imageNamed:@"home_out_n"] forState:UIControlStateNormal];
+    [_sendButton setTitleColor:[ColorUtil colorWithHexString:@"#999999"] forState:UIControlStateNormal];
     [_sendButton setTitle:@"发送" forState:UIControlStateNormal];
     _sendButton.frame = CGRectMake(SCREEN_WIDTH -60, 8 ,50,34);
     _sendButton.backgroundColor = MAIN_COLOR;
@@ -337,26 +389,46 @@
 //键盘拉起回调
 - (void) keyboardWasShown:(NSNotification *) notif
 {
+//    if(!isKeyShow)
+//    {
+//        isKeyShow = YES;
     NSDictionary *info = [notif userInfo];
     NSValue *value = [info objectForKey:UIKeyboardFrameBeginUserInfoKey];
     CGSize keyboardSize = [value CGRectValue].size;
+    NSLog(@"%f",keyboardSize.height);
+    
+    int keyboardHeight =302.666667;
+    if(IS_IPHONE_5)
+    {
+        keyboardHeight = 253;
+    }
+    else if(IS_IPHONE_6)
+    {
+        keyboardHeight = 258;
+    }
     
     _maskView.hidden = NO;
     __weak UIView *weakBottomView = _bottomView;
 
     [UIView animateWithDuration:0.2 animations:^{
-        weakBottomView.frame = CGRectMake(0, SCREEN_HEIGHT - 50-keyboardSize.height, SCREEN_WIDTH, 50);
+        weakBottomView.frame = CGRectMake(0, SCREEN_HEIGHT - 50-keyboardHeight, SCREEN_WIDTH, 50);
     } completion:nil];
+//    }
 }
 
 //键盘隐藏回调
 - (void)keyboardWasHidden:(NSNotification *) notif
 {
-    _maskView.hidden = YES;
-    __weak UIView *weakBottomView = _bottomView;
-    [UIView animateWithDuration:0.2 animations:^{
-        weakBottomView.frame = CGRectMake(0, SCREEN_HEIGHT - 50, SCREEN_WIDTH, 50);
-    } completion:nil];
+//    if(isKeyShow)
+//    {
+//        isKeyShow = NO;
+        _maskView.hidden = YES;
+        __weak UIView *weakBottomView = _bottomView;
+        [UIView animateWithDuration:0.2 animations:^{
+            weakBottomView.frame = CGRectMake(0, SCREEN_HEIGHT - 50, SCREEN_WIDTH, 50);
+        } completion:nil];
+//    }
+
 }
 
 #pragma mark 请求页面数据
@@ -423,6 +495,9 @@
              CURRENT = 0;
              [self requestCommentList:YES];
              _commentTextView.text = nil;
+             _model.totalComment +=1;
+             _commentTitleLabel.text = [NSString stringWithFormat:@"评论(%d)",_model.totalComment];
+             _countLabel.text = [NSString stringWithFormat:@"%d",_model.totalComment];
          }
          else if(model.code == ERROR_TOKEN)
          {
@@ -501,5 +576,11 @@
          [_scrollView.footer endRefreshing];
          hua.hidden = YES;
      }];
+}
+
+
+-(void)OnClickConfirm
+{
+    [self requestComment];
 }
 @end

@@ -17,6 +17,7 @@
 		CF014E1A1CA9B6CE002D7079 /* UserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF014E191CA9B6CE002D7079 /* UserInfoViewController.m */; };
 		CF014E1D1CA9B75A002D7079 /* UserInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CF014E1C1CA9B75A002D7079 /* UserInfoCell.m */; };
 		CF0FE0041CDC7E4D003F8858 /* SecretViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF0FE0031CDC7E4D003F8858 /* SecretViewController.m */; };
+		CF28F1EF1E753F2200A4EBE0 /* GuideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF28F1EE1E753F2200A4EBE0 /* GuideViewController.m */; };
 		CF2A50FB1CE30A8300F0EF3D /* CheckUpdateUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2A50FA1CE30A8300F0EF3D /* CheckUpdateUtil.m */; };
 		CF2A50FF1CE30F7C00F0EF3D /* UpdateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2A50FE1CE30F7C00F0EF3D /* UpdateModel.m */; };
 		CF2BEA781C8EC0CC00DA61D9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2BEA771C8EC0CC00DA61D9 /* main.m */; };
@@ -119,6 +120,8 @@
 		CF014E1C1CA9B75A002D7079 /* UserInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoCell.m; sourceTree = "<group>"; };
 		CF0FE0021CDC7E4D003F8858 /* SecretViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecretViewController.h; sourceTree = "<group>"; };
 		CF0FE0031CDC7E4D003F8858 /* SecretViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecretViewController.m; sourceTree = "<group>"; };
+		CF28F1ED1E753F2200A4EBE0 /* GuideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuideViewController.h; sourceTree = "<group>"; };
+		CF28F1EE1E753F2200A4EBE0 /* GuideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuideViewController.m; sourceTree = "<group>"; };
 		CF2A50F91CE30A8300F0EF3D /* CheckUpdateUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckUpdateUtil.h; sourceTree = "<group>"; };
 		CF2A50FA1CE30A8300F0EF3D /* CheckUpdateUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckUpdateUtil.m; sourceTree = "<group>"; };
 		CF2A50FD1CE30F7C00F0EF3D /* UpdateModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateModel.h; sourceTree = "<group>"; };
@@ -579,6 +582,8 @@
 				CF004BA21C8ED6F200CD389E /* MsgListViewController.m */,
 				CF014E181CA9B6CE002D7079 /* UserInfoViewController.h */,
 				CF014E191CA9B6CE002D7079 /* UserInfoViewController.m */,
+				CF28F1ED1E753F2200A4EBE0 /* GuideViewController.h */,
+				CF28F1EE1E753F2200A4EBE0 /* GuideViewController.m */,
 			);
 			name = main;
 			sourceTree = "<group>";
@@ -884,6 +889,7 @@
 				CF88B5C91CA30BA900660CD4 /* VoteDetalViewController.m in Sources */,
 				CF008A3D1CA5AC9400549EBD /* CommentCell.m in Sources */,
 				CF2CEDF21CA456AB004FF058 /* MJRefreshHeader.m in Sources */,
+				CF28F1EF1E753F2200A4EBE0 /* GuideViewController.m in Sources */,
 				CFDD2E041CCF0CE400E81E3F /* FeedbackListViewController.m in Sources */,
 				CF48C62B1CCFF43800BF4EF9 /* PictureModel.m in Sources */,
 				CF2CEDEE1CA456AB004FF058 /* MJRefreshAutoFooter.m in Sources */,
