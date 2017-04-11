@@ -34,15 +34,13 @@
     
     // 同时启用APNs跟应用内长连接
     [MiPushSDK registerMiPush:self type:0 connect:YES];
-
-//    [MiPushSDK unregisterMiPush];
-
+    
     
     [NSThread sleepForTimeInterval:3.0];
-
+    
     [self launchViewController];
-//    [self requestUpdate];
-
+    //    [self requestUpdate];
+    
     [[CheckUpdateUtil sharedCheckUpdateUtil] check];
     return YES;
 }
@@ -75,7 +73,7 @@
     }
     else
     {
-    
+        
         HomeViewController *homeViewController= [[HomeViewController alloc]init];
         controller= [[UINavigationController alloc]initWithRootViewController:homeViewController];
     }
@@ -94,24 +92,21 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
     [MiPushSDK openAppNotify:messageId];
 }
 
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
-{
-    [MiPushSDK handleReceiveRemoteNotification:userInfo];
-}
+
 
 #pragma mark UIApplicationDelegate
 - (void)application:(UIApplication *)app
 didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
-   
+    
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSInteger villageId = [userDefaults integerForKey:VillageID];
     // 设置别名
     [MiPushSDK setAlias:[[Account sharedAccount] getUid]];
     // 订阅内容
     [MiPushSDK subscribe:[NSString stringWithFormat:@"%d",(int)villageId]];
-//    // 设置帐号
-//    [MiPushSDK setAccount:@"account"];
+    //    // 设置帐号
+    //    [MiPushSDK setAccount:@"account"];
     
     // 注册APNS成功, 注册deviceToken
     [MiPushSDK bindDeviceToken:deviceToken];
@@ -140,6 +135,31 @@ didFailToRegisterForRemoteNotificationsWithError:(NSError *)err
     
 }
 
+- ( void )application:( UIApplication *)application didReceiveRemoteNotification:( NSDictionary *)userInfo
+{
+    [ MiPushSDK handleReceiveRemoteNotification :userInfo];
+}
+
+// iOS10新加入的回调方法
+// 应用在前台收到通知
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler {
+    NSDictionary * userInfo = notification.request.content.userInfo;
+    if([notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
+        [MiPushSDK handleReceiveRemoteNotification:userInfo];
+    }
+    //    completionHandler(UNNotificationPresentationOptionAlert);
+}
+
+// 点击通知进入应用
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)())completionHandler {
+    NSDictionary * userInfo = response.notification.request.content.userInfo;
+    if([response.notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
+        [MiPushSDK handleReceiveRemoteNotification:userInfo];
+    }
+    completionHandler();
+}
+
+
 
 -(void)requestUpdate
 {
@@ -147,28 +167,35 @@ didFailToRegisterForRemoteNotificationsWithError:(NSError *)err
     NSString *appCurVersionNum = [infoDictionary objectForKey:@"CFBundleVersion"];
     NSLog(@"当前应用版本号码：%@",appCurVersionNum);
     
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"pt"] = @"0";
     params[@"ver"] = appCurVersionNum;
     
-    [manager GET:Request_Update parameters:params
-         success:^(AFHTTPRequestOperation *operation, id responseObject)
-     {
-         ResponseModel *model = [ResponseModel mj_objectWithKeyValues:responseObject];
-         if(model.code == UPDATE)
-         {
-             UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"发现新版本" message:@"是否更新到最新版本？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
-             updateUrl = model.data;
-             [alertView show];
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
+    [manager GET:Request_Update parameters:params progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    }
+         success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
              
+             ResponseModel *model = [ResponseModel mj_objectWithKeyValues:responseObject];
+             if(model.code == UPDATE)
+             {
+                 UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"发现新版本" message:@"是否更新到最新版本？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+                 updateUrl = model.data;
+                 [alertView show];
+                 
+             }
          }
-         
-     }
-         failure:^(AFHTTPRequestOperation *operation, NSError *error)
-     {
-     }];
-
+     
+         failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull   error) {
+             
+             NSLog(@"%@",error);  //这里打印错误信息
+             
+         }];
+    
+    
 }
 
 
@@ -181,7 +208,7 @@ didFailToRegisterForRemoteNotificationsWithError:(NSError *)err
         {
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:updateUrl]];
         }
-
+        
     }
 }
 

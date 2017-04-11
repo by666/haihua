@@ -26,34 +26,40 @@ SINGLETON_IMPLEMENTION(CheckUpdateUtil);
     NSDictionary *infoDic = [[NSBundle mainBundle] infoDictionary];
     float currentVersion = [[infoDic valueForKey:@"CFBundleShortVersionString"] floatValue];
     
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    params[@"id"] = APPID;
-    [manager GET:@"http://itunes.apple.com/lookup" parameters:params
-         success:^(AFHTTPRequestOperation *operation, id responseObject)
-     {
-         UpdateModel *model = [UpdateModel mj_objectWithKeyValues:responseObject];
-         int resultCount =model.resultCount;
-         if(resultCount > 0)
-         {
-             NSMutableArray *resultArray = model.results;
-             if(!IS_NS_COLLECTION_EMPTY(resultArray))
+    NSDictionary *params = @{@"id":APPID};
+
+   // NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    //params[@"id"] = APPID;
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    [manager GET:@"http://itunes.apple.com/lookup" parameters:params progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    }
+         success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+             
+             UpdateModel *model = [UpdateModel mj_objectWithKeyValues:responseObject];
+             int resultCount =model.resultCount;
+             if(resultCount > 0)
              {
-                 NSDictionary *dic= [resultArray objectAtIndex:0];
-                 float appstoreVersion = [[dic objectForKey:@"version"] floatValue];
-                 downUrl = [dic objectForKey:@"trackViewUrl"];
-                 if(appstoreVersion > currentVersion)
+                 NSMutableArray *resultArray = model.results;
+                 if(!IS_NS_COLLECTION_EMPTY(resultArray))
                  {
-                     [self showUpdateDialog];
+                     NSDictionary *dic= [resultArray objectAtIndex:0];
+                     float appstoreVersion = [[dic objectForKey:@"version"] floatValue];
+                     downUrl = [dic objectForKey:@"trackViewUrl"];
+                     if(appstoreVersion > currentVersion)
+                     {
+                         [self showUpdateDialog];
+                     }
                  }
              }
+             
          }
-         
-         
-     }
-         failure:^(AFHTTPRequestOperation *operation, NSError *error)
-     {
-     }];
+     
+         failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull   error) {
+             
+             NSLog(@"%@",error);  //这里打印错误信息
+             
+         }];
 
 }
 

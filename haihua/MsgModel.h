@@ -43,9 +43,17 @@
 //typeVote
 @property (assign, nonatomic) BOOL typeVote;
 
+@property (assign, nonatomic) Boolean commented;
+
 //图文内容
 @property (strong, nonatomic) NSMutableArray *picNotes;
 
 @property (assign, nonatomic) BOOL hasVote;
+
+@property (assign, nonatomic) Boolean isVote;
+
+//投票结果
+@property (strong, nonatomic) NSMutableArray *options;
+
 
 @end

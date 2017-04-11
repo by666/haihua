@@ -50,7 +50,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    headPosition = -1;
+    headPosition = 0;
     cid = -1;
     _datas = [[NSMutableArray alloc]init];
     _selectButtons = [[NSMutableArray alloc]init];
@@ -86,7 +86,7 @@
     tipLabel.textAlignment = NSTextAlignmentCenter;
     tipLabel.frame =CGRectMake(0, 0, SCREEN_WIDTH, 28);
     [view addSubview:tipLabel];
-
+    
     //姓名
     UIView *view1 = [[UIView alloc]init];
     view1.backgroundColor = [UIColor whiteColor];
@@ -110,31 +110,31 @@
     _nameTextView.delegate = self;
     [_nameTextView becomeFirstResponder];
     [view1 addSubview:_nameTextView];
-
     
-    //身份证号
-    UIView *view2 = [[UIView alloc]init];
-    view2.backgroundColor = [UIColor whiteColor];
-    view2.frame = CGRectMake(0, 28 + 42, SCREEN_WIDTH, 42);
-    [view addSubview:view2];
     
-    UILabel *cardIDLabel = [[UILabel alloc]init];
-    cardIDLabel.text = @"身份证号";
-    cardIDLabel.font = [UIFont systemFontOfSize:13.0f];
-    cardIDLabel.textColor = [UIColor blackColor];
-    cardIDLabel.textAlignment = NSTextAlignmentCenter;
-    cardIDLabel.frame = CGRectMake(15, 0, cardIDLabel.contentSize.width, 42);
-    [view2 addSubview:cardIDLabel];
+    //    //身份证号
+    //    UIView *view2 = [[UIView alloc]init];
+    //    view2.backgroundColor = [UIColor whiteColor];
+    //    view2.frame = CGRectMake(0, 28 + 42, SCREEN_WIDTH, 42);
+    //    [view addSubview:view2];
+    //
+    //    UILabel *cardIDLabel = [[UILabel alloc]init];
+    //    cardIDLabel.text = @"身份证号";
+    //    cardIDLabel.font = [UIFont systemFontOfSize:13.0f];
+    //    cardIDLabel.textColor = [UIColor blackColor];
+    //    cardIDLabel.textAlignment = NSTextAlignmentCenter;
+    //    cardIDLabel.frame = CGRectMake(15, 0, cardIDLabel.contentSize.width, 42);
+    //    [view2 addSubview:cardIDLabel];
     
-    _cardIDTextView = [[UIPlaceholderTextView alloc]initWithFrame:CGRectMake(100, 5, SCREEN_WIDTH -100, 42)];
-    _cardIDTextView.placeholder = @"有助于我们核实您的真实身份";
-    _cardIDTextView.font = [UIFont systemFontOfSize:13.0f];
-    _cardIDTextView.backgroundColor = [UIColor clearColor];
-    _cardIDTextView.textColor = [ColorUtil colorWithHexString:@"#000000" alpha:0.6];
-    _cardIDTextView.returnKeyType = UIReturnKeyNext;
-    _cardIDTextView.delegate = self;
-    [view2 addSubview:_cardIDTextView];
-    
+    //    _cardIDTextView = [[UIPlaceholderTextView alloc]initWithFrame:CGRectMake(100, 5, SCREEN_WIDTH -100, 42)];
+    //    _cardIDTextView.placeholder = @"有助于我们核实您的真实身份";
+    //    _cardIDTextView.font = [UIFont systemFontOfSize:13.0f];
+    //    _cardIDTextView.backgroundColor = [UIColor clearColor];
+    //    _cardIDTextView.textColor = [ColorUtil colorWithHexString:@"#000000" alpha:0.6];
+    //    _cardIDTextView.returnKeyType = UIReturnKeyNext;
+    //    _cardIDTextView.delegate = self;
+    //    [view2 addSubview:_cardIDTextView];
+    //
     
     UIView *divideLine1 = [[UIView alloc]init];
     divideLine1.backgroundColor = BACKGROUND_COLOR;
@@ -146,7 +146,7 @@
     //选择小区
     UIView *view3 = [[UIView alloc]init];
     view3.backgroundColor = [UIColor whiteColor];
-    view3.frame = CGRectMake(0, 28 + 42 *2+10, SCREEN_WIDTH, 42);
+    view3.frame = CGRectMake(0, 28 + 42 +10, SCREEN_WIDTH, 42);
     [view addSubview:view3];
     
     UILabel *addressLabel = [[UILabel alloc]init];
@@ -164,7 +164,7 @@
     [_selectVillageBtn setTitle:@"请选择小区 ▼" forState:UIControlStateNormal];
     [_selectVillageBtn setTitleColor:[ColorUtil colorWithHexString:@"#000000" alpha:0.6] forState:UIControlStateNormal];
     _selectVillageBtn.titleLabel.textAlignment = NSTextAlignmentLeft;
-
+    
     [_selectVillageBtn addTarget:self action:@selector(selectVillage) forControlEvents:UIControlEventTouchUpInside];
     [view3 addSubview:_selectVillageBtn];
     
@@ -172,7 +172,7 @@
     //门牌号
     UIView *view4 = [[UIView alloc]init];
     view4.backgroundColor = [UIColor whiteColor];
-    view4.frame = CGRectMake(0, 28 + 42 *3+10, SCREEN_WIDTH, 42);
+    view4.frame = CGRectMake(0, 28 + 42 *2+10, SCREEN_WIDTH, 42);
     [view addSubview:view4];
     
     UILabel *gateHouseLabel = [[UILabel alloc]init];
@@ -183,7 +183,7 @@
     gateHouseLabel.textAlignment = NSTextAlignmentCenter;
     [view4 addSubview:gateHouseLabel];
     
-
+    
     _gateHouseTextView = [[UIPlaceholderTextView alloc]initWithFrame:CGRectMake(100, 5, SCREEN_WIDTH-100, 42)];
     _gateHouseTextView.placeholder = @"请填写详细住址，例如A101";
     _gateHouseTextView.font = [UIFont systemFontOfSize:13.0f];
@@ -196,7 +196,7 @@
     
     UIView *divideLine2 = [[UIView alloc]init];
     divideLine2.backgroundColor = BACKGROUND_COLOR;
-    divideLine2.frame = CGRectMake(0, 28 + 42 *3 +10, SCREEN_WIDTH, 1);
+    divideLine2.frame = CGRectMake(0, 28 + 42 *2 +10, SCREEN_WIDTH, 1);
     [view addSubview:divideLine2];
     
     
@@ -209,12 +209,12 @@
     _headView.hidden = YES;
     [view addSubview:_headView];
     
-
+    
     UIButton *commitBtn = [[UIButton alloc]init];
     commitBtn.frame = CGRectMake(15, 28 + 42 *4 +10 +120, SCREEN_WIDTH-30, 48);
-    [commitBtn setBackgroundImage:[AppUtil imageWithColor:MAIN_COLOR] forState:UIControlStateNormal];
+    [commitBtn setBackgroundImage:[AppUtil imageWithColor:LOGIN_COLOR] forState:UIControlStateNormal];
     [commitBtn setBackgroundImage:[AppUtil imageWithColor:[ColorUtil colorWithHexString:@"#2d90ff" alpha:0.6f]] forState:UIControlStateHighlighted];
-    [commitBtn setTitle:@"提交审核" forState:UIControlStateNormal];
+    [commitBtn setTitle:@"下一步" forState:UIControlStateNormal];
     [commitBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     commitBtn.titleLabel.font = [UIFont systemFontOfSize:15.0f];
     commitBtn.layer.masksToBounds=YES;
@@ -302,7 +302,7 @@
         selectBtn.frame = CGRectMake(35, 35, 20, 20);
         [button addSubview:selectBtn];
         [_selectButtons addObject:selectBtn];
-
+        
     }
 }
 
@@ -355,7 +355,7 @@
         [_nameTextView resignFirstResponder];
         [_cardIDTextView resignFirstResponder];
         [_gateHouseTextView resignFirstResponder];
-
+        
     }
 }
 
@@ -374,21 +374,21 @@
     [_cardIDTextView resignFirstResponder];
     [_gateHouseTextView resignFirstResponder];
     
-    if(IS_NS_STRING_EMPTY(_nameTextView.text))
-    {
-        [DialogHelper showWarnTips:@"请填写您的姓名"];
-        return;
-    }
-    if(IS_NS_STRING_EMPTY(_cardIDTextView.text))
-    {
-        [DialogHelper showWarnTips:@"请填写您的身份证号码"];
-        return;
-    }
-    if(![AppUtil checkUserIdCard:_cardIDTextView.text])
-    {
-        [DialogHelper showWarnTips:@"请检查您身份证号码是否有误"];
-        return;
-    }
+    //    if(IS_NS_STRING_EMPTY(_nameTextView.text))
+    //    {
+    //        [DialogHelper showWarnTips:@"请填写您的姓名"];
+    //        return;
+    //    }
+    //    if(IS_NS_STRING_EMPTY(_cardIDTextView.text))
+    //    {
+    //        [DialogHelper showWarnTips:@"请填写您的身份证号码"];
+    //        return;
+    //    }
+    //    if(![AppUtil checkUserIdCard:_cardIDTextView.text])
+    //    {
+    //        [DialogHelper showWarnTips:@"请检查您身份证号码是否有误"];
+    //        return;
+    //    }
     if(IS_NS_STRING_EMPTY(_gateHouseTextView.text))
     {
         [DialogHelper showWarnTips:@"请填写您的门牌号"];
@@ -399,20 +399,19 @@
         [DialogHelper showWarnTips:@"请选择小区"];
         return;
     }
-    if(headPosition == -1)
-    {
-        [DialogHelper showWarnTips:@"请选择一个喜欢的头像"];
-        return;
-
-    }
- 
+    //    if(headPosition == -1)
+    //    {
+    //        [DialogHelper showWarnTips:@"请选择一个喜欢的头像"];
+    //        return;
+    //
+    //    }
+    
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
     params[@"tel"] = _tel;
     params[@"cid"] = [NSString stringWithFormat:@"%d",cid];
-    params[@"name"] = _nameTextView.text;
-    params[@"idcard"] = _cardIDTextView.text;
+    params[@"name"] =  IS_NS_STRING_EMPTY(_nameTextView.text)?_tel:_nameTextView.text;
+    params[@"idcard"] = @"";
     params[@"gatehouse"] = _gateHouseTextView.text;
     params[@"token"] = [[Account sharedAccount]getToken];
     params[@"avatar"] = [NSString stringWithFormat:@"%d",headPosition];
@@ -420,31 +419,39 @@
     NSUserDefaults *userDefault= [NSUserDefaults standardUserDefaults];
     [userDefault setInteger:cid forKey:VillageID];
     [userDefault setObject:name forKey:VillageName];
-    [manager GET:Request_Commit parameters:params
-         success:^(AFHTTPRequestOperation *operation, id responseObject)
-     {
-         ResponseModel *model = [ResponseModel mj_objectWithKeyValues:responseObject];
-         if(model.code == SUCCESS_CODE)
-         {
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
+    [manager GET:Request_Commit parameters:params progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    }
+         success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
              
-             UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:
-                                       @"恭喜您" message:@"提交资料成功，我们会在1-3个工作日审核，请耐心等待" delegate:self
-                                                      cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
-             [alertView show];
-        
+             ResponseModel *model = [ResponseModel mj_objectWithKeyValues:responseObject];
+             if(model.code == SUCCESS_CODE)
+             {
+                 
+                 //             UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:
+                 //                                       @"恭喜您" message:@"提交资料成功，我们会在1-3个工作日审核，请耐心等待" delegate:self
+                 //                                                      cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
+                 //             [alertView show];
+                 [HomeViewController show:self];
+                 
+             }
+             else
+             {
+                 [DialogHelper showFailureAlertSheet:@"提交失败，请重试"];
+             }
+             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
          }
-         else
-         {
+     
+         failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull   error) {
+             
              [DialogHelper showFailureAlertSheet:@"提交失败，请重试"];
-         }
-         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-     }
-         failure:^(AFHTTPRequestOperation *operation, NSError *error)
-     {
-         [DialogHelper showFailureAlertSheet:@"提交失败，请重试"];
-         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-     }];
-        
+             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+         }];
+    
+    
 }
 
 -(void)OnLeftClickCallback

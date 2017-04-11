@@ -16,4 +16,7 @@
 
 +(void)show : (BaseViewController *)controller mid: (int)mid;
 
++(void)show : (BaseViewController *)controller mid: (int)mid type:(NSString *)type;
+
+
 @end

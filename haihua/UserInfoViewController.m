@@ -104,12 +104,12 @@
     {
         verifyStatu = @"审核通过";
     }
-        [_datas addObject:[UserTableModel buildModel:[UIImage imageNamed:@"ic_ass"] title :@"审核状态" content:verifyStatu isClick:NO]];
-    [_datas addObject:[UserTableModel buildModel:[UIImage imageNamed:@"ic_bby"] title :@"我的建议" content:[NSString stringWithFormat:@"%d",model.total_feedback] isClick:YES]];
-    [_datas addObject:[UserTableModel buildModel:[UIImage imageNamed:@"ic_ppl"] title :@"我的评论" content:[NSString stringWithFormat:@"%d",model.total_msg] isClick:YES]];
-    [_datas addObject:[UserTableModel buildModel:[UIImage imageNamed:@"ic_ttl"] title :@"我的投票" content:[NSString stringWithFormat:@"%d",model.total_vote] isClick:YES]];
-    [_datas addObject:[UserTableModel buildModel:[UIImage imageNamed:@"ic_ggy"] title :@"关于" content:nil isClick:YES]];
-    [_datas addObject:[UserTableModel buildModel:[UIImage imageNamed:@"ic_set"] title :@"设置" content:nil isClick:YES]];
+        [_datas addObject:[UserTableModel buildModel:[UIImage imageNamed:@"one_my_shenhe"] title :@"审核状态" content:verifyStatu isClick:NO]];
+    [_datas addObject:[UserTableModel buildModel:[UIImage imageNamed:@"one_my_jianyi"] title :@"我的建议" content:[NSString stringWithFormat:@"%d",model.total_feedback] isClick:YES]];
+    [_datas addObject:[UserTableModel buildModel:[UIImage imageNamed:@"one_my_pinglun"] title :@"我的评论" content:[NSString stringWithFormat:@"%d",model.total_msg] isClick:YES]];
+    [_datas addObject:[UserTableModel buildModel:[UIImage imageNamed:@"one_my_toupiao"] title :@"我的投票" content:[NSString stringWithFormat:@"%d",model.total_vote] isClick:YES]];
+    [_datas addObject:[UserTableModel buildModel:[UIImage imageNamed:@"one_my_guanyu"] title :@"关于" content:nil isClick:YES]];
+    [_datas addObject:[UserTableModel buildModel:[UIImage imageNamed:@"one_my_shezhi"] title :@"设置" content:nil isClick:YES]];
     
 }
 
@@ -280,31 +280,37 @@
 -(void)requestUserInfo
 {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"uid"] = [[Account sharedAccount] getUid];
     params[@"token"] = [[Account sharedAccount] getToken];
-    [manager GET:Request_GetUserInfo parameters:params
-         success:^(AFHTTPRequestOperation *operation, id responseObject)
-     {
-         ResponseModel *model = [ResponseModel mj_objectWithKeyValues:responseObject];
-         if(model.code == SUCCESS_CODE)
-         {
-             id data = model.data;
-             UserModel *userModel = [UserModel mj_objectWithKeyValues:data];
-             userModel.total_feedback = model.total_feedback;
-             userModel.total_vote = model.total_vote;
-             userModel.total_msg = model.total_msg;
-             [[Account sharedAccount]saveTel:userModel.tel];
-             [self updateView:userModel];
-            
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
+    [manager GET:Request_GetUserInfo parameters:params progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    }
+         success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+             
+             ResponseModel *model = [ResponseModel mj_objectWithKeyValues:responseObject];
+             if(model.code == SUCCESS_CODE)
+             {
+                 id data = model.data;
+                 UserModel *userModel = [UserModel mj_objectWithKeyValues:data];
+                 userModel.total_feedback = model.total_feedback;
+                 userModel.total_vote = model.total_vote;
+                 userModel.total_msg = model.total_msg;
+                 [[Account sharedAccount]saveTel:userModel.tel];
+                 [self updateView:userModel];
+                 
+             }
+             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
          }
-         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-     }
-         failure:^(AFHTTPRequestOperation *operation, NSError *error)
-     {
-         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-     }];
+     
+         failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull   error) {
+             
+             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+             
+         }];
+ 
 }
 
 -(void)updateView : (UserModel *)model
@@ -336,32 +342,35 @@
     NSString *appCurVersionNum = [infoDictionary objectForKey:@"CFBundleVersion"];
     NSLog(@"当前应用版本号码：%@",appCurVersionNum);
     
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"pt"] = @"0";
     params[@"ver"] = appCurVersionNum;
     
-    [manager GET:Request_Update parameters:params
-         success:^(AFHTTPRequestOperation *operation, id responseObject)
-     {
-         ResponseModel *model = [ResponseModel mj_objectWithKeyValues:responseObject];
-         if(model.code == UPDATE)
-         {
-             UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"发现新版本" message:@"是否更新到最新版本？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
-             updateUrl = model.data;
-             [alertView show];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
+    [manager GET:Request_Update parameters:params progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    }
+         success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+             
+             ResponseModel *model = [ResponseModel mj_objectWithKeyValues:responseObject];
+             if(model.code == UPDATE)
+             {
+                 UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"发现新版本" message:@"是否更新到最新版本？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+                 updateUrl = model.data;
+                 [alertView show];
+             }
+             else
+             {
+                 [DialogHelper showSuccessTips:@"已是最新版本"];
+             }
          }
-         else
-         {
-             [DialogHelper showSuccessTips:@"已是最新版本"];
-         }
-         
-     }
-         failure:^(AFHTTPRequestOperation *operation, NSError *error)
-     {
-         [DialogHelper showTips:@"请检查您的网络"];
-
-     }];
+     
+         failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull   error) {
+             
+             [DialogHelper showTips:@"请检查您的网络"];
+             
+         }];
     
 }
 

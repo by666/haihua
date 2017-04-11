@@ -99,7 +99,10 @@
 -(void)setNewsData:(MsgModel *)model
 {
 
-    _showImageView.image = [UIImage imageNamed:@"test"];
+    if(model.isVote)
+    {
+        _commentImage.image = [UIImage imageNamed:@"home_vote"];
+    }
     
     _titleLabel.text = model.title;
     BOOL hasImage = NO;

@@ -29,6 +29,8 @@
 
 @property (strong, nonatomic) UITableView *tableView;
 
+@property (strong, nonatomic) UILabel *countLabel;
+
 @end
 
 @implementation VoteDetalViewController
@@ -84,7 +86,8 @@
     [self showNavigationBar];
     [self.navBar.leftBtn setHidden:NO];
     self.navBar.delegate = self;
-    [self.navBar.leftBtn setImage:[UIImage imageNamed:@"ic_back"] forState:UIControlStateNormal];
+    [self.navBar.leftBtn setImage:[UIImage imageNamed:@"topbar_back"] forState:UIControlStateNormal];
+    [self.navBar setTitle:@"投票详情"];
 }
 
 -(void)initTopView
@@ -95,23 +98,40 @@
     [self.view addSubview:topView];
     
     UILabel *titleLabel = [[UILabel alloc]init];
-    titleLabel.textColor = [UIColor whiteColor];
-    titleLabel.font = [UIFont systemFontOfSize:15.0f];
+    titleLabel.textColor = [UIColor blackColor];
+    titleLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:20];
     titleLabel.numberOfLines = 0;
     titleLabel.contentMode = NSLineBreakByWordWrapping;
     titleLabel.text = _model.title;
     CGSize size = [titleLabel.text sizeWithFont:titleLabel.font constrainedToSize:CGSizeMake(SCREEN_WIDTH-30, MAXFLOAT) lineBreakMode:NSLineBreakByWordWrapping];
-    titleLabel.frame = CGRectMake(15, 0, SCREEN_WIDTH-30, size.height);
+    titleLabel.frame = CGRectMake(15, 10, SCREEN_WIDTH-30, size.height);
     [topView addSubview:titleLabel];
     
+    UIImageView *commentImage = [[UIImageView alloc]init];
+    commentImage.image = [UIImage imageNamed:@"home_vote"];
+    commentImage.frame = CGRectMake(15, 20 + size.height, 15 ,15);
+    [topView addSubview:commentImage];
+    
+    _countLabel = [[UILabel alloc]init];
+    _countLabel.textColor = [ColorUtil colorWithHexString:@"#999999"];
+    _countLabel.font = [UIFont systemFontOfSize:13.0f];
+    _countLabel.text = [NSString stringWithFormat:@"%d",_model.totalComment];
+    [topView addSubview:_countLabel];
+    _countLabel.frame = CGRectMake(35, 20 + size.height, _countLabel.contentSize.width, _countLabel.contentSize.height);
+    
+    UIImageView *timeImage = [[UIImageView alloc]init];
+    timeImage.image = [UIImage imageNamed:@"home_time"];
+    timeImage.frame = CGRectMake(80, 20 + size.height, 15 ,15);
+    [topView addSubview:timeImage];
+    
     UILabel *timeLabel = [[UILabel alloc]init];
-    timeLabel.textColor = [UIColor whiteColor];
+    timeLabel.textColor = [ColorUtil colorWithHexString:@"#999999"];
     timeLabel.font = [UIFont systemFontOfSize:13.0f];
     NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyy-MM-dd"];
     NSDate *date = [NSDate dateWithTimeIntervalSince1970:_model.publishTs];
     timeLabel.text = [formatter stringFromDate:date];
-    timeLabel.frame = CGRectMake(15, 5 + size.height, timeLabel.contentSize.width, timeLabel.contentSize.height);
+    timeLabel.frame = CGRectMake(100, 20 + size.height, timeLabel.contentSize.width, timeLabel.contentSize.height);
     [topView addSubview:timeLabel];
     
     UIButton *button = [[UIButton alloc]init];
@@ -257,6 +277,7 @@
         
         if(selectModel.hasVote)
         {
+            [DialogHelper showWarnTips:@"您已经投过票了"];
             return;
         }
         NSString *message = [NSString stringWithFormat:@"是否确定投票给\"%@\"",selectModel.option];
@@ -287,30 +308,36 @@
 -(void)requestData
 {
     __weak MBProgressHUD *hua = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"mid"] = [NSString stringWithFormat:@"%d",_mid];
-    [manager GET:Request_Msg_Detail parameters:params
-         success:^(AFHTTPRequestOperation *operation, id responseObject)
-     {
-         ResponseModel *model = [ResponseModel mj_objectWithKeyValues:responseObject];
-         if(model.code == SUCCESS_CODE)
-         {
-             id data = model.data;
-             _model = [MsgModel mj_objectWithKeyValues:data];
-             _model.picNotes = [PictureModel mj_objectArrayWithKeyValuesArray:_model.picNotes];
-             [self initTopView];
-             [self initBody];
-             [self initVoteView];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
+    [manager GET:Request_Msg_Detail parameters:params progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    }
+         success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+             
+             ResponseModel *model = [ResponseModel mj_objectWithKeyValues:responseObject];
+             if(model.code == SUCCESS_CODE)
+             {
+                 id data = model.data;
+                 _model = [MsgModel mj_objectWithKeyValues:data];
+                 _model.picNotes = [PictureModel mj_objectArrayWithKeyValuesArray:_model.picNotes];
+                 [self initTopView];
+                 [self initBody];
+                 [self initVoteView];
+             }
+             hua.hidden = YES;
+             
          }
-         hua.hidden = YES;
-     }
-         failure:^(AFHTTPRequestOperation *operation, NSError *error)
-     {
-         [_scrollView.footer endRefreshing];
-         hua.hidden = YES;
-     }
-     ];
+     
+         failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull   error) {
+             
+             [_scrollView.footer endRefreshing];
+             hua.hidden = YES;
+             
+         }];
+ 
 }
 
 #pragma mark 获取投票结果
@@ -318,45 +345,53 @@
 {
     [_datas removeAllObjects];
     __weak MBProgressHUD *hua =[MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"mid"] = [NSString stringWithFormat:@"%ld",_model.mid];
     params[@"tel"] = [[Account sharedAccount]getTel];
-    [manager GET:Request_VoteResult parameters:params
-         success:^(AFHTTPRequestOperation *operation, id responseObject)
-     {
-         ResponseModel *model = [ResponseModel mj_objectWithKeyValues:responseObject];
-         if(model.code == SUCCESS_CODE)
-         {
-             id data = model.data;
-             if([model.status isEqualToString:@"submit"])
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
+    [manager GET:Request_VoteResult parameters:params progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    }
+         success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+             
+             ResponseModel *model = [ResponseModel mj_objectWithKeyValues:responseObject];
+             if(model.code == SUCCESS_CODE)
              {
-                 hasVote = YES;
+                 id data = model.data;
+                 if([model.status isEqualToString:@"submit"])
+                 {
+                     hasVote = YES;
+                 }
+                 _datas = [VoteModel mj_objectArrayWithKeyValuesArray:data];
+                 int size = 0;
+                 for(VoteModel *temp in _datas)
+                 {
+                     size += temp.total;
+                 }
+                 for(VoteModel *temp in _datas)
+                 {
+                     temp.allTotal = size;
+                     temp.hasVote = hasVote;
+                     temp.commentedVoId = model.commentedVoId;
+                     _countLabel.text = [NSString stringWithFormat:@"%d",temp.allTotal];
+                 }
+                 
              }
-             _datas = [VoteModel mj_objectArrayWithKeyValuesArray:data];
-             int size = 0;
-             for(VoteModel *temp in _datas)
-             {
-                 size += temp.total;
-             }
-             for(VoteModel *temp in _datas)
-             {
-                 temp.allTotal = size;
-                 temp.hasVote = hasVote;
-                 temp.commentedVoId = model.commentedVoId;
-             }
+             _tableView.frame = CGRectMake(10, contentHeight + 30, SCREEN_WIDTH - 20, [_datas count] * ITEM_HEIGHT + 15);
+             [_scrollView setContentSize:CGSizeMake(SCREEN_WIDTH, contentHeight + 60 + [_datas count] * ITEM_HEIGHT)];
+             
+             [_tableView reloadData];
+             [hua hide:YES];
          }
-         _tableView.frame = CGRectMake(10, contentHeight + 30, SCREEN_WIDTH - 20, [_datas count] * ITEM_HEIGHT + 15);
-         [_scrollView setContentSize:CGSizeMake(SCREEN_WIDTH, contentHeight + 60 + [_datas count] * ITEM_HEIGHT)];
-
-         [_tableView reloadData];
-         [hua hide:YES];
-     }
-         failure:^(AFHTTPRequestOperation *operation, NSError *error)
-     {
-         [hua hide:YES];
-     }];
-}
+     
+         failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull   error) {
+             
+             [hua hide:YES];
+             
+         }];
+   }
 
 
 #pragma mark 请求投票
@@ -370,7 +405,6 @@
         }
         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
         __weak MBProgressHUD *hua= [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         NSMutableDictionary *params = [NSMutableDictionary dictionary];
         params[@"uid"] = [account getUid];
         params[@"cid"] = [NSString stringWithFormat:@"%d",(int)[userDefaults integerForKey:VillageID]];
@@ -379,43 +413,50 @@
         VoteModel *selectModel = [_datas objectAtIndex:selectPosition];
         params[@"voId"]= [NSString stringWithFormat:@"%d",selectModel.voId];
 
-        [manager POST:Request_Vote parameters:params
-              success:^(AFHTTPRequestOperation *operation, id responseObject)
-         {
-             ResponseModel *model = [ResponseModel mj_objectWithKeyValues:responseObject];
-             
-             if(model.code == SUCCESS_CODE)
-             {
-                 [DialogHelper showSuccessTips:@"投票成功，感谢您的支持"];
-                 [self requestVoteResult];
-             }
-             else if(model.code == ERROR_TOKEN)
-             {
-                 [LoginViewController show:self];
-             }
-             else if(model.code == SUCCESS_VERIFY_FAIL)
-             {
-                 [self voteFail];
-                 [DialogHelper showWarnTips:@"帐户正在审核中，请稍后操作"];
-             }
-             else if(model.code == SUCCESS_USER_COMMITED)
-             {
-                 [self voteFail];
-                 [DialogHelper showWarnTips:@"请勿重复提交"];
-             }
-             else
-             {
-                 [self voteFail];
-                 [DialogHelper showWarnTips:@"投票失败"];
-             }
-             [hua hide:YES];
-         }
-              failure:^(AFHTTPRequestOperation *operation, NSError *error)
-         {
-             [hua hide:YES];
-             [self voteFail];
-             [DialogHelper showWarnTips:@"投票失败"];
-         }];
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
+    
+    
+    [manager POST:Request_Vote parameters:params progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        ResponseModel *model = [ResponseModel mj_objectWithKeyValues:responseObject];
+        
+        if(model.code == SUCCESS_CODE)
+        {
+            [DialogHelper showSuccessTips:@"投票成功，感谢您的支持"];
+            [self requestVoteResult];
+        }
+        else if(model.code == ERROR_TOKEN)
+        {
+            [LoginViewController show:self];
+        }
+        else if(model.code == SUCCESS_VERIFY_FAIL)
+        {
+            [self voteFail];
+            [DialogHelper showWarnTips:@"帐户正在审核中，请稍后操作"];
+        }
+        else if(model.code == SUCCESS_USER_COMMITED)
+        {
+            [self voteFail];
+            [DialogHelper showWarnTips:@"请勿重复提交"];
+        }
+        else
+        {
+            [self voteFail];
+            [DialogHelper showWarnTips:@"投票失败"];
+        }
+        [hua hide:YES];
+
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [hua hide:YES];
+        [self voteFail];
+        [DialogHelper showWarnTips:@"投票失败"];
+    }];
+    
 
 }
 

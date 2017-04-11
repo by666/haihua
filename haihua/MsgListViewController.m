@@ -20,7 +20,8 @@
 #import "VoteDetalViewController.h"
 #import "FileDataParams.h"
 #import "BannerModel.h"
-
+#import "VoteModel.h"
+#import "VoteViewCell.h"
 #define ITEM_HEIGHT 110
 #define REQUEST_SIZE 10
 
@@ -47,6 +48,8 @@
 @property (strong, nonatomic) UIButton *errorView;
 
 @property (copy, nonatomic) NSString *type;
+
+@property (copy, nonatomic) NSString *temp;
 
 @property (assign , nonatomic) BOOL isMine;
 
@@ -76,6 +79,22 @@
     [controller.navigationController pushViewController:openViewControler animated:YES];
 }
 
+
++(void)show : (UIViewController *)controller
+       title: (NSString *)title
+        type: (NSString *)type
+       mine : (BOOL) isMine
+     isVote : (BOOL) isVote
+       temp : (NSString *)temp
+{
+    MsgListViewController *openViewControler = [[MsgListViewController alloc]init];
+    openViewControler.mainTitle = title;
+    openViewControler.type = type;
+    openViewControler.isMine = isMine;
+    openViewControler.isVote = isVote;
+    openViewControler.temp = temp;
+    [controller.navigationController pushViewController:openViewControler animated:YES];
+}
 
 
 - (void)viewDidLoad {
@@ -201,21 +220,40 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if(_isVote)
+    {
+        return ITEM_HEIGHT  + 200;
+    }
+    
     return ITEM_HEIGHT;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
-    CommentViewCell *cell = [[CommentViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:[CommentViewCell identify]];
-    cell.backgroundColor = [UIColor clearColor];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    MsgModel *model;
     if(!IS_NS_COLLECTION_EMPTY(_datas))
     {
-        MsgModel *model = [_datas objectAtIndex:indexPath.row];
-        [cell setNewsData:model];
+        model = [_datas objectAtIndex:indexPath.row];
+        model.isVote = _isVote;
     }
-    return cell;
+    if(_isVote)
+    {
+        VoteViewCell *cell = [[VoteViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:[VoteViewCell identify]];
+        cell.backgroundColor = [UIColor clearColor];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        [cell setNewsData:model];
+        return cell;
+        
+    }else{
+        CommentViewCell *cell = nil;
+        cell = [[CommentViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:[CommentViewCell identify]];
+        cell.backgroundColor = [UIColor clearColor];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        [cell setNewsData:model];
+        return cell;
+    }
+  
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -229,7 +267,7 @@
         }
         else
         {
-            [CommentDetailViewController show:self model:model];
+            [CommentDetailViewController show:self mid:model.mid type:_temp];
         }
     }
 }
@@ -265,7 +303,7 @@
         }
         else
         {
-            [CommentDetailViewController show:self mid:model.mid];
+            [CommentDetailViewController show:self mid:model.mid type:_temp];
         }
     }
 }
@@ -291,12 +329,15 @@
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     }
     NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"cid"] = [NSString stringWithFormat:@"%d", [userDefault integerForKey:VillageID]];
     params[@"index"] = [NSString stringWithFormat:@"%d",CURRENT];
     params[@"length"] = [NSString stringWithFormat:@"%d",REQUEST_SIZE];
     params[@"type"] = _type;
+    if(!IS_NS_STRING_EMPTY(_temp))
+    {
+        params[@"type"] = _temp;
+    }
     NSString *url = Request_InfoList;
     if(_isMine)
     {
@@ -312,54 +353,68 @@
             params[@"isVote"] = @"true";
         }
     }
-    [manager GET:url parameters:params
-         success:^(AFHTTPRequestOperation *operation, id responseObject)
-     {
-         ResponseModel *model = [ResponseModel mj_objectWithKeyValues:responseObject];
-         if(model.code == SUCCESS_CODE)
-         {
-             id data = model.data;
-             if(isLoadMore)
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
+    [manager GET:url parameters:params progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    }
+         success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+             
+             ResponseModel *model = [ResponseModel mj_objectWithKeyValues:responseObject];
+             if(model.code == SUCCESS_CODE)
              {
-                 NSMutableArray *temp = [MsgModel mj_objectArrayWithKeyValuesArray:data];
-                 if(IS_NS_COLLECTION_EMPTY(temp))
+                 id data = model.data;
+                 if(isLoadMore)
                  {
-                     [_scrollerView.footer noticeNoMoreData];
-                     return ;
+                     NSMutableArray *temp = [MsgModel mj_objectArrayWithKeyValuesArray:data];
+                     if(IS_NS_COLLECTION_EMPTY(temp))
+                     {
+                         [_scrollerView.footer noticeNoMoreData];
+                         return ;
+                     }
+                     else
+                     {
+                         for( int i = 0 ; i < temp.count ; i ++)
+                         {
+                             MsgModel *model = [temp objectAtIndex:i];
+                             model.picNotes = [PictureModel mj_objectArrayWithKeyValuesArray:model.picNotes];
+                             model.options = [VoteModel mj_objectArrayWithKeyValuesArray:model.options];
+                         }
+                     }
+                     [_datas addObjectsFromArray:temp];
                  }
                  else
                  {
-                     for( int i = 0 ; i < temp.count ; i ++)
+                     _datas = [MsgModel mj_objectArrayWithKeyValuesArray:data];
+                     for( int i = 0 ; i < _datas.count ; i ++)
                      {
-                         MsgModel *model = [temp objectAtIndex:i];
+                         MsgModel *model = [_datas objectAtIndex:i];
                          model.picNotes = [PictureModel mj_objectArrayWithKeyValuesArray:model.picNotes];
+                         model.options = [VoteModel mj_objectArrayWithKeyValuesArray:model.options];
                      }
                  }
-                 [_datas addObjectsFromArray:temp];
-             }
-             else
-             {
-                 _datas = [MsgModel mj_objectArrayWithKeyValuesArray:data];
-                 for( int i = 0 ; i < _datas.count ; i ++)
+                 if(_isVote)
                  {
-                     MsgModel *model = [_datas objectAtIndex:i];
-                     model.picNotes = [PictureModel mj_objectArrayWithKeyValuesArray:model.picNotes];
+                     _tableView.frame = CGRectMake(0,Top_Height, SCREEN_WIDTH,  [_datas count] * (ITEM_HEIGHT + 200));
+                     [_scrollerView setContentSize:CGSizeMake(SCREEN_WIDTH, [_datas count] * (ITEM_HEIGHT  + 200)+ Top_Height)];
                  }
+                 else{
+                     _tableView.frame = CGRectMake(0,Top_Height, SCREEN_WIDTH,  [_datas count] * ITEM_HEIGHT);
+                     [_scrollerView setContentSize:CGSizeMake(SCREEN_WIDTH, [_datas count] * ITEM_HEIGHT + Top_Height)];
+                 }
+                 [_tableView reloadData];
+                 [_scrollerView.header endRefreshing];
+                 [_scrollerView.footer endRefreshing];
+                 
              }
-             _tableView.frame = CGRectMake(0,Top_Height, SCREEN_WIDTH,  [_datas count] * ITEM_HEIGHT);
-             [_scrollerView setContentSize:CGSizeMake(SCREEN_WIDTH, [_datas count] * ITEM_HEIGHT + Top_Height)];
-             [_tableView reloadData];
-             [_scrollerView.header endRefreshing];
-             [_scrollerView.footer endRefreshing];
-             
+             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
          }
-         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-     }
-         failure:^(AFHTTPRequestOperation *operation, NSError *error)
-     {
-         [self showFailView];
-         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-     }];
+     
+         failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull   error) {
+             
+             [self showFailView];
+             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+         }];
 
 }
 
@@ -367,24 +422,31 @@
 -(void)requestBanner
 {
     NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"type"] = _type;
     params[@"cid"] = [userDefault objectForKey:VillageID];
-    [manager GET:Request_Banner parameters:params
-         success:^(AFHTTPRequestOperation *operation, id responseObject)
-     {
-         ResponseModel *model = [ResponseModel mj_objectWithKeyValues:responseObject];
-         if(model.code == SUCCESS_CODE)
-         {
-             _imageDatas = [BannerModel mj_objectArrayWithKeyValuesArray:model.data];
-             [self initTopView];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
+    [manager GET:Request_Banner parameters:params progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    }
+         success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+             
+             ResponseModel *model = [ResponseModel mj_objectWithKeyValues:responseObject];
+             if(model.code == SUCCESS_CODE)
+             {
+                 _imageDatas = [BannerModel mj_objectArrayWithKeyValuesArray:model.data];
+                 [self initTopView];
+             }
+             
          }
-     }
-         failure:^(AFHTTPRequestOperation *operation, NSError *error)
-     {
-         [self showFailView];
-     }];
+     
+         failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull   error) {
+             
+             [self showFailView];
+             
+         }];
+
 
 }
 

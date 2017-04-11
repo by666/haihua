@@ -30,7 +30,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.view setBackgroundColor:BACKGROUND_COLOR];
-    titles = [[NSArray alloc]initWithObjects:@"民生",@"计生",@"城建",@"社保",@"安全",@"法律",@"劳动",@"房屋租赁",nil];
+    titles = [[NSArray alloc]initWithObjects:@"民政",@"计生",@"城建",@"社保",@"安全",@"法律",@"劳动",@"房屋租赁",nil];
     images = [[NSArray alloc]initWithObjects:@"one_guide_minzheng",@"one_guide_jisheng",@"one_guide_chengjian",@"one_guide_shebao",@"one_guide_anquan",@"one_guide_falv",@"one_guide_laodong",@"one_guide_zufang",nil];
     [self showNavigationBar];
     [self.navBar setTitle:@"办事指南"];
@@ -102,7 +102,36 @@
 {
     UIButton *button = sender;
     int tag = (int)button.tag;
-    [MsgListViewController show:self title:[titles objectAtIndex:tag] type:@"guide" mine: NO isVote: NO];
+    NSString *temp;
+    switch (tag) {
+        case 0:
+            temp = @"livelihood";
+            break;
+        case 1:
+            temp = @"family_planning";
+            break;
+        case 2:
+            temp = @"urban_construction";
+            break;
+        case 3:
+            temp = @"social_security";
+            break;
+        case 4:
+            temp = @"security";
+            break;
+        case 5:
+            temp = @"law";
+            break;
+        case 6:
+            temp = @"labour";
+            break;
+        case 7:
+            temp = @"housing_lease";
+            break;
+        default:
+            break;
+    }
+    [MsgListViewController show:self title:[titles objectAtIndex:tag] type:@"guide" mine: NO isVote: NO temp:temp];
     
 }
 

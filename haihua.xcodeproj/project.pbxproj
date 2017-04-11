@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		38DB315E415A3C4FDA1C9F3E /* libPods-haihua.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 018436E8C598563445769FC4 /* libPods-haihua.a */; };
 		CF004BA31C8ED6F200CD389E /* MsgListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF004BA21C8ED6F200CD389E /* MsgListViewController.m */; };
 		CF008A3A1CA5AB1E00549EBD /* CommentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CF008A391CA5AB1E00549EBD /* CommentModel.m */; };
 		CF008A3D1CA5AC9400549EBD /* CommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CF008A3C1CA5AC9400549EBD /* CommentCell.m */; };
@@ -17,6 +16,7 @@
 		CF014E1A1CA9B6CE002D7079 /* UserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF014E191CA9B6CE002D7079 /* UserInfoViewController.m */; };
 		CF014E1D1CA9B75A002D7079 /* UserInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CF014E1C1CA9B75A002D7079 /* UserInfoCell.m */; };
 		CF0FE0041CDC7E4D003F8858 /* SecretViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF0FE0031CDC7E4D003F8858 /* SecretViewController.m */; };
+		CF18B5C01E7A87FC006FEABD /* VoteListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF18B5BF1E7A87FC006FEABD /* VoteListViewController.m */; };
 		CF28F1EF1E753F2200A4EBE0 /* GuideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF28F1EE1E753F2200A4EBE0 /* GuideViewController.m */; };
 		CF2A50FB1CE30A8300F0EF3D /* CheckUpdateUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2A50FA1CE30A8300F0EF3D /* CheckUpdateUtil.m */; };
 		CF2A50FF1CE30F7C00F0EF3D /* UpdateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2A50FE1CE30F7C00F0EF3D /* UpdateModel.m */; };
@@ -61,6 +61,7 @@
 		CF7166591C8F202700711656 /* ByNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = CF7166581C8F202700711656 /* ByNavigationBar.m */; };
 		CF71665D1C904D8A00711656 /* ColorUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = CF71665C1C904D8A00711656 /* ColorUtil.m */; };
 		CF7166631C9051C800711656 /* UILabel+ContentSize.m in Sources */ = {isa = PBXBuildFile; fileRef = CF7166611C9051C800711656 /* UILabel+ContentSize.m */; };
+		CF7252C11E785D9E00D57D48 /* VoteViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CF7252C01E785D9E00D57D48 /* VoteViewCell.m */; };
 		CF88B5C31CA306BE00660CD4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CF88B5C21CA306BE00660CD4 /* Assets.xcassets */; };
 		CF88B5C61CA30B9500660CD4 /* CommentDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF88B5C51CA30B9500660CD4 /* CommentDetailViewController.m */; };
 		CF88B5C91CA30BA900660CD4 /* VoteDetalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF88B5C81CA30BA900660CD4 /* VoteDetalViewController.m */; };
@@ -96,11 +97,13 @@
 		CFFAA4851CB6B53000880A03 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFFAA4841CB6B53000880A03 /* MobileCoreServices.framework */; };
 		CFFAA4871CB6B53D00880A03 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFFAA4861CB6B53D00880A03 /* CFNetwork.framework */; };
 		CFFAA4891CB6B54A00880A03 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFFAA4881CB6B54A00880A03 /* CoreTelephony.framework */; };
+		D8D1CD4868677FC04E5A3070 /* libPods-haihua.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ACE7B302C0E64C5D8798395 /* libPods-haihua.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		018436E8C598563445769FC4 /* libPods-haihua.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-haihua.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		BF9B174712C9F8ADFD80E8B0 /* Pods-haihua.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-haihua.release.xcconfig"; path = "Pods/Target Support Files/Pods-haihua/Pods-haihua.release.xcconfig"; sourceTree = "<group>"; };
+		4ACE7B302C0E64C5D8798395 /* libPods-haihua.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-haihua.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		53DBEBC6BEA534E45744BE0C /* Pods-haihua.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-haihua.debug.xcconfig"; path = "Pods/Target Support Files/Pods-haihua/Pods-haihua.debug.xcconfig"; sourceTree = "<group>"; };
+		A7FB44BDD55902838CD52696 /* Pods-haihua.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-haihua.release.xcconfig"; path = "Pods/Target Support Files/Pods-haihua/Pods-haihua.release.xcconfig"; sourceTree = "<group>"; };
 		CF004BA11C8ED6F200CD389E /* MsgListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MsgListViewController.h; sourceTree = "<group>"; };
 		CF004BA21C8ED6F200CD389E /* MsgListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MsgListViewController.m; sourceTree = "<group>"; };
 		CF008A381CA5AB1E00549EBD /* CommentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentModel.h; sourceTree = "<group>"; };
@@ -120,12 +123,20 @@
 		CF014E1C1CA9B75A002D7079 /* UserInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoCell.m; sourceTree = "<group>"; };
 		CF0FE0021CDC7E4D003F8858 /* SecretViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecretViewController.h; sourceTree = "<group>"; };
 		CF0FE0031CDC7E4D003F8858 /* SecretViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecretViewController.m; sourceTree = "<group>"; };
+		CF18B5BE1E7A87FB006FEABD /* VoteListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoteListViewController.h; sourceTree = "<group>"; };
+		CF18B5BF1E7A87FC006FEABD /* VoteListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VoteListViewController.m; sourceTree = "<group>"; };
 		CF28F1ED1E753F2200A4EBE0 /* GuideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuideViewController.h; sourceTree = "<group>"; };
 		CF28F1EE1E753F2200A4EBE0 /* GuideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuideViewController.m; sourceTree = "<group>"; };
 		CF2A50F91CE30A8300F0EF3D /* CheckUpdateUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckUpdateUtil.h; sourceTree = "<group>"; };
 		CF2A50FA1CE30A8300F0EF3D /* CheckUpdateUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckUpdateUtil.m; sourceTree = "<group>"; };
 		CF2A50FD1CE30F7C00F0EF3D /* UpdateModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateModel.h; sourceTree = "<group>"; };
 		CF2A50FE1CE30F7C00F0EF3D /* UpdateModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateModel.m; sourceTree = "<group>"; };
+		CF2BD1C51E80FE4800B1C484 /* libAFNetworking.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAFNetworking.a; path = "Pods/../build/Debug-iphoneos/AFNetworking/libAFNetworking.a"; sourceTree = "<group>"; };
+		CF2BD1C71E80FE5000B1C484 /* libMBProgressHUD.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libMBProgressHUD.a; path = "Pods/../build/Debug-iphoneos/MBProgressHUD/libMBProgressHUD.a"; sourceTree = "<group>"; };
+		CF2BD1C91E80FE5700B1C484 /* libSDWebImage.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSDWebImage.a; path = "Pods/../build/Debug-iphoneos/SDWebImage/libSDWebImage.a"; sourceTree = "<group>"; };
+		CF2BD1CB1E80FE5F00B1C484 /* libMJExtension.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libMJExtension.a; path = "Pods/../build/Debug-iphoneos/MJExtension/libMJExtension.a"; sourceTree = "<group>"; };
+		CF2BD1CD1E80FECD00B1C484 /* libPods-haihua.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-haihua.a"; path = "../../../Library/Developer/Xcode/DerivedData/haihua-cpngqgubqmpkasfwdtgnpklvjodc/Build/Products/Debug-iphoneos/libPods-haihua.a"; sourceTree = "<group>"; };
+		CF2BD1CF1E80FEE900B1C484 /* libAFNetworking.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAFNetworking.a; path = "../../../Library/Developer/Xcode/DerivedData/haihua-cpngqgubqmpkasfwdtgnpklvjodc/Build/Products/Debug-iphoneos/AFNetworking/libAFNetworking.a"; sourceTree = "<group>"; };
 		CF2BEA731C8EC0CC00DA61D9 /* haihua.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = haihua.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF2BEA771C8EC0CC00DA61D9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		CF2BEA791C8EC0CC00DA61D9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -185,6 +196,7 @@
 		CF3733AB1E69655E00631412 /* TimeUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeUtil.h; sourceTree = "<group>"; };
 		CF3733AC1E69655E00631412 /* TimeUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeUtil.m; sourceTree = "<group>"; };
 		CF3733AE1E696E9C00631412 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
+		CF43608A1E7E71AB00B6834B /* haihua.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = haihua.entitlements; sourceTree = "<group>"; };
 		CF48C6261CCFCDB900BF4EF9 /* FeedbackCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackCell.h; sourceTree = "<group>"; };
 		CF48C6271CCFCDB900BF4EF9 /* FeedbackCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackCell.m; sourceTree = "<group>"; };
 		CF48C6291CCFF43800BF4EF9 /* PictureModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PictureModel.h; sourceTree = "<group>"; };
@@ -202,6 +214,8 @@
 		CF71665C1C904D8A00711656 /* ColorUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorUtil.m; sourceTree = "<group>"; };
 		CF7166601C9051C800711656 /* UILabel+ContentSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+ContentSize.h"; sourceTree = "<group>"; };
 		CF7166611C9051C800711656 /* UILabel+ContentSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+ContentSize.m"; sourceTree = "<group>"; };
+		CF7252BF1E785D9E00D57D48 /* VoteViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoteViewCell.h; sourceTree = "<group>"; };
+		CF7252C01E785D9E00D57D48 /* VoteViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VoteViewCell.m; sourceTree = "<group>"; };
 		CF88B5C21CA306BE00660CD4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CF88B5C41CA30B9500660CD4 /* CommentDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentDetailViewController.h; sourceTree = "<group>"; };
 		CF88B5C51CA30B9500660CD4 /* CommentDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentDetailViewController.m; sourceTree = "<group>"; };
@@ -266,7 +280,6 @@
 		CFFAA4841CB6B53000880A03 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		CFFAA4861CB6B53D00880A03 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		CFFAA4881CB6B54A00880A03 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
-		F889E33D3983F77ADF1AEF35 /* Pods-haihua.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-haihua.debug.xcconfig"; path = "Pods/Target Support Files/Pods-haihua/Pods-haihua.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -288,7 +301,7 @@
 				CF2CEDB41CA444D9004FF058 /* libz.tbd in Frameworks */,
 				CF2CEDB21CA444B8004FF058 /* SMS_SDK.framework in Frameworks */,
 				CF2CEDB11CA444B8004FF058 /* MOBFoundation.framework in Frameworks */,
-				38DB315E415A3C4FDA1C9F3E /* libPods-haihua.a in Frameworks */,
+				D8D1CD4868677FC04E5A3070 /* libPods-haihua.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -298,6 +311,12 @@
 		314FDB4E4D4D0D8D1EC0E4AF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CF2BD1CF1E80FEE900B1C484 /* libAFNetworking.a */,
+				CF2BD1CD1E80FECD00B1C484 /* libPods-haihua.a */,
+				CF2BD1CB1E80FE5F00B1C484 /* libMJExtension.a */,
+				CF2BD1C91E80FE5700B1C484 /* libSDWebImage.a */,
+				CF2BD1C71E80FE5000B1C484 /* libMBProgressHUD.a */,
+				CF2BD1C51E80FE4800B1C484 /* libAFNetworking.a */,
 				CFFAA4881CB6B54A00880A03 /* CoreTelephony.framework */,
 				CFFAA4861CB6B53D00880A03 /* CFNetwork.framework */,
 				CFFAA4841CB6B53000880A03 /* MobileCoreServices.framework */,
@@ -310,16 +329,16 @@
 				CF2CEDB71CA444F5004FF058 /* MessageUI.framework */,
 				CF2CEDB51CA444E9004FF058 /* libicucore.tbd */,
 				CF2CEDB31CA444D9004FF058 /* libz.tbd */,
-				018436E8C598563445769FC4 /* libPods-haihua.a */,
+				4ACE7B302C0E64C5D8798395 /* libPods-haihua.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		7928558836612C9312FC9234 /* Pods */ = {
+		4469708919A21F8EE844D9D5 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				F889E33D3983F77ADF1AEF35 /* Pods-haihua.debug.xcconfig */,
-				BF9B174712C9F8ADFD80E8B0 /* Pods-haihua.release.xcconfig */,
+				53DBEBC6BEA534E45744BE0C /* Pods-haihua.debug.xcconfig */,
+				A7FB44BDD55902838CD52696 /* Pods-haihua.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -340,8 +359,8 @@
 			children = (
 				CF2BEA751C8EC0CC00DA61D9 /* haihua */,
 				CF2BEA741C8EC0CC00DA61D9 /* Products */,
-				7928558836612C9312FC9234 /* Pods */,
 				314FDB4E4D4D0D8D1EC0E4AF /* Frameworks */,
+				4469708919A21F8EE844D9D5 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -356,6 +375,7 @@
 		CF2BEA751C8EC0CC00DA61D9 /* haihua */ = {
 			isa = PBXGroup;
 			children = (
+				CF43608A1E7E71AB00B6834B /* haihua.entitlements */,
 				CFE291D91C8EC7D5008C9C26 /* controller */,
 				CFE291DB1C8EC7F0008C9C26 /* utils */,
 				CFE291DA1C8EC7E4008C9C26 /* view */,
@@ -523,6 +543,8 @@
 				CFDD2DFD1CCE00D800E81E3F /* VillageCell.m */,
 				CF48C6261CCFCDB900BF4EF9 /* FeedbackCell.h */,
 				CF48C6271CCFCDB900BF4EF9 /* FeedbackCell.m */,
+				CF7252BF1E785D9E00D57D48 /* VoteViewCell.h */,
+				CF7252C01E785D9E00D57D48 /* VoteViewCell.m */,
 			);
 			name = cell;
 			sourceTree = "<group>";
@@ -576,6 +598,8 @@
 		CFC15BBE1CC3FCD40077FA19 /* main */ = {
 			isa = PBXGroup;
 			children = (
+				CF18B5BE1E7A87FB006FEABD /* VoteListViewController.h */,
+				CF18B5BF1E7A87FC006FEABD /* VoteListViewController.m */,
 				CF4A6D041CBDE39B00B36C93 /* HomeViewController.h */,
 				CF3733AE1E696E9C00631412 /* HomeViewController.m */,
 				CF004BA11C8ED6F200CD389E /* MsgListViewController.h */,
@@ -708,12 +732,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CF2BEA8A1C8EC0CC00DA61D9 /* Build configuration list for PBXNativeTarget "haihua" */;
 			buildPhases = (
-				8AEC346E4DE9B283EA157F93 /* Check Pods Manifest.lock */,
+				15D4D3FFB71DD5141CBF25C9 /* [CP] Check Pods Manifest.lock */,
 				CF2BEA6F1C8EC0CC00DA61D9 /* Sources */,
 				CF2BEA701C8EC0CC00DA61D9 /* Frameworks */,
 				CF2BEA711C8EC0CC00DA61D9 /* Resources */,
-				16FC961A7916D3D02325240B /* Embed Pods Frameworks */,
-				F2D488A4B84899A3041F9A4E /* Copy Pods Resources */,
+				7A08074779204A3C6B933475 /* [CP] Embed Pods Frameworks */,
+				A9456BE202780C3D0A43CABB /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -736,12 +760,13 @@
 					CF2BEA721C8EC0CC00DA61D9 = {
 						CreatedOnToolsVersion = 7.2.1;
 						DevelopmentTeam = AB86U4DT8H;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
 							};
 							com.apple.Push = {
-								enabled = 0;
+								enabled = 1;
 							};
 						};
 					};
@@ -780,14 +805,29 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		16FC961A7916D3D02325240B /* Embed Pods Frameworks */ = {
+		15D4D3FFB71DD5141CBF25C9 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		7A08074779204A3C6B933475 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -795,29 +835,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-haihua/Pods-haihua-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		8AEC346E4DE9B283EA157F93 /* Check Pods Manifest.lock */ = {
+		A9456BE202780C3D0A43CABB /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		F2D488A4B84899A3041F9A4E /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -832,6 +857,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CF18B5C01E7A87FC006FEABD /* VoteListViewController.m in Sources */,
 				CFA464DA1CA1BA9900563CE4 /* UIPlaceholderTextView.m in Sources */,
 				CF2CEDF61CA456AB004FF058 /* MJRefreshBackGifFooter.m in Sources */,
 				CFA46B301C954FE200408084 /* VillageModel.m in Sources */,
@@ -848,6 +874,7 @@
 				CF2BEA7B1C8EC0CC00DA61D9 /* AppDelegate.m in Sources */,
 				CF2CEDF01CA456AB004FF058 /* MJRefreshComponent.m in Sources */,
 				CFE291DF1C8EC865008C9C26 /* BaseViewController.m in Sources */,
+				CF7252C11E785D9E00D57D48 /* VoteViewCell.m in Sources */,
 				CF0FE0041CDC7E4D003F8858 /* SecretViewController.m in Sources */,
 				CFA464E11CA1C33000563CE4 /* DialogHelper.m in Sources */,
 				CFDD2E071CCF14E000E81E3F /* FeedbackModel.m in Sources */,
@@ -1003,17 +1030,20 @@
 		};
 		CF2BEA8B1C8EC0CC00DA61D9 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F889E33D3983F77ADF1AEF35 /* Pods-haihua.debug.xcconfig */;
+			baseConfigurationReference = 53DBEBC6BEA534E45744BE0C /* Pods-haihua.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = haihua/haihua.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: chengshi huang (H7AY58X99M)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = AB86U4DT8H;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/haihua/SMS_SDK",
 				);
-				GCC_PREFIX_HEADER = /Users/by.huang/Desktop/by/haihua/haihua/Common.pch;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/haihua/Common.pch";
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = haihua/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
@@ -1025,23 +1055,26 @@
 				PROVISIONING_PROFILE = "e7146122-ca68-40fa-9057-7b7d4b703ece";
 				PROVISIONING_PROFILE_SPECIFIER = dev_xingdong;
 				TARGETED_DEVICE_FAMILY = 1;
+				VALID_ARCHS = "arm64 armv7";
 			};
 			name = Debug;
 		};
 		CF2BEA8C1C8EC0CC00DA61D9 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BF9B174712C9F8ADFD80E8B0 /* Pods-haihua.release.xcconfig */;
+			baseConfigurationReference = A7FB44BDD55902838CD52696 /* Pods-haihua.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = haihua/haihua.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: chengshi huang (H7AY58X99M)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: chengshi huang (AB86U4DT8H)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = AB86U4DT8H;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/haihua/SMS_SDK",
 				);
-				GCC_PREFIX_HEADER = /Users/by.huang/Desktop/by/haihua/haihua/Common.pch;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/haihua/Common.pch";
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = haihua/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
@@ -1054,6 +1087,7 @@
 				"PROVISIONING_PROFILE[sdk=*]" = "661339af-12be-4d99-a83e-f70b7c40237c";
 				PROVISIONING_PROFILE_SPECIFIER = dis_xingdong;
 				TARGETED_DEVICE_FAMILY = 1;
+				VALID_ARCHS = "arm64 armv7";
 			};
 			name = Release;
 		};

@@ -194,47 +194,53 @@
     {
         hua = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     }
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"index"] = [NSString stringWithFormat:@"%d",CURRENT];
     params[@"length"] = [NSString stringWithFormat:@"%d",REQUEST_SIZE];
     params[@"mid"] = [NSString stringWithFormat:@"%d",_model.fid];
-    [manager GET:Request_CommentList parameters:params
-         success:^(AFHTTPRequestOperation *operation, id responseObject)
-     {
-         ResponseModel *model = [ResponseModel mj_objectWithKeyValues:responseObject];
-         if(model.code == SUCCESS_CODE)
-         {
-             id data = model.data;
-             NSMutableArray *requestDatas = [CommentModel mj_objectArrayWithKeyValuesArray:data];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
+    [manager GET:Request_CommentList parameters:params progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    }
+         success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
              
-             if(IS_NS_COLLECTION_EMPTY(requestDatas))
+             ResponseModel *model = [ResponseModel mj_objectWithKeyValues:responseObject];
+             if(model.code == SUCCESS_CODE)
              {
-                 [_scrollView.footer noticeNoMoreData];
-                 hua.hidden = YES;
-                 return;
+                 id data = model.data;
+                 NSMutableArray *requestDatas = [CommentModel mj_objectArrayWithKeyValuesArray:data];
+                 
+                 if(IS_NS_COLLECTION_EMPTY(requestDatas))
+                 {
+                     [_scrollView.footer noticeNoMoreData];
+                     hua.hidden = YES;
+                     return;
+                 }
+                 [_datas addObjectsFromArray:requestDatas];
+                 
+                 int tableViewHeight = 0;
+                 for(CommentModel *model in _datas)
+                 {
+                     _heightLabel.text = model.content;
+                     CGSize size  =[_heightLabel boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 60 , MAXFLOAT) ];
+                     tableViewHeight += (size.height+50);
+                 }
+                 _tableView.frame = CGRectMake(0, contentHeight + 30 , SCREEN_WIDTH, tableViewHeight);
+                 _scrollView.contentSize = CGSizeMake(SCREEN_WIDTH, contentHeight + 30 +tableViewHeight);
+                 [_tableView reloadData];
              }
-             [_datas addObjectsFromArray:requestDatas];
+             [_scrollView.footer endRefreshing];
+             hua.hidden = YES;
              
-             int tableViewHeight = 0;
-             for(CommentModel *model in _datas)
-             {
-                 _heightLabel.text = model.content;
-                 CGSize size  =[_heightLabel boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 60 , MAXFLOAT) ];
-                 tableViewHeight += (size.height+50);
-             }
-             _tableView.frame = CGRectMake(0, contentHeight + 30 , SCREEN_WIDTH, tableViewHeight);
-             _scrollView.contentSize = CGSizeMake(SCREEN_WIDTH, contentHeight + 30 +tableViewHeight);
-             [_tableView reloadData];
          }
-         [_scrollView.footer endRefreshing];
-         hua.hidden = YES;
-     }
-         failure:^(AFHTTPRequestOperation *operation, NSError *error)
-     {
-         [_scrollView.footer endRefreshing];
-         hua.hidden = YES;
-     }];
+     
+         failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull   error) {
+             
+             [_scrollView.footer endRefreshing];
+             hua.hidden = YES;
+         }];
+
 }
 
 

@@ -39,7 +39,7 @@
     [self showNavigationBar];
     [self.navBar.leftBtn setHidden:NO];
     self.navBar.delegate = self;
-    [self.navBar.leftBtn setImage:[UIImage imageNamed:@"ic_back"] forState:UIControlStateNormal];
+    [self.navBar.leftBtn setImage:[UIImage imageNamed:@"topbar_back"] forState:UIControlStateNormal];
     [self.navBar setTitle:@"关于"];
 }
 

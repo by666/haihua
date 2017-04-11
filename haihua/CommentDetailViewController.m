@@ -34,6 +34,8 @@
 
 @property (assign ,nonatomic) int mid;
 
+@property (copy ,nonatomic) NSString *type;
+
 @property (strong, nonatomic) UIView *bottomView;
 
 @property (strong, nonatomic) UIView *maskView;
@@ -69,6 +71,14 @@
 {
     CommentDetailViewController *targetController = [[CommentDetailViewController alloc]init];
     targetController.mid = mid;
+    [controller.navigationController pushViewController:targetController animated:YES];
+}
+
++(void)show : (BaseViewController *)controller mid: (int)mid type:(NSString *)type
+{
+    CommentDetailViewController *targetController = [[CommentDetailViewController alloc]init];
+    targetController.mid = mid;
+    targetController.type = type;
     [controller.navigationController pushViewController:targetController animated:YES];
 }
 
@@ -108,7 +118,10 @@
     [self.navBar.leftBtn setHidden:NO];
     self.navBar.delegate = self;
     [self.navBar.leftBtn setImage:[UIImage imageNamed:@"topbar_back"] forState:UIControlStateNormal];
-    [self.navBar setTitle:@"议事详情"];
+    if(IS_NS_STRING_EMPTY(_type))
+    {
+        [self.navBar setTitle:@"议事详情"];
+    }
 }
 
 -(void)initTopView
@@ -197,7 +210,7 @@
             else if(model.type == 2)
             {
                 UIImageView *imageView = [[UIImageView alloc]init];
-                imageView.contentMode = UIViewContentModeScaleAspectFill;
+                imageView.contentMode = UIViewContentModeScaleAspectFit;
                 imageView.clipsToBounds = YES;
                 [imageView sd_setImageWithURL:[NSURL URLWithString:model.data] placeholderImage:[UIImage imageNamed:@"bg_logo"]];
                 imageView.frame = CGRectMake(15, 15 + contentHeight, SCREEN_WIDTH -30, SCREEN_WIDTH -30);
@@ -435,12 +448,15 @@
 -(void)requestData
 {
     __weak MBProgressHUD *hua = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"mid"] = [NSString stringWithFormat:@"%d",_mid];
-    [manager GET:Request_Msg_Detail parameters:params
-         success:^(AFHTTPRequestOperation *operation, id responseObject)
-         {
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
+    [manager GET:Request_Msg_Detail parameters:params progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    }
+         success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+             
              ResponseModel *model = [ResponseModel mj_objectWithKeyValues:responseObject];
              if(model.code == SUCCESS_CODE)
              {
@@ -454,12 +470,12 @@
              }
              hua.hidden = YES;
          }
-         failure:^(AFHTTPRequestOperation *operation, NSError *error)
-         {
+     
+         failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull   error) {
+             
              [_scrollView.footer endRefreshing];
              hua.hidden = YES;
-         }
-     ];
+         }];
 
 }
 
@@ -475,7 +491,6 @@
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
 
     __weak MBProgressHUD *hua = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"uid"] = [account getUid];
     params[@"cid"] = [NSString stringWithFormat:@"%d",(int)[userDefaults integerForKey:VillageID]];
@@ -483,45 +498,51 @@
     params[@"content"]= _commentTextView.text;
     params[@"token"] = [account getToken];
     
-    [manager POST:Request_Comment parameters:params
-         success:^(AFHTTPRequestOperation *operation, id responseObject)
-     {
-         ResponseModel *model = [ResponseModel mj_objectWithKeyValues:responseObject];
-         
-         if(model.code == SUCCESS_CODE)
-         {
-             [DialogHelper showSuccessTips:@"评论成功，感谢您的支持"];
-             [_datas removeAllObjects];
-             CURRENT = 0;
-             [self requestCommentList:YES];
-             _commentTextView.text = nil;
-             _model.totalComment +=1;
-             _commentTitleLabel.text = [NSString stringWithFormat:@"评论(%d)",_model.totalComment];
-             _countLabel.text = [NSString stringWithFormat:@"%d",_model.totalComment];
-         }
-         else if(model.code == ERROR_TOKEN)
-         {
-             [LoginViewController show:self];
-         }
-         else if(model.code == SUCCESS_VERIFY_FAIL)
-         {
-             [DialogHelper showWarnTips:@"帐户正在审核中，请稍后操作"];
-         }
-         else if(model.code == ERROR_USER_NOT_IN_VILLAGE)
-         {
-             [DialogHelper showWarnTips:@"您不是本小区成员，不能进行评论"];
-         }
-         else
-         {
-             [DialogHelper showWarnTips:@"评论失败"];
-         }
-         hua.hidden = YES;
-     }
-         failure:^(AFHTTPRequestOperation *operation, NSError *error)
-     {
-         hua.hidden = YES;
-         [DialogHelper showWarnTips:@"评论失败"];
-     }];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
+    
+    
+    [manager POST:Request_Comment parameters:params progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        ResponseModel *model = [ResponseModel mj_objectWithKeyValues:responseObject];
+        
+        if(model.code == SUCCESS_CODE)
+        {
+            [DialogHelper showSuccessTips:@"评论成功，感谢您的支持"];
+            [_datas removeAllObjects];
+            CURRENT = 0;
+            [self requestCommentList:YES];
+            _commentTextView.text = nil;
+            _model.totalComment +=1;
+            _commentTitleLabel.text = [NSString stringWithFormat:@"评论(%d)",_model.totalComment];
+            _countLabel.text = [NSString stringWithFormat:@"%d",_model.totalComment];
+        }
+        else if(model.code == ERROR_TOKEN)
+        {
+            [LoginViewController show:self];
+        }
+        else if(model.code == SUCCESS_VERIFY_FAIL)
+        {
+            [DialogHelper showWarnTips:@"帐户正在审核中，请稍后操作"];
+        }
+        else if(model.code == ERROR_USER_NOT_IN_VILLAGE)
+        {
+            [DialogHelper showWarnTips:@"您不是本小区成员，不能进行评论"];
+        }
+        else
+        {
+            [DialogHelper showWarnTips:@"评论失败"];
+        }
+        hua.hidden = YES;
+
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        hua.hidden = YES;
+        [DialogHelper showWarnTips:@"评论失败"];
+    }];
+
 }
 
 
@@ -533,49 +554,57 @@
     {
         hua = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     }
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"index"] = [NSString stringWithFormat:@"%d",CURRENT];
     params[@"length"] = [NSString stringWithFormat:@"%d",REQUEST_SIZE];
     params[@"mid"] = [NSString stringWithFormat:@"%ld",_model.mid];
-    [manager GET:Request_CommentList parameters:params
-         success:^(AFHTTPRequestOperation *operation, id responseObject)
-     {
-         ResponseModel *model = [ResponseModel mj_objectWithKeyValues:responseObject];
-         if(model.code == SUCCESS_CODE)
-         {
-             id data = model.data;
-             NSMutableArray *requestDatas = [CommentModel mj_objectArrayWithKeyValuesArray:data];
-
-             if(IS_NS_COLLECTION_EMPTY(requestDatas))
-             {
-                 [_scrollView.footer noticeNoMoreData];
-                 hua.hidden = YES;
-                 return;
-             }
-             [_datas addObjectsFromArray:requestDatas];
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
+    [manager GET:Request_CommentList parameters:params progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    }
+         success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
              
-             int tableViewHeight = 0;
-             int height = contentHeight + 30;
-             for(CommentModel *model in _datas)
+             ResponseModel *model = [ResponseModel mj_objectWithKeyValues:responseObject];
+             if(model.code == SUCCESS_CODE)
              {
-                 _heightLabel.text = model.content;
-                 CGSize size  =[_heightLabel boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 60 , MAXFLOAT) ];
-
-                 tableViewHeight += (size.height+50);
+                 id data = model.data;
+                 NSMutableArray *requestDatas = [CommentModel mj_objectArrayWithKeyValuesArray:data];
+                 
+                 if(IS_NS_COLLECTION_EMPTY(requestDatas))
+                 {
+                     [_scrollView.footer noticeNoMoreData];
+                     hua.hidden = YES;
+                     return;
+                 }
+                 [_datas addObjectsFromArray:requestDatas];
+                 
+                 int tableViewHeight = 0;
+                 int height = contentHeight + 30;
+                 for(CommentModel *model in _datas)
+                 {
+                     _heightLabel.text = model.content;
+                     CGSize size  =[_heightLabel boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 60 , MAXFLOAT) ];
+                     
+                     tableViewHeight += (size.height+50);
+                 }
+                 _tableView.frame = CGRectMake(0, contentHeight + 30 , SCREEN_WIDTH, tableViewHeight);
+                 _scrollView.contentSize = CGSizeMake(SCREEN_WIDTH, height +tableViewHeight);
+                 [_tableView reloadData];
              }
-             _tableView.frame = CGRectMake(0, contentHeight + 30 , SCREEN_WIDTH, tableViewHeight);
-            _scrollView.contentSize = CGSizeMake(SCREEN_WIDTH, height +tableViewHeight);
-             [_tableView reloadData];
+             [_scrollView.footer endRefreshing];
+             hua.hidden = YES;
+             
          }
-         [_scrollView.footer endRefreshing];
-         hua.hidden = YES;
-     }
-         failure:^(AFHTTPRequestOperation *operation, NSError *error)
-     {
-         [_scrollView.footer endRefreshing];
-         hua.hidden = YES;
-     }];
+     
+         failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull   error) {
+             
+             [_scrollView.footer endRefreshing];
+             hua.hidden = YES;
+             
+         }];
+  
 }
 
 

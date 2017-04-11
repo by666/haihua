@@ -86,9 +86,12 @@
 {
     [self showNavigationBar];
     [self.navBar.leftBtn setHidden:NO];
+    self.navBar.backgroundColor = LOGIN_COLOR;
     self.navBar.delegate = self;
     [self.navBar.leftBtn setImage:[UIImage imageNamed:@"ic_close"] forState:UIControlStateNormal];
+    [self.navBar.leftBtn setHidden:YES];
     [self.navBar setTitle:@"登陆"];
+    self.navBar.titleLabel.textColor = [UIColor whiteColor];
     if(_hideClose)
     {
         [self.navBar.leftBtn setHidden:YES];
@@ -162,7 +165,7 @@
     
     UIButton *loginBtn = [[UIButton alloc]init];
     loginBtn.frame = CGRectMake(30, bottomLine.y + 20, SCREEN_WIDTH-60, 50);
-    [loginBtn setBackgroundImage:[AppUtil imageWithColor:MAIN_COLOR] forState:UIControlStateNormal];
+    [loginBtn setBackgroundImage:[AppUtil imageWithColor:LOGIN_COLOR] forState:UIControlStateNormal];
     [loginBtn setBackgroundImage:[AppUtil imageWithColor:[ColorUtil colorWithHexString:@"#2d90ff" alpha:0.6f]] forState:UIControlStateHighlighted];
     [loginBtn setTitle:@"登陆" forState:UIControlStateNormal];
     [loginBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -178,7 +181,7 @@
     _sendButton.titleLabel.font = [UIFont systemFontOfSize:13];
     _sendButton.layer.masksToBounds=YES;
     _sendButton.layer.cornerRadius = 4;
-    [_sendButton setBackgroundImage:[AppUtil imageWithColor:MAIN_COLOR] forState:UIControlStateNormal];
+    [_sendButton setBackgroundImage:[AppUtil imageWithColor:LOGIN_COLOR] forState:UIControlStateNormal];
     [_sendButton setBackgroundImage:[AppUtil imageWithColor:[ColorUtil colorWithHexString:@"#2d90ff" alpha:0.6f]] forState:UIControlStateHighlighted];
     _sendButton.frame = CGRectMake(SCREEN_WIDTH - 100, topLine.y+5, 80, 30);
     [_sendButton addTarget:self action:@selector(sendMsg) forControlEvents:UIControlEventTouchUpInside];
@@ -200,7 +203,7 @@
     NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:@"e事会用户协议"];
     NSRange strRange = {0,[str length]};
     [str addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:strRange];
-    [str addAttribute:NSForegroundColorAttributeName value:MAIN_COLOR range:strRange];
+    [str addAttribute:NSForegroundColorAttributeName value:LOGIN_COLOR range:strRange];
     
     _contentBtn = [[UIButton alloc]init];
     _contentBtn.backgroundColor = [UIColor clearColor];
@@ -320,7 +323,6 @@
 -(void)requestLogin
 {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
 
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
@@ -329,50 +331,54 @@
     params[@"cid"] = [NSString stringWithFormat:@"%d",(int)[userDefaults integerForKey:VillageID]];
     [[Account sharedAccount] saveTel:_phoneTextView.text];
 
-        [manager POST:Request_VerifyCode parameters:params
-         success:^(AFHTTPRequestOperation *operation, id responseObject)
-     {
-         ResponseModel *model = [ResponseModel mj_objectWithKeyValues:responseObject];
-         if(model.code == SUCCESS_CODE)
-         {
-             
-//             Account *account = [[Account alloc]init];
-//             account.uid = model.uid;
-//             account.token = model.token;
-//             // 设置别名
-//             [MiPushSDK setAlias:account.uid];
-//             // 订阅内容
-//             [MiPushSDK subscribe:[NSString stringWithFormat:@"%d",(int)[userDefaults integerForKey:VillageID]]];
-//             // 设置帐号
-////             [MiPushSDK setAccount:@"account"];
-//             [[Account sharedAccount] savaAccount:account];
-//             [MainViewController show:self villageId:[userDefaults integerForKey:VillageID] name:[userDefaults objectForKey:VillageName]];
-             Account *account = [[Account alloc]init];
-             account.uid = model.uid;
-             account.token = model.token;
-             [[Account sharedAccount] savaAccount:account];
-             [HomeViewController show:self];
-         }
-         else if(model.code == SUCCESS_NEED_VERIFY)
-         {
-             Account *account = [[Account alloc]init];
-             account.uid = model.uid;
-             account.token = model.token;
-             [[Account sharedAccount] savaAccount:account];
-             [ImproveInfoViewController show:self tel:_phoneTextView.text];
-         }
-         else
-         {
-             [DialogHelper showFailureAlertSheet:@"登陆失败"];
-         }
-         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-     }
-         failure:^(AFHTTPRequestOperation *operation, NSError *error)
-     {
-         [DialogHelper showFailureAlertSheet:@"登陆失败"];
-         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
+    
+    
+    [manager POST:Request_VerifyCode parameters:params progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    }  success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        ResponseModel *model = [ResponseModel mj_objectWithKeyValues:responseObject];
+        if(model.code == SUCCESS_CODE)
+        {
+            
+            //             Account *account = [[Account alloc]init];
+            //             account.uid = model.uid;
+            //             account.token = model.token;
+            //             // 设置别名
+            //             [MiPushSDK setAlias:account.uid];
+            //             // 订阅内容
+            //             [MiPushSDK subscribe:[NSString stringWithFormat:@"%d",(int)[userDefaults integerForKey:VillageID]]];
+            //             // 设置帐号
+            ////             [MiPushSDK setAccount:@"account"];
+            //             [[Account sharedAccount] savaAccount:account];
+            //             [MainViewController show:self villageId:[userDefaults integerForKey:VillageID] name:[userDefaults objectForKey:VillageName]];
+            Account *account = [[Account alloc]init];
+            account.uid = model.uid;
+            account.token = model.token;
+            [[Account sharedAccount] savaAccount:account];
+            [HomeViewController show:self];
+        }
+        else if(model.code == SUCCESS_NEED_VERIFY)
+        {
+            Account *account = [[Account alloc]init];
+            account.uid = model.uid;
+            account.token = model.token;
+            [[Account sharedAccount] savaAccount:account];
+            [ImproveInfoViewController show:self tel:_phoneTextView.text];
+        }
+        else
+        {
+            [DialogHelper showFailureAlertSheet:@"登陆失败"];
+        }
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [DialogHelper showFailureAlertSheet:@"登陆失败"];
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
 
-     }];
+    }];
+    
 }
 
 

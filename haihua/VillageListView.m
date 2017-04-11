@@ -138,29 +138,35 @@
 -(void)requestList
 {
     __weak MBProgressHUD *hua = [MBProgressHUD showHUDAddedTo:self animated:YES];
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     if(_userModel.admin == 1)
     {
         params[@"uid"] = [NSString stringWithFormat:@"%d",_userModel.uid];
     }
     [_datas removeAllObjects];
-    [manager GET:Request_VillageList parameters:params
-         success:^(AFHTTPRequestOperation *operation, id responseObject)
-     {
-         ResponseModel *model = [ResponseModel mj_objectWithKeyValues:responseObject];
-         if(model.code == SUCCESS_CODE)
-         {
-             id data = model.data;
-             _datas = [VillageModel mj_objectArrayWithKeyValuesArray:data];
-             [self initView];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
+    [manager GET:Request_VillageList parameters:params progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    }
+         success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+             
+             ResponseModel *model = [ResponseModel mj_objectWithKeyValues:responseObject];
+             if(model.code == SUCCESS_CODE)
+             {
+                 id data = model.data;
+                 _datas = [VillageModel mj_objectArrayWithKeyValuesArray:data];
+                 [self initView];
+             }
+             hua.hidden = YES;
+             
          }
-         hua.hidden = YES;
-     }
-         failure:^(AFHTTPRequestOperation *operation, NSError *error)
-     {
-         hua.hidden = YES;
-     }];
+     
+         failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull   error) {
+             
+             hua.hidden = YES;
+             
+         }];
     
 }
 
@@ -171,28 +177,34 @@
 -(void)requestSelectVillage : (NSInteger)position
 {
     __weak MBProgressHUD *hua = [MBProgressHUD showHUDAddedTo:self animated:YES];
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     VillageModel *model =  [_datas objectAtIndex:position];
     params[@"uid"] = [NSString stringWithFormat:@"%d",_userModel.uid];
     params[@"cid"] = [NSString stringWithFormat:@"%d",model.villageId];
-    [manager GET:Request_Select_Village parameters:params
-         success:^(AFHTTPRequestOperation *operation, id responseObject)
-     {
-         ResponseModel *model = [ResponseModel mj_objectWithKeyValues:responseObject];
-         if(model.code == SUCCESS_CODE)
-         {
-             if(self.delegate)
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
+    [manager GET:Request_Select_Village parameters:params progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    }
+         success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+             
+             ResponseModel *model = [ResponseModel mj_objectWithKeyValues:responseObject];
+             if(model.code == SUCCESS_CODE)
              {
-                 [self.delegate OnSelectVillage:[_datas objectAtIndex:position]];
+                 if(self.delegate)
+                 {
+                     [self.delegate OnSelectVillage:[_datas objectAtIndex:position]];
+                 }
              }
+             hua.hidden = YES;
          }
-         hua.hidden = YES;
-     }
-         failure:^(AFHTTPRequestOperation *operation, NSError *error)
-     {
-         hua.hidden = YES;
-     }];
+     
+         failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull   error) {
+             
+             hua.hidden = YES;
+             
+         }];
+
     
 }
 

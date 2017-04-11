@@ -9,7 +9,7 @@
 #ifndef Common_pch
 #define Common_pch
 #import "Constant.h"
-#import <AFNetworking.h>
+#import <AFNetworking/AFNetworking.h>
 #import <MBProgressHUD/MBProgressHUD.h>
 #import "ColorUtil.h"
 #import "UILabel+ContentSize.h"
@@ -249,9 +249,12 @@ description:__VA_ARGS__];                             \
 #define BACKGROUND_COLOR [UIColor colorWithRed:234.0/255.0 green:235.0/255.0 blue:236.0/255.0 alpha:1.0]
 
 //2d90ff
-//#define MAIN_COLOR  [UIColor colorWithRed:43/255.0 green:153/255.0 blue:241.0/255.0 alpha:1.0]
+#define Bold_COLOR  [UIColor colorWithRed:43/255.0 green:153/255.0 blue:241.0/255.0 alpha:1.0]
 
 #define MAIN_COLOR  [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0]
+
+#define LOGIN_COLOR  [UIColor colorWithRed:17/255.0 green:151/255.0 blue:255/255.0 alpha:1.0]
+
 
 #define LINE_COLOR  [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.1]
 

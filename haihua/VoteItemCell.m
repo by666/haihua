@@ -44,17 +44,17 @@
     _bgView = [[UIView alloc]init];
     _bgView.frame = CGRectMake(10, 10, ProgressWidth, ITEM_HEIGHT-10);
     _bgView.layer.masksToBounds = YES;
-    _bgView.backgroundColor  = [UIColor whiteColor];
+    _bgView.backgroundColor  = LINE_COLOR;
     _bgView.layer.cornerRadius = (ITEM_HEIGHT - 10 )/2;
-    _bgView.layer.borderColor = [MAIN_COLOR CGColor];
-    _bgView.layer.borderWidth = 1;
+//    _bgView.layer.borderColor = [Bold_COLOR CGColor];
+//    _bgView.layer.borderWidth = 1;
     _bgView.userInteractionEnabled = NO;
     [self.contentView addSubview:_bgView];
     
     _progressView = [[UIView alloc]init];
     _progressView.layer.masksToBounds = YES;
     _progressView.userInteractionEnabled = NO;
-    _progressView.backgroundColor = [UIColor redColor];
+    _progressView.backgroundColor  = LINE_COLOR;
     _progressView.frame = CGRectMake(10, 10, 0, ITEM_HEIGHT-10);
     [self.contentView addSubview:_progressView];
     
@@ -91,7 +91,7 @@
         _percentLabel.hidden = NO;
         if(model.commentedVoId == model.voId)
         {
-            _progressView.backgroundColor  = [UIColor orangeColor];
+            _progressView.backgroundColor  = [ColorUtil colorWithHexString:@"#ffcdb1"];
         }
         else
         {
@@ -125,7 +125,7 @@
         }
         else
         {
-            _bgView.backgroundColor  = [UIColor whiteColor];
+            _bgView.backgroundColor  = LINE_COLOR;
         }
     }
 

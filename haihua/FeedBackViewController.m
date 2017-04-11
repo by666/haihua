@@ -59,7 +59,7 @@
     [self showNavigationBar];
     [self.navBar.leftBtn setHidden:NO];
     self.navBar.delegate = self;
-    [self.navBar.leftBtn setImage:[UIImage imageNamed:@"ic_close"] forState:UIControlStateNormal];
+    [self.navBar.leftBtn setImage:[UIImage imageNamed:@"topbar_back"] forState:UIControlStateNormal];
     [self.navBar setTitle:@"发布意见"];
 }
 
@@ -111,7 +111,7 @@
     
     UIButton *commitBtn = [[UIButton alloc]init];
     commitBtn.frame = CGRectMake(15,  360, SCREEN_WIDTH - 30, 50);
-    [commitBtn setBackgroundImage:[AppUtil imageWithColor:MAIN_COLOR] forState:UIControlStateNormal];
+    [commitBtn setBackgroundImage:[AppUtil imageWithColor:LOGIN_COLOR] forState:UIControlStateNormal];
     [commitBtn setBackgroundImage:[AppUtil imageWithColor:[ColorUtil colorWithHexString:@"#2d90ff" alpha:0.6f]] forState:UIControlStateHighlighted];
     [commitBtn setTitle:@"确定发布" forState:UIControlStateNormal];
     [commitBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -316,10 +316,11 @@
     NSURLSessionUploadTask *uploadTask;
     
     
-    NSProgress *_progress = nil;
     uploadTask = [manager
                   uploadTaskWithStreamedRequest:request
-                  progress:&_progress
+                  progress:^(NSProgress * _Nonnull uploadProgress) {
+                      hua.labelText = [NSString stringWithFormat:@"%.2f％",uploadProgress.fractionCompleted * 100];
+                  }
                   completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
                       if (error) {
                           [DialogHelper showWarnTips:@"上传失败,请重试"];
@@ -342,15 +343,7 @@
                   }];
     
     [uploadTask resume];
-    [_progress addObserver:self forKeyPath:@"fractionCompleted" options:NSKeyValueObservingOptionNew context:nil];
 
 }
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
-
-{
-    NSProgress *progress = object;
-    hua.labelText = [NSString stringWithFormat:@"%.2f％",progress.fractionCompleted * 100];
-    
-}
 @end

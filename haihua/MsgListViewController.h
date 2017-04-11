@@ -16,4 +16,11 @@
        mine : (BOOL) isMine
      isVote : (BOOL) isVote;
 
++(void)show : (UIViewController *)controller
+       title: (NSString *)title
+        type: (NSString *)type
+       mine : (BOOL) isMine
+     isVote : (BOOL) isVote
+       temp : (NSString *)temp;
+
 @end

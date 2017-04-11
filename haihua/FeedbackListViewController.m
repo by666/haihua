@@ -190,7 +190,6 @@
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     }
     NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"cid"] = [NSString stringWithFormat:@"%ld", [userDefault integerForKey:VillageID]];
     params[@"index"] = [NSString stringWithFormat:@"%d",CURRENT];
@@ -203,54 +202,59 @@
         params[@"token"] = [[Account sharedAccount] getToken];
     }
     
-    [manager GET:url parameters:params
-         success:^(AFHTTPRequestOperation *operation, id responseObject)
-     {
-         ResponseModel *model = [ResponseModel mj_objectWithKeyValues:responseObject];
-         if(model.code == SUCCESS_CODE)
-         {
-             id data = model.data;
-             if(isLoadMore)
-             {
-                 NSMutableArray *temp = [FeedbackModel mj_objectArrayWithKeyValuesArray:data];
-                 if(IS_NS_COLLECTION_EMPTY(temp))
-                 {
-                     [_tableView.footer noticeNoMoreData];
-                     return ;
-                 }
-                 [_datas addObjectsFromArray:temp];
-             }
-             else
-             {
-                 _datas = [FeedbackModel mj_objectArrayWithKeyValuesArray:data];
-             }
-             
-             if(!IS_NS_COLLECTION_EMPTY(_datas))
-             {
-                 for(FeedbackModel *model in _datas)
-                 {
-                     NSMutableArray *datas = [[NSMutableArray alloc]init];
-                     NSArray *arrayValue = model.pics.allValues;
-                     for(NSString *temp in arrayValue)
-                     {
-                         [datas addObject:temp];
-                     }
-                     model.pictures = datas;
-                 }
-             }
-
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
+    [manager GET:url parameters:params progress:^(NSProgress * _Nonnull downloadProgress) {
         
-             [_tableView reloadData];
-             [_tableView.header endRefreshing];
-             [_tableView.footer endRefreshing];
+    }
+         success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+             
+             ResponseModel *model = [ResponseModel mj_objectWithKeyValues:responseObject];
+             if(model.code == SUCCESS_CODE)
+             {
+                 id data = model.data;
+                 if(isLoadMore)
+                 {
+                     NSMutableArray *temp = [FeedbackModel mj_objectArrayWithKeyValuesArray:data];
+                     if(IS_NS_COLLECTION_EMPTY(temp))
+                     {
+                         [_tableView.footer noticeNoMoreData];
+                         return ;
+                     }
+                     [_datas addObjectsFromArray:temp];
+                 }
+                 else
+                 {
+                     _datas = [FeedbackModel mj_objectArrayWithKeyValuesArray:data];
+                 }
+                 
+                 if(!IS_NS_COLLECTION_EMPTY(_datas))
+                 {
+                     for(FeedbackModel *model in _datas)
+                     {
+                         NSMutableArray *datas = [[NSMutableArray alloc]init];
+                         NSArray *arrayValue = model.pics.allValues;
+                         for(NSString *temp in arrayValue)
+                         {
+                             [datas addObject:temp];
+                         }
+                         model.pictures = datas;
+                     }
+                 }
+                 
+                 
+                 [_tableView reloadData];
+                 [_tableView.header endRefreshing];
+                 [_tableView.footer endRefreshing];
+             }
+             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
          }
-         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-     }
-         failure:^(AFHTTPRequestOperation *operation, NSError *error)
-     {
-         [self showFailView];
-         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-     }];
+     
+         failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull   error) {
+             
+             [self showFailView];
+             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+         }];
     
 }
 
